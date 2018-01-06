@@ -4,11 +4,12 @@
 # A PyQt5-based interface for running the open-source
 # microfluidic pumps.
 
-import pdb
 import sys
-from pymata_aio_test import Pymata3_board
+import time
+import picamera
+from pymata_aio.pymata3 import PyMata3
 
-from PyQt5.QtCore import Qt, pyqtSlot
+from PyQt5.QtCore import Qt, pyqtSlot, QPoint
 from PyQt5.QtWidgets import (QApplication, QLabel, QWidget, QGridLayout,
                              QSpinBox, QComboBox, QPushButton, QTabWidget)
 
@@ -18,10 +19,21 @@ class Pump_interface(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.board = Pymata3_board()
+        self.initBoard()
+        self.camera = picamera.PiCamera()
         self.initUI()
 
-    
+    def initBoard(self):
+        self.board = PyMata3( log_output=True, arduino_wait=5)
+        # initializing X stepper with device number 0
+        self.board.get_pin_state(2)
+        self.board.accelstepper_config( 0, 1, 1, 0, [2,5])
+        self.board.get_pin_state(2)
+        # initializing Y stepper with device number 1
+        self.board.accelstepper_config( 1, 1, 1, 0, [3,6])
+        # initializing Z stepper with device number 2
+        self.board.accelstepper_config( 2, 1, 1, 0, [4,7])
+
     def initUI(self):
         self.create_widgets()
         self.style_widgets()
@@ -196,6 +208,9 @@ class Pump_interface(QWidget):
         self.pump_one_stop.clicked.connect( self.stop_button_click )
         self.pump_two_stop.clicked.connect( self.stop_button_click )
         self.pump_three_stop.clicked.connect( self.stop_button_click )
+        self.stop_all_pumps.clicked.connect( self.stop_all_pumps_button_click )
+
+        self.view_camera.clicked.connect( self.camera_preview )
 
     def place_widgets(self):
 
@@ -308,14 +323,25 @@ class Pump_interface(QWidget):
     def run_button_click(self):
         clicked_button = self.sender()
         if clicked_button.styleSheet() == self.run_button_style_string:
-            if clicked_button.objectName() == 'pump_one_run':
-                self.board.run_pump()
+            button_name = clicked_button.objectName()
+            self.run_pump(button_name)
             clicked_button.setStyleSheet(self.pause_button_style_string)
             clicked_button.setText('Pause')
         elif clicked_button.styleSheet() == self.pause_button_style_string:
             clicked_button.setStyleSheet(self.run_button_style_string)
             clicked_button.setText('Run')
         self.run_all_pumps_consistency_check()
+    
+    def run_pump(self, button_name):
+            if button_name == 'pump_one_run':
+                self.board.accelstepper_set_speed(0, 50)
+                self.board.accelstepper_step(0, 1500, "forward")
+            if button_name == 'pump_two_run':
+                self.board.accelstepper_set_speed(1, 50)
+                self.board.accelstepper_step(1, 1500, "forward")
+            if button_name == 'pump_three_run':
+                self.board.accelstepper_set_speed(2, 50)
+                self.board.accelstepper_step(2, 1500, "forward")
 
     def run_all_pumps_consistency_check(self):
         if self.pump_one_run.styleSheet() == self.run_button_style_string and \
@@ -335,12 +361,15 @@ class Pump_interface(QWidget):
             clicked_button.setStyleSheet(self.pause_button_style_string)
             clicked_button.setText('Pause All Pumps')
             if self.pump_one_run.styleSheet() != self.pause_button_style_string:
+                self.run_pump("pump_one_run")
                 self.pump_one_run.setStyleSheet(self.pause_button_style_string)
                 self.pump_one_run.setText('Pause')
             if self.pump_two_run.styleSheet() != self.pause_button_style_string:
+                self.run_pump("pump_two_run")
                 self.pump_two_run.setStyleSheet(self.pause_button_style_string)
                 self.pump_two_run.setText('Pause')
             if self.pump_three_run.styleSheet() != self.pause_button_style_string:
+                self.run_pump("pump_three_run")
                 self.pump_three_run.setStyleSheet(self.pause_button_style_string)
                 self.pump_three_run.setText('Pause')
         elif clicked_button.styleSheet() == self.pause_button_style_string:
@@ -360,18 +389,53 @@ class Pump_interface(QWidget):
         clicked_button_name = self.sender().objectName()
         if clicked_button_name == 'pump_one_stop':
             if self.pump_one_run.styleSheet() == self.pause_button_style_string:
+                self.board.accelstepper_stop(0)
                 self.pump_one_run.setStyleSheet(self.run_button_style_string)
                 self.pump_one_run.setText('Run')
         elif clicked_button_name == 'pump_two_stop':
             if self.pump_two_run.styleSheet() == self.pause_button_style_string:
+                self.board.accelstepper_stop(1)
                 self.pump_two_run.setStyleSheet(self.run_button_style_string)
                 self.pump_two_run.setText('Run')
         elif clicked_button_name == 'pump_three_stop':
             if self.pump_three_run.styleSheet() == self.pause_button_style_string:
+                self.board.accelstepper_stop(2)
                 self.pump_three_run.setStyleSheet(self.run_button_style_string)
                 self.pump_three_run.setText('Run')
         self.run_all_pumps_consistency_check()
 
+    def stop_all_pumps_button_click(self):
+        self.board.accelstepper_stop(0)
+        self.pump_one_run.setStyleSheet(self.run_button_style_string)
+        self.pump_one_run.setText('Run')
+        self.board.accelstepper_stop(1)
+        self.pump_two_run.setStyleSheet(self.run_button_style_string)
+        self.pump_two_run.setText('Run')
+        self.board.accelstepper_stop(2)
+        self.pump_three_run.setStyleSheet(self.run_button_style_string)
+        self.pump_three_run.setText('Run')
+
+    def camera_preview(self):
+        # get size and location of widget, and place the picamera overlay 
+        # directly on top of it
+        renderer_height = self.view_camera.height()
+        renderer_width = self.view_camera.width()
+        local_x = self.view_camera.x()
+        local_y = self.view_camera.y()
+        local_point = QPoint(local_x, local_y)
+        renderer_x = self.view_camera.mapToGlobal(local_point).x()
+        renderer_y = self.view_camera.mapToGlobal(local_point).y()
+        #renderer_tuple = (renderer_x, renderer_y, renderer_width, renderer_height)
+        renderer_tuple = (renderer_x, renderer_y, renderer_width, 300)
+        self.camera.resolution = ( 1024, 768) 
+        #self.camera.resolution = ( renderer_width, renderer_height) 
+        print( str(renderer_x) + "," + str(renderer_y) + "," + str(renderer_width) + "," + str(renderer_height) )
+        #self.camera.start_preview( fullscreen=False,
+        #    window=(300, 600, renderer_x, renderer_y))
+        self.preview_window = self.camera.start_preview( fullscreen=False )
+        self.preview_window._set_window( renderer_tuple )
+        time.sleep(2)
+        self.camera.stop_preview()
 
 if __name__=='__main__':
     app = QApplication(sys.argv)

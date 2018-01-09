@@ -5,13 +5,15 @@
 # microfluidic pumps.
 
 import sys
+#import logging
 import time
 import picamera
 from pymata_aio.pymata3 import PyMata3
 
 from PyQt5.QtCore import Qt, pyqtSlot, QPoint
 from PyQt5.QtWidgets import (QApplication, QLabel, QWidget, QGridLayout,
-                             QSpinBox, QComboBox, QPushButton, QTabWidget)
+                             QSpinBox, QComboBox, QPushButton, QTabWidget,
+                             QDoubleSpinBox)
 
 
 class Pump_interface(QWidget):
@@ -19,9 +21,18 @@ class Pump_interface(QWidget):
     def __init__(self):
         super().__init__()
 
+        self.initHardwareConstants()
         self.initBoard()
         self.camera = picamera.PiCamera()
         self.initUI()
+
+    def initHardwareConstants(self):
+        self.steps_per_rev = 6400
+        self.mm_per_rev = 0.8
+        self.syringe_mm_per_ml_dict = {}
+        self.syringe_mm_per_ml_dict["3mL"] = 17.0
+        self.syringe_mm_per_ml_dict["10mL"] = 6.0
+        self.syringe_mm_per_ml_dict["60mL"] = 1.5
 
     def initBoard(self):
         self.board = PyMata3( log_output=True, arduino_wait=5)
@@ -66,9 +77,9 @@ class Pump_interface(QWidget):
         self.pump_two_label = QLabel("Pump Two", self)
         self.pump_three_label = QLabel("Pump Three", self)
 
-        self.pump_one_speed = QSpinBox(self)
-        self.pump_two_speed = QSpinBox(self)
-        self.pump_three_speed = QSpinBox(self)
+        self.pump_one_speed = QDoubleSpinBox(self)
+        self.pump_two_speed = QDoubleSpinBox(self)
+        self.pump_three_speed = QDoubleSpinBox(self)
         
         self.pump_one_speed_units = QComboBox(self)
         self.pump_one_speed_units.addItem('mm/s')
@@ -80,9 +91,9 @@ class Pump_interface(QWidget):
         self.pump_three_speed_units.addItem('mm/s')
         self.pump_three_speed_units.addItem('mL/hr')
 
-        self.pump_one_distance = QSpinBox(self)
-        self.pump_two_distance = QSpinBox(self)
-        self.pump_three_distance = QSpinBox(self)
+        self.pump_one_distance = QDoubleSpinBox(self)
+        self.pump_two_distance = QDoubleSpinBox(self)
+        self.pump_three_distance = QDoubleSpinBox(self)
 
         self.pump_one_distance_units = QComboBox(self)
         self.pump_one_distance_units.addItem('mm')
@@ -322,26 +333,146 @@ class Pump_interface(QWidget):
 
     def run_button_click(self):
         clicked_button = self.sender()
+        button_name = clicked_button.objectName()
         if clicked_button.styleSheet() == self.run_button_style_string:
-            button_name = clicked_button.objectName()
             self.run_pump(button_name)
-            clicked_button.setStyleSheet(self.pause_button_style_string)
-            clicked_button.setText('Pause')
         elif clicked_button.styleSheet() == self.pause_button_style_string:
-            clicked_button.setStyleSheet(self.run_button_style_string)
-            clicked_button.setText('Run')
+            self.pause_pump(button_name)
         self.run_all_pumps_consistency_check()
-    
+   
+    def pause_pump(self, button_name):
+        if button_name == 'pump_one_run':
+            self.pump_one_run.setStyleSheet(self.run_button_style_string)
+            self.pump_one_run.setText('Run')
+        if button_name == 'pump_two_run':
+            self.pump_two_run.setStyleSheet(self.run_button_style_string)
+            self.pump_two_run.setText('Run')
+        if button_name == 'pump_three_run':
+            self.pump_three_run.setStyleSheet(self.run_button_style_string)
+            self.pump_three_run.setText('Run')
+
     def run_pump(self, button_name):
-            if button_name == 'pump_one_run':
-                self.board.accelstepper_set_speed(0, 50)
-                self.board.accelstepper_step(0, 1500, "forward")
-            if button_name == 'pump_two_run':
-                self.board.accelstepper_set_speed(1, 50)
-                self.board.accelstepper_step(1, 1500, "forward")
-            if button_name == 'pump_three_run':
-                self.board.accelstepper_set_speed(2, 50)
-                self.board.accelstepper_step(2, 1500, "forward")
+        motor_speed = self.compute_speed(button_name)
+        direction = self.get_direction(button_name)
+        steps = self.get_steps(button_name)
+        #print("motor: " + str(button_name) + "   speed: " + str(motor_speed))
+        if button_name == 'pump_one_run':
+            self.board.accelstepper_set_speed(0, motor_speed)
+            self.board.accelstepper_step(0, steps, direction)
+            self.pump_one_run.setStyleSheet(self.pause_button_style_string)
+            self.pump_one_run.setText('Pause')
+        elif button_name == 'pump_two_run':
+            self.board.accelstepper_set_speed(1, motor_speed)
+            self.board.accelstepper_step(1, steps, direction)
+            self.pump_two_run.setStyleSheet(self.pause_button_style_string)
+            self.pump_two_run.setText('Pause')
+        elif button_name == 'pump_three_run':
+            self.board.accelstepper_set_speed(2, motor_speed)
+            self.board.accelstepper_step(2, steps, direction)
+            self.pump_three_run.setStyleSheet(self.pause_button_style_string)
+            self.pump_three_run.setText('Pause')
+        self.display_speed(button_name)
+
+    def get_steps(self, button_name):
+        if button_name=="pump_one_run":
+            distance = self.pump_one_distance.value()
+            distance_units = self.pump_one_distance_units.currentText()
+            self.pump_one_distance_set.setText("{0:.2f}".format(distance))
+            self.pump_one_distance_set_units.setText(str(distance_units))
+        elif button_name=="pump_two_run":
+            distance = self.pump_two_distance.value()
+            distance_units = self.pump_two_distance_units.currentText()
+            self.pump_two_distance_set.setText("{0:.2f}".format(distance))
+            self.pump_two_distance_set_units.setText(str(distance_units))
+        elif button_name=="pump_three_run":
+            distance = self.pump_three_distance.value()
+            distance_units = self.pump_three_distance_units.currentText()
+            self.pump_three_distance_set.setText("{0:.2f}".format(distance))
+            self.pump_three_distance_set_units.setText(str(distance_units))
+        if distance_units=="mm":
+            steps = distance * (1 / self.mm_per_rev) * self.steps_per_rev 
+        elif distance_units=="mL":
+            syringe_name = self.get_syringe_name(button_name)
+            mm_per_ml = self.syringe_mm_per_ml_dict[syringe_name]  #float
+            steps = distance * mm_per_ml * (1 / self.mm_per_rev) * \
+                    self.steps_per_rev
+        return steps
+
+    def get_direction(self, button_name):
+        if button_name=="pump_one_run":
+            raw_direction = self.pump_one_direction.currentText()
+        if button_name=="pump_two_run":
+            raw_direction = self.pump_two_direction.currentText()
+        if button_name=="pump_three_run":
+            raw_direction = self.pump_three_direction.currentText()
+        final_direction = self.recompute_direction(raw_direction)
+        return final_direction
+
+    def recompute_direction(self, raw_direction):
+        if raw_direction=="expel":
+            final_direction = "forward"
+        elif raw_direction=="intake":
+            final_direction = "backward"
+        return final_direction
+
+    def display_speed(self, button_name):
+        speed_value = self.get_speed_value(button_name)
+        speed_units = self.get_speed_units(button_name)
+        if button_name == 'pump_one_run':
+            self.pump_one_speed_readout.setText("{0:.2f}".format(speed_value))
+            self.pump_one_speed_units_readout.setText(str(speed_units))
+        elif button_name == 'pump_two_run':
+            self.pump_two_speed_readout.setText("{0:.2f}".format(speed_value))
+            self.pump_two_speed_units_readout.setText(str(speed_units))
+        elif button_name == 'pump_three_run':
+            self.pump_three_speed_readout.setText("{0:.2f}".format(speed_value))
+            self.pump_three_speed_units_readout.setText(str(speed_units))
+
+    def compute_speed(self, button_name):
+        """
+        The output value from this function should be in units of steps/s.
+        I'm going to assume that the motor being driven has 200 steps/rev 
+        and is running with 1/32 microstepping (so, effectively, 6400 
+        steps/rev).
+        """
+        speed_value = self.get_speed_value(button_name)
+        speed_units = self.get_speed_units(button_name)
+        # need to convert from native units to steps/s
+        if speed_units=="mm/s":
+            final_speed = (speed_value / self.mm_per_rev) * self.steps_per_rev
+        elif speed_units=="mL/hr":
+            syringe_name = self.get_syringe_name(button_name)
+            mm_per_ml = self.syringe_mm_per_ml_dict[syringe_name]  #float
+            final_speed = speed_value * mm_per_ml * (1 / self.mm_per_rev) * \
+                    self.steps_per_rev * (1/3600)
+        return final_speed
+
+    def get_speed_value(self, button_name):
+        if button_name=="pump_one_run":
+            speed_value = self.pump_one_speed.value()
+        elif button_name=="pump_two_run":
+            speed_value = self.pump_two_speed.value()
+        elif button_name=="pump_three_run":
+            speed_value = self.pump_three_speed.value()
+        return speed_value
+
+    def get_speed_units(self, button_name):
+        if button_name=="pump_one_run":
+            speed_units = self.pump_one_speed_units.currentText()
+        elif button_name=="pump_two_run":
+            speed_units = self.pump_two_speed_units.currentText()
+        elif button_name=="pump_three_run":
+            speed_units = self.pump_three_speed_units.currentText()
+        return speed_units
+
+    def get_syringe_name(self, button_name):
+        if button_name=="pump_one_run":
+            syringe_name = self.pump_one_syringe.currentText()
+        elif button_name=="pump_two_run":
+            syringe_name = self.pump_two_syringe.currentText()
+        elif button_name=="pump_three_run":
+            syringe_name = self.pump_three_syringe.currentText()
+        return syringe_name
 
     def run_all_pumps_consistency_check(self):
         if self.pump_one_run.styleSheet() == self.run_button_style_string and \
@@ -358,20 +489,14 @@ class Pump_interface(QWidget):
     def run_all_pumps_button_click(self):
         clicked_button = self.sender()
         if clicked_button.styleSheet() == self.run_button_style_string:
-            clicked_button.setStyleSheet(self.pause_button_style_string)
-            clicked_button.setText('Pause All Pumps')
             if self.pump_one_run.styleSheet() != self.pause_button_style_string:
                 self.run_pump("pump_one_run")
-                self.pump_one_run.setStyleSheet(self.pause_button_style_string)
-                self.pump_one_run.setText('Pause')
             if self.pump_two_run.styleSheet() != self.pause_button_style_string:
                 self.run_pump("pump_two_run")
-                self.pump_two_run.setStyleSheet(self.pause_button_style_string)
-                self.pump_two_run.setText('Pause')
             if self.pump_three_run.styleSheet() != self.pause_button_style_string:
                 self.run_pump("pump_three_run")
-                self.pump_three_run.setStyleSheet(self.pause_button_style_string)
-                self.pump_three_run.setText('Pause')
+            clicked_button.setStyleSheet(self.pause_button_style_string)
+            clicked_button.setText('Pause All Pumps')
         elif clicked_button.styleSheet() == self.pause_button_style_string:
             clicked_button.setStyleSheet(self.run_button_style_string)
             clicked_button.setText('Run All Pumps')
@@ -386,34 +511,44 @@ class Pump_interface(QWidget):
                 self.pump_three_run.setText('Run')
 
     def stop_button_click(self):
-        clicked_button_name = self.sender().objectName()
-        if clicked_button_name == 'pump_one_stop':
+        button_name = self.sender().objectName()
+        self.stop_pump(button_name)
+
+    def stop_pump(self, button_name):
+        if button_name == 'pump_one_stop':
+            self.pump_one_distance_set.setText("0.00")
+            self.pump_one_distance_set_units.setText("")
             if self.pump_one_run.styleSheet() == self.pause_button_style_string:
                 self.board.accelstepper_stop(0)
+                self.pump_one_speed_readout.setText("0.00")
+                self.pump_one_speed_units_readout.setText("")
                 self.pump_one_run.setStyleSheet(self.run_button_style_string)
                 self.pump_one_run.setText('Run')
-        elif clicked_button_name == 'pump_two_stop':
+        elif button_name == 'pump_two_stop':
+            self.pump_two_distance_set.setText("0.00")
+            self.pump_two_distance_set_units.setText("")
             if self.pump_two_run.styleSheet() == self.pause_button_style_string:
                 self.board.accelstepper_stop(1)
+                self.pump_two_speed_readout.setText("0.00")
+                self.pump_two_speed_units_readout.setText("")
                 self.pump_two_run.setStyleSheet(self.run_button_style_string)
                 self.pump_two_run.setText('Run')
-        elif clicked_button_name == 'pump_three_stop':
+        elif button_name == 'pump_three_stop':
+            self.pump_three_distance_set.setText("0.00")
+            self.pump_three_distance_set_units.setText("")
             if self.pump_three_run.styleSheet() == self.pause_button_style_string:
                 self.board.accelstepper_stop(2)
+                self.pump_three_speed_readout.setText("0.00")
+                self.pump_three_speed_units_readout.setText("")
                 self.pump_three_run.setStyleSheet(self.run_button_style_string)
                 self.pump_three_run.setText('Run')
         self.run_all_pumps_consistency_check()
 
     def stop_all_pumps_button_click(self):
-        self.board.accelstepper_stop(0)
-        self.pump_one_run.setStyleSheet(self.run_button_style_string)
-        self.pump_one_run.setText('Run')
-        self.board.accelstepper_stop(1)
-        self.pump_two_run.setStyleSheet(self.run_button_style_string)
-        self.pump_two_run.setText('Run')
-        self.board.accelstepper_stop(2)
-        self.pump_three_run.setStyleSheet(self.run_button_style_string)
-        self.pump_three_run.setText('Run')
+        self.stop_pump("pump_one_stop")
+        self.stop_pump("pump_two_stop")
+        self.stop_pump("pump_three_stop")
+        self.run_all_pumps_consistency_check()
 
     def camera_preview(self):
         # get size and location of widget, and place the picamera overlay 
@@ -437,7 +572,17 @@ class Pump_interface(QWidget):
         time.sleep(2)
         self.camera.stop_preview()
 
+# Some necessary(?) debugging code
+def log_unhandled_exception(*exc_info):
+    text = "".join(traceback.format_exception(*exc_info))
+    pump_gui_logger.critical("An unhandled exception has caused this script to terminate prematurely.  Here are the details: {0}".format(text))
+    sys.exit(2)
+
+
 if __name__=='__main__':
+    #pump_gui_logger = logging.getLogger("pump_gui")
+    #logging.basicConfig(filename="pump_gui.log", level=logging.DEBUG)
+    #sys.excepthook = log_unhandled_exception
     app = QApplication(sys.argv)
     pump_control = Pump_interface()
     sys.exit(app.exec_())

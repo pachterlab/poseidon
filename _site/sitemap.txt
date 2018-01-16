@@ -1,0 +1,8 @@
+
+https://pachterlab.github.io/poseidon/about
+https://pachterlab.github.io/poseidon/atom.xml
+https://pachterlab.github.io/poseidon/hardware
+https://pachterlab.github.io/poseidon/
+https://pachterlab.github.io/poseidon/rss.xml
+https://pachterlab.github.io/poseidon/sitemap.txt
+https://pachterlab.github.io/poseidon/software

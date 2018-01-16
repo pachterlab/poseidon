@@ -9,7 +9,8 @@ group: navigation
 
 Source code is available at [https://github.com/pachterlab/poseidon](https://github.com/pachterlab/poseidon)
 
-## binaries
+
+## Binaries
 We Pump control software GUI has binaries available for Windows, Linux, MacOS and Raspbian
 
 [Download Linux Binary 42MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_linux_v0.025)
@@ -21,6 +22,12 @@ We Pump control software GUI has binaries available for Windows, Linux, MacOS an
 [Download MacOS Binary 42MB](www.replacethislink.com)
 
 
-#### Licence
+## Arudino Firmware
+To communicate with the Arduino, it must first be flashed with [Configurable Firmata](https://www.github.com/firmata/ConfigurableFirmata).
+
+We have had success following their instructions for installing the ConfigurableFirmata library and using their [example sketch](https://www.github.com/firmata/ConfigurableFirmata/examples/ConfigurableFirmata/Configurablefirmata.ino) for our Arduinos.
+
+
+#### License
 
 poseidon is distributed under the GPL v3.0 License.

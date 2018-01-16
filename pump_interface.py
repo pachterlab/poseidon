@@ -7,7 +7,7 @@
 import sys
 #import logging
 import time
-import picamera
+#import picamera
 from pymata_aio.pymata3 import PyMata3
 
 from PyQt5.QtCore import Qt, pyqtSlot, QPoint, QTimer
@@ -24,7 +24,7 @@ class Pump_interface(QWidget):
         self.initHardwareConstants()
         self.initBoard()
         self.initUIrefreshLoop()
-        self.camera = picamera.PiCamera()
+        #self.camera = picamera.PiCamera()
         self.initUI()
         self.initGlobalVariables()
 

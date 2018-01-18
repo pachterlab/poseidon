@@ -9,6 +9,7 @@ group: navigation
 
 Source code is available at [https://github.com/pachterlab/poseidon](https://github.com/pachterlab/poseidon)
 
+![mvimg_20180118_053112](https://user-images.githubusercontent.com/12504176/35100644-604b45a4-fc11-11e7-904a-45e804750611.jpg)
 
 ## Binaries
 The pump control software GUI has binaries available for Windows, Linux, MacOS and Raspbian

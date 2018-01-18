@@ -18,7 +18,7 @@ The pump control software GUI has binaries available for Windows, Linux, MacOS a
 
 [Download Linux Binary 42MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_linux_v0.025)
 
-[Download Windows Binary 17MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_windows_v0.025.exe)
+[Download Windows Binary 17MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_windows_v0.025.1.exe)
 
 [Download Raspbian Binary 37MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_raspi_v0.025)
 

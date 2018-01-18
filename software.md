@@ -23,7 +23,7 @@ The pump control software GUI has binaries available for Windows, Linux, MacOS a
 [Download MacOS Binary 42MB](www.replacethislink.com)
 
 
-## Arudino Firmware
+## Arduino Firmware
 To communicate with the Arduino and control the CNC shield stepper motor drivers, we must first flash the Arduino with [Configurable Firmata](https://www.github.com/firmata/ConfigurableFirmata).
 
 We have had success following their instructions for installing the ConfigurableFirmata library and using their [example sketch](https://www.github.com/firmata/ConfigurableFirmata/examples/ConfigurableFirmata/Configurablefirmata.ino) for our Arduinos.

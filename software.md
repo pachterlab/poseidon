@@ -22,7 +22,7 @@ The pump control software GUI has binaries available for Windows, Linux, MacOS a
 
 [Download Raspbian Binary 37MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_raspi_v0.025.1)
 
-[Download MacOS Binary 42MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_mac_v0.025.1)
+[Download MacOS Binary 42MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_osx_v0.025.1)
 
 
 ## Arduino Firmware

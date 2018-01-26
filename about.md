@@ -27,6 +27,7 @@ With subsequent refinementspublished on [http://www.appropedia.org/Open-source_s
 
 
 The microscope was inspired on a design published by the [Satija Lab](http://satijalab.org/):
+
 [Single-Cell RNA-Seq Of Rheumatoid Arthritis Synovial Tissue Using Low Cost Microfluidic Instrumentation <br>
 William Stephenson, Laura T. Donlin, Andrew Butler, Cristina Rozo, Ali Rashidfarrokhi, Susan M. Goodman, Lionel B. Ivashkiv, Vivian P. Bykerk, Dana E. Orange, Robert B. Darnell, Harold P. Swerdlow, Rahul Satija <br>
 bioRxiv, 2017](http://www.appropedia.org/Open-source_syringe_pump)

@@ -6,7 +6,7 @@ group: navigation
 
 {% include JB/setup %}
 
-# __poseidon__ project: open source bioinstrumentation
+####  __poseidon__ project: open source bioinstrumentation
 
 The poseidon syringe pumps and microscope is a customizable open source alternative to commercial systems that costs less than $500 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, but the pumps can also be connected to a computer and used independently for other experiments.
 
@@ -22,7 +22,7 @@ The microscope controller station uses Raspberry Pi with a touchscreen to connec
 
 ![cam_pump_ortho](https://user-images.githubusercontent.com/12504176/44077943-22281bac-9f5a-11e8-8e48-0c1936c4b787.png)
 
-## Hardware and software components developed for the poseidon system 
+#### Hardware and software components developed for the poseidon system 
 
 1. Computer Aided Design (CAD) files for the [pumps](https://a360.co/2B9KUDZ) and [microscope controller station](https://a360.co/2P7rClx)
 2. Pump controller software and Graphical User Interface (GUI) to control the Arduino
@@ -35,7 +35,7 @@ The GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigner-manual.
 The pumps are driven by an Arduino board that interprets commands sent via USB and sends the proper signal to control the stepper motor movement. The user can take advantage of this by developing custom movement patterns using the Arduino functions.
 
 
-## Prior work and references
+#### Prior work and references
 
 As with everything in life, the Poseidon project was not developed in a vacuum. 
 
@@ -54,4 +54,4 @@ The microscope was inspired on a design published by the [Satija Lab](http://sat
 William Stephenson, Laura T. Donlin, Andrew Butler, Cristina Rozo, Ali Rashidfarrokhi, Susan M. Goodman, Lionel B. Ivashkiv, Vivian P. Bykerk, Dana E. Orange, Robert B. Darnell, Harold P. Swerdlow, Rahul Satija <br>
 bioRxiv, 2017](http://www.appropedia.org/Open-source_syringe_pump)
 
-[All necessary files were made avaialble on Metafluidics](https://metafluidics.org/devices/minidrops/)
+[All necessary files are avaialble on Metafluidics](https://metafluidics.org/devices/minidrops/)

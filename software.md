@@ -7,28 +7,31 @@ group: navigation
 {% include JB/setup %}
 
 
-![mvimg_20180118_053112](https://user-images.githubusercontent.com/12504176/35100644-604b45a4-fc11-11e7-904a-45e804750611.jpg)
+![poseidon_gui](https://user-images.githubusercontent.com/12504176/44837086-7565ba00-abed-11e8-9f49-90933ecdb3e8.png)
 
-## Source Code
+### Source Code
 
-Source code is available at [https://github.com/pachterlab/poseidon](https://github.com/pachterlab/poseidon)
+Source code, bill of materials and 3D model files are available at [https://github.com/pachterlab/poseidon](https://github.com/pachterlab/poseidon).
 
-## Binaries
-The pump control software GUI has binaries available for Windows, Linux, MacOS and Raspbian
+The GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigner-manual.html), a drag and drop application for organizing buttons that allows the used to easily make modifications. This GUI is used to interface with a Python script that controls both the microscope and Arduino via USB. 
 
-[Download Linux Binary 42MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_linux_v0.025.1)
+The software you will need to run on your computer in order to control the Arduino is the `poseidon_main.py` script located in the `software` folder. (it also needs the `poseidon_controller_gui.py`). You have the option of either running from the source code in Python or choosing the appropriate binary file below for your operating system and executing that. You still need to flash the arduino as described in the next section.
 
-[Download Windows Binary 17MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_windows_v0.025.1.exe)
+#### Binaries
+The pump control software GUI has binaries available for Windows, Linux, MacOS and Raspbian. 
 
-[Download Raspbian Binary 37MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_raspi_v0.025.1)
+- [Windows](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_windows_executable_2018-08-29.exe) 
+- [Mac OS](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_mac_executable_2018-08-29)
+- [Ubuntu] (coming soon)
+- [Raspbian](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_raspbian_executable_2018-08-29)
 
-[Download MacOS Binary 42MB](https://github.com/pachterlab/poseidon/raw/master/software/binaries/pump_interface_osx_v0.025.1)
 
+### Arduino Firmware
+The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available the software folder.
 
-## Arduino Firmware
-To communicate with the Arduino and control the CNC shield stepper motor drivers, we must first flash the Arduino with [Configurable Firmata](https://www.github.com/firmata/ConfigurableFirmata).
+The pumps are driven by an Arduino board that interprets commands sent via USB and sends the proper signal to control the stepper motor movement. The user can take advantage of this by developing custom movement patterns using the Arduino functions.
 
-We have had success following their instructions for installing the ConfigurableFirmata library and using their [example sketch](https://www.github.com/firmata/ConfigurableFirmata/examples/ConfigurableFirmata/Configurablefirmata.ino) for our Arduinos.
+For directions on how to flash an arduino please refer to the official guide: https://www.arduino.cc/en/Guide/HomePage
 
 
 #### License

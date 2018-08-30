@@ -34,6 +34,18 @@ The GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigner-manual.
 
 The pumps are driven by an Arduino board that interprets commands sent via USB and sends the proper signal to control the stepper motor movement. The user can take advantage of this by developing custom movement patterns using the Arduino functions.
 
+<iframe src="https://myhub.autodesk360.com/ue29183a6/shares/public/SH7f1edQT22b515c761e2c8d8d3b6a07c5ab?mode=embed" width="640" height="480" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0"></iframe>
+
+<iframe src="https://myhub.autodesk360.com/ue29183a6/shares/public/SH7f1edQT22b515c761ebfc710668fe6075c?mode=embed" width="640" height="480" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"  frameborder="0"></iframe>
+
+#### Authors
+
+The poseidon system was developed at the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
+- [Sina Booeshaghi](https://github.com/sbooeshaghi/)
+- [Dylan Bannon](https://github.com/dylanbannon/)
+- [Eduardo Beltrame](https://github.com/munfred/)
+- [Jase Gehring](https://scholar.google.com/citations?user=63ZRebIAAAAJ&hl=en)
+- [Lior Pachter](https://github.com/lakigigar)
 
 #### Prior work and references
 
@@ -50,8 +62,8 @@ With subsequent refinementspublished on [http://www.appropedia.org/Open-source_s
 
 The microscope was inspired on a design published by the [Satija Lab](http://satijalab.org/):
 
-[Single-Cell RNA-Seq Of Rheumatoid Arthritis Synovial Tissue Using Low Cost Microfluidic Instrumentation <br>
+[Single-Cell Single-cell RNA-seq of rheumatoid arthritis synovial tissue using low-cost microfluidic instrumentation <br>
 William Stephenson, Laura T. Donlin, Andrew Butler, Cristina Rozo, Ali Rashidfarrokhi, Susan M. Goodman, Lionel B. Ivashkiv, Vivian P. Bykerk, Dana E. Orange, Robert B. Darnell, Harold P. Swerdlow, Rahul Satija <br>
-bioRxiv, 2017](http://www.appropedia.org/Open-source_syringe_pump)
+Nature Communicationsvolume 9, Article number: 791 (2018)](https://www.nature.com/articles/s41467-017-02659-x)
 
 [All necessary files are avaialble on Metafluidics](https://metafluidics.org/devices/minidrops/)

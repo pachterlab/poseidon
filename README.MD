@@ -17,13 +17,13 @@ The controller station uses Raspberry Pi with a touchscreen to connect to the Ar
 ## Components of the poseidon system
 
 ### Computer Aided Design (CAD) files of the 3D printed components
-STL files, Fusion 360 archive files and bill of materials are available on the hardware folder.
-
-Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk) and [poseidon pump](https://a360.co/2Ph19kC).
-Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml)
 
 The 3D printed components can be fabricated on any desktop fused filament fabrication (FFF) 3D printer. They were designed using [Autodesk Fusion 360](http://autodesk.com/fusion360), a proprietary CAD software that offers free academic licenses. To modify the 3D models the user can either use Fusion 360 or any other CAD software. 
 
+- STL files, Fusion 360 archive files and bill of materials are available on the hardware folder.
+- Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk)
+- Fusion360 interactive view of [poseidon pump](https://a360.co/2Ph19kC).
+- Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml)
 
 ### Python pump controller software and Graphical User Interface (GUI) to control the Arduino
 

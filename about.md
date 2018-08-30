@@ -59,11 +59,10 @@ PLOS One, 2014. https://doi.org/10.1371/journal.pone.0107216](http://journals.pl
 
 With subsequent refinementspublished on [http://www.appropedia.org/Open-source_syringe_pump](http://www.appropedia.org/Open-source_syringe_pump)
 
-
 The microscope was inspired on a design published by the [Satija Lab](http://satijalab.org/):
 
 [Single-Cell Single-cell RNA-seq of rheumatoid arthritis synovial tissue using low-cost microfluidic instrumentation <br>
 William Stephenson, Laura T. Donlin, Andrew Butler, Cristina Rozo, Ali Rashidfarrokhi, Susan M. Goodman, Lionel B. Ivashkiv, Vivian P. Bykerk, Dana E. Orange, Robert B. Darnell, Harold P. Swerdlow, Rahul Satija <br>
 Nature Communicationsvolume 9, Article number: 791 (2018)](https://www.nature.com/articles/s41467-017-02659-x)
 
-[All necessary files are avaialble on Metafluidics](https://metafluidics.org/devices/minidrops/)
+All necessary files are avaialble on [Metafluidics](https://metafluidics.org/devices/minidrops/)

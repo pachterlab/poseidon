@@ -16,7 +16,7 @@ The controller station uses Raspberry Pi with a touchscreen to connect to the Ar
 
 ## Components of the poseidon system
 
-### 1. Computer Aided Design (CAD) files of the 3D printed components
+### 1. Computer Aided Design (CAD) files of the 3D printed components and assembly
 
 The 3D printed components can be fabricated on any desktop fused filament fabrication (FFF) 3D printer. They were designed using [Autodesk Fusion 360](http://autodesk.com/fusion360), a proprietary CAD software that offers free academic licenses. To modify the 3D models the user can either use Fusion 360 or any other CAD software. 
 

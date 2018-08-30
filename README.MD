@@ -3,7 +3,7 @@
 The poseidon syringe pumps and microscope is a customizable open source alternative to commercial systems that costs less than $400 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, but the pumps can also be connected to a computer and used independently for other experiments.
 
 
-## Open source syringe pumps and Raspberry Pi microscope
+### Open source syringe pumps and Raspberry Pi microscope
 ![mvimg_20180111_222424](https://user-images.githubusercontent.com/12504176/34991157-69e99c68-fa7d-11e7-8a77-660660820391.jpg)
 
 # Overview
@@ -16,45 +16,35 @@ The controller station uses Raspberry Pi with a touchscreen to connect to the Ar
 
 ## Components of the poseidon system
 
+### Computer Aided Design (CAD) files of the 3D printed components
+STL files, Fusion 360 archive files and bill of materials are available on the hardware folder.
 
-### 1. Computer Aided Design (CAD) files of the 3D printed components
-    - Interactive view of poseidon microscope CAD: http://a360.co/2krZoEk
-    - Interactive view of poseidon pumps CAD: https://a360.co/2Ph19kC
-    - STL files and Fusion 360 archive files are available on the hardware folder
+Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk) and [poseidon pump](https://a360.co/2Ph19kC).
+Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml)
 
 The 3D printed components can be fabricated on any desktop fused filament fabrication (FFF) 3D printer. They were designed using [Autodesk Fusion 360](http://autodesk.com/fusion360), a proprietary CAD software that offers free academic licenses. To modify the 3D models the user can either use Fusion 360 or any other CAD software. 
 
 
-## 2. Pump controller software and Graphical User Interface (GUI) to control the Arduino, available on the software folder
+### Python pump controller software and Graphical User Interface (GUI) to control the Arduino
+
+The Python scripts are available on the software folder.
 
 The GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigner-manual.html), a drag and drop application for organizing buttons that allows the used to easily make modifications. This GUI is used to interface with a Python script that controls both the microscope and Arduino via USB. 
 
 The software you will need to run on your compuer in order to control the Arduino is located in the `software` folder. You have the option of either running the source code in Python or choosing the appropriate binary file for your operating system and executing that.
 
-### Download of binary files:
+** Download of binary files: **
 - [Windows](link) 
 - [Mac OS](link)
 - [Ubuntu](link)
 - [Raspbian](link)
 
-## 3. Arduino firmware used to drive the motors, available the software folder
+### Arduino firmware used to drive the motors, 
+The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available the software folder.
 
 The pumps are driven by an Arduino board that interprets commands sent via USB and sends the proper signal to control the stepper motor movement. The user can take advantage of this by developing custom movement patterns using the Arduino functions.
 
-The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch.
 For directions on how to flash an arduino please refer to the official guide: https://www.arduino.cc/en/Guide/HomePage
-
-
-## Software information
-
-The software you will need to run on your compuer in order to control the Arduino is located in the `software` folder. You have the option of either running the source code in Python or choosing the appropriate binary file for your operating system and executing that.
-
-### Download of binary files:
-- [Windows](link) 
-- [Mac OS](link)
-- [Ubuntu](link)
-- [Raspbian](link)
-
 
 # Detailed instructions
 
@@ -80,7 +70,9 @@ sudo apt-get install libqt4-test
 python3.5 poseidon_main.py
 ```
 
-### Installing pyinstaller on Windows 7 and compiling the executable
+### Installing pyinstaller on Windows 7 and making a single executable for the Python controller
+
+To create a single .exe file we use 
 Using Python 3.7 (installing pyqt5 form pip) or 3.4 (isntalling pyqt5 from executable) on Windows 10 did not work. 
 Python 3.7 yields terrible dependency errors from pyinstaller and with Python 3.4 after making the executable pyqt complains apparently because of windows 10. The solution was to use a machine with Windows 7. 
 
@@ -90,20 +82,19 @@ python -m pip install pyqt5
 python -m pip install pyserial
 python -m pip install opencv-python
 ```
-To compile a binary for some reason the pyinstaller people thought it made sense to use capital letters..
-So you gotta write `PyInstaller` instead of `pyinstaller`...
+To compile a binary you should write `PyInstaller`, instead of `pyinstaller`...
 ```
 python -m PyInstaller --version
 python -m PyInstaller poseidon_main.py
 ```
 Just doing `python -m PyInstaller gui.py` with Python 3.5 on windows 7 threw up some errors, the following line solved the issue.
-Desdribed here: https://stackoverflow.com/questions/51324754/python-3-6-x-pyinstaller-gives-error-no-module-named-pyqt5-sip
+Described here: https://stackoverflow.com/questions/51324754/python-3-6-x-pyinstaller-gives-error-no-module-named-pyqt5-sip
 ```
 python -m PyInstaller -F poseidon_main.py --hidden-import PyQt5.sip
 ```
 
 
-## Detailed Arduino hardware information
+## Arduino hardware setup information
 
 We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)
 to allow for up to three pumps can be controlled from a computer or from the Rapsberry Pi microscope.

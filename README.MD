@@ -31,13 +31,13 @@ The Python scripts are available on the software folder.
 
 The GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigner-manual.html), a drag and drop application for organizing buttons that allows the used to easily make modifications. This GUI is used to interface with a Python script that controls both the microscope and Arduino via USB. 
 
-The software you will need to run on your compuer in order to control the Arduino is located in the `software` folder. You have the option of either running the source code in Python or choosing the appropriate binary file for your operating system and executing that.
+The software you will need to run on your computer in order to control the Arduino is the `poseidon_main.py` script located in the `software folder` (it also needs the poseidon_controller_gui.py). You have the option of either running from the source code in Python or choosing the appropriate binary file below for your operating system and executing that. You still need to flash the arduino as described in the next section.
 
 #### Download of binary files
-- [Windows](link) 
-- [Mac OS](link)
-- [Ubuntu](link)
-- [Raspbian](link)
+- [Windows](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_windows_executable_2018-08-29.exe) 
+- [Mac OS](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_mac_executable_2018-08-29)
+- [Ubuntu] (coming soon)
+- [Raspbian](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_raspbian_executable_2018-08-29)
 
 ### 3. Arduino firmware used to drive the motors, 
 The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available the software folder.
@@ -118,3 +118,41 @@ Detailed written instructions are on the way. In the meantime you can [click her
 Before stating the Python controller, make sure the Arduino is connected via USB to the computer or Rapsberry Pi microscope, that the CNC shield is powered, and that the 3 motors are plugged in. Test to see that they are moving in the correct direction when expelling, if not simply rotate the relevant stepper motor connectors 180 degrees and plug them back in.
 
 
+#### Authors
+
+The poseidon system was developed at the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
+- [Sina Booeshaghi](https://github.com/sbooeshaghi/)
+- [Dylan Bannon](https://github.com/dylanbannon/)
+- [Eduardo Beltrame](https://github.com/munfred/)
+- [Jase Gehring](https://scholar.google.com/citations?user=63ZRebIAAAAJ&hl=en)
+- [Lior Pachter](https://github.com/lakigigar)
+
+
+#### Authors
+
+The poseidon system was developed at the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
+- [Sina Booeshaghi](https://github.com/sbooeshaghi/)
+- [Dylan Bannon](https://github.com/dylanbannon/)
+- [Eduardo Beltrame](https://github.com/munfred/)
+- [Jase Gehring](https://scholar.google.com/citations?user=63ZRebIAAAAJ&hl=en)
+- [Lior Pachter](https://github.com/lakigigar)
+
+#### Prior work and references
+
+As with everything in life, the Poseidon project was not developed in a vacuum. 
+
+The pumps design was based of the open source syringe pumps published by the [Pearce Research Group](http://www.mse.mtu.edu/~pearce/Index.html):
+
+[Open-Source Syringe Pump Library <br>
+Bas Wijnen, Emily J. Hunt, Gerald C. Anzalone, Joshua M. Pearce <br>
+PLOS One, 2014. https://doi.org/10.1371/journal.pone.0107216](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0107216)
+
+With subsequent refinements published on [http://www.appropedia.org/Open-source_syringe_pump](http://www.appropedia.org/Open-source_syringe_pump)
+
+The microscope was inspired on a design published by the [Satija Lab](http://satijalab.org/):
+
+[Single-Cell Single-cell RNA-seq of rheumatoid arthritis synovial tissue using low-cost microfluidic instrumentation <br>
+William Stephenson, Laura T. Donlin, Andrew Butler, Cristina Rozo, Ali Rashidfarrokhi, Susan M. Goodman, Lionel B. Ivashkiv, Vivian P. Bykerk, Dana E. Orange, Robert B. Darnell, Harold P. Swerdlow, Rahul Satija <br>
+Nature Communicationsvolume 9, Article number: 791 (2018)](https://www.nature.com/articles/s41467-017-02659-x)
+
+All necessary files are avaialble on [Metafluidics](https://metafluidics.org/devices/minidrops/)

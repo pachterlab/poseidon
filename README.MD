@@ -16,7 +16,7 @@ The controller station uses Raspberry Pi with a touchscreen to connect to the Ar
 
 ## Components of the poseidon system
 
-### Computer Aided Design (CAD) files of the 3D printed components
+### 1. Computer Aided Design (CAD) files of the 3D printed components
 
 The 3D printed components can be fabricated on any desktop fused filament fabrication (FFF) 3D printer. They were designed using [Autodesk Fusion 360](http://autodesk.com/fusion360), a proprietary CAD software that offers free academic licenses. To modify the 3D models the user can either use Fusion 360 or any other CAD software. 
 
@@ -25,7 +25,7 @@ The 3D printed components can be fabricated on any desktop fused filament fabric
 - Fusion360 interactive view of [poseidon pump](https://a360.co/2Ph19kC).
 - Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml)
 
-### Python pump controller software and Graphical User Interface (GUI) to control the Arduino
+### 2. Python pump controller software and Graphical User Interface (GUI) to control the Arduino
 
 The Python scripts are available on the software folder.
 
@@ -33,13 +33,13 @@ The GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigner-manual.
 
 The software you will need to run on your compuer in order to control the Arduino is located in the `software` folder. You have the option of either running the source code in Python or choosing the appropriate binary file for your operating system and executing that.
 
-** Download of binary files: **
+#### Download of binary files
 - [Windows](link) 
 - [Mac OS](link)
 - [Ubuntu](link)
 - [Raspbian](link)
 
-### Arduino firmware used to drive the motors, 
+### 3. Arduino firmware used to drive the motors, 
 The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available the software folder.
 
 The pumps are driven by an Arduino board that interprets commands sent via USB and sends the proper signal to control the stepper motor movement. The user can take advantage of this by developing custom movement patterns using the Arduino functions.

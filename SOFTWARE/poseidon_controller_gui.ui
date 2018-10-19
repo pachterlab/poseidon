@@ -999,6 +999,9 @@
               <property name="decimals">
                <number>4</number>
               </property>
+              <property name="maximum">
+               <double>9999.998999999999796</double>
+              </property>
              </widget>
             </item>
             <item row="2" column="1">
@@ -1008,6 +1011,9 @@
              <widget class="QDoubleSpinBox" name="p2_speed_INPUT">
               <property name="decimals">
                <number>4</number>
+              </property>
+              <property name="maximum">
+               <double>9999.998999999999796</double>
               </property>
              </widget>
             </item>
@@ -1025,6 +1031,9 @@
              <widget class="QDoubleSpinBox" name="p3_speed_INPUT">
               <property name="decimals">
                <number>4</number>
+              </property>
+              <property name="maximum">
+               <double>9999.998999999999796</double>
               </property>
              </widget>
             </item>

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'poseidon_controller_gui.ui'
 #
-# Created by: PyQt5 UI code generator 5.9.2
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -564,6 +564,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.label_19, 0, 4, 1, 1)
         self.p1_speed_INPUT = QtWidgets.QDoubleSpinBox(self.setup)
         self.p1_speed_INPUT.setDecimals(4)
+        self.p1_speed_INPUT.setMaximum(9999.999)
         self.p1_speed_INPUT.setObjectName("p1_speed_INPUT")
         self.gridLayout.addWidget(self.p1_speed_INPUT, 1, 3, 1, 1)
         self.p2_syringe_DROPDOWN = QtWidgets.QComboBox(self.setup)
@@ -571,6 +572,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.p2_syringe_DROPDOWN, 2, 1, 1, 1)
         self.p2_speed_INPUT = QtWidgets.QDoubleSpinBox(self.setup)
         self.p2_speed_INPUT.setDecimals(4)
+        self.p2_speed_INPUT.setMaximum(9999.999)
         self.p2_speed_INPUT.setObjectName("p2_speed_INPUT")
         self.gridLayout.addWidget(self.p2_speed_INPUT, 2, 3, 1, 1)
         self.p1_accel_INPUT = QtWidgets.QDoubleSpinBox(self.setup)
@@ -582,6 +584,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addWidget(self.p3_syringe_DROPDOWN, 3, 1, 1, 1)
         self.p3_speed_INPUT = QtWidgets.QDoubleSpinBox(self.setup)
         self.p3_speed_INPUT.setDecimals(4)
+        self.p3_speed_INPUT.setMaximum(9999.999)
         self.p3_speed_INPUT.setObjectName("p3_speed_INPUT")
         self.gridLayout.addWidget(self.p3_speed_INPUT, 3, 3, 1, 1)
         self.p1_units_DROPDOWN = QtWidgets.QComboBox(self.setup)

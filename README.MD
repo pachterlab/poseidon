@@ -16,10 +16,10 @@ The controller station uses Raspberry Pi with a touchscreen to connect to the Ar
 
 **Build tutorial videos are found here:**
 
-Syringe Pump: https://www.youtube.com/watch?v=7YSiO6usR1M
-Microscope  : https://www.youtube.com/watch?v=Szg-vjukonA
-Arduino     : https://www.youtube.com/watch?v=Xl02fsRCJ7U
-Raspberry Pi: https://www.youtube.com/watch?v=g3pXNY8snOg
+Syringe Pump: https://www.youtube.com/watch?v=7YSiO6usR1M  
+Microscope  : https://www.youtube.com/watch?v=Szg-vjukonA  
+Arduino     : https://www.youtube.com/watch?v=Xl02fsRCJ7U  
+Raspberry Pi: https://www.youtube.com/watch?v=g3pXNY8snOg  
 
 ## Components of the poseidon system
 

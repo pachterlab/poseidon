@@ -14,6 +14,12 @@ The pump driver uses an Arduino with a [CNC shield](https://blog.protoneer.co.nz
 
 The controller station uses Raspberry Pi with a touchscreen to connect to the Arduino and microscope via USB. Because the microscope and Arduino use USB connections, the they can alternatively be connected to any computer instead of a Raspberry Pi. 
 
+**Build tutorial videos are found here: **
+Syringe Pump: https://www.youtube.com/watch?v=7YSiO6usR1M
+Microscope  : https://www.youtube.com/watch?v=Szg-vjukonA
+Arduino     : https://www.youtube.com/watch?v=Xl02fsRCJ7U
+Raspberry Pi: https://www.youtube.com/watch?v=g3pXNY8snOg
+
 ## Components of the poseidon system
 
 ### 1. Computer Aided Design (CAD) files of the 3D printed components and assembly

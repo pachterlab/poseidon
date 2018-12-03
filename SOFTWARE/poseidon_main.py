@@ -65,6 +65,8 @@ class Thread(QtCore.QThread):
 
 	def run(self):
 		try:
+			#self.serial.flushInput()
+			#self.serial.flushOutput()
 			result = self.fn(*self.args, **self.kwargs)
 		except:
 			traceback.print_exc()
@@ -74,6 +76,7 @@ class Thread(QtCore.QThread):
 			self.signals.result.emit(result)  # Return the result of the processing
 		finally:
 			self.signals.finished.emit()  # Done
+			self.stop()
 
 			print("Job completed")
 
@@ -541,11 +544,12 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 			three_jog = str(self.p3_setup_jog_delta_to_send)
 				 
 			if btn.text() == "Jog +":
-				self.statusBar().showMessage("You clicked JOG -")
+				self.statusBar().showMessage("You clicked JOG +")
 				f_cmd = "<RUN,DIST," + pumps_2_run +",0,F," + one_jog + "," + two_jog + "," + three_jog + ">"
 				testData.append(f_cmd)
 
 				print("Sending JOG command..")
+
 				thread = Thread(self.runTest, testData)
 				thread.finished.connect(lambda:self.thread_finished(thread))
 				thread.start()
@@ -1018,9 +1022,9 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 				#self.serial.flushInput()
 
 				# This is a thread that always runs and listens to commands from the Arduino
-				self.global_listener_thread = Thread(self.listening)
-				self.global_listener_thread.finished.connect(lambda:self.self.thread_finished(self.global_listener_thread))
-				self.global_listener_thread.start()
+				#self.global_listener_thread = Thread(self.listening)
+				#self.global_listener_thread.finished.connect(lambda:self.self.thread_finished(self.global_listener_thread))
+				#self.global_listener_thread.start()
 
 				# ~~~~~~~~~~~~~~~~
 				# TAB : Setup
@@ -1047,7 +1051,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 	def disconnect(self):
 		self.statusBar().showMessage("You clicked DISCONNECT FROM BOARD")
 		print("Disconnecting from board..")
-		self.global_listener_thread.stop()
+		#self.global_listener_thread.stop()
 		time.sleep(3)
 		self.serial.close()
 		print("Board has been disconnected")
@@ -1094,6 +1098,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 	# 200 steps per rev
 	# one rev is 0.8mm dist
 		mm = steps/200/32*0.8
+		#mm = steps/200/0.8
 		return mm
 
 	def steps2mL(self, steps, syringe_area):
@@ -1107,6 +1112,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 	def mm2steps(self, mm):
 		steps = mm/0.8*200*32
+		#steps = mm/0.8*200
 		return steps
 
 	def mL2steps(self, mL, syringe_area):
@@ -1311,8 +1317,8 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 				while self.serial.inWaiting() == 0:
 					pass
 
-				#dataRecvd = self.recvFromArduino2()
-				print("Reply Received -- ")
+				dataRecvd = self.recvPositionArduino()
+				print("Reply Received -- " + dataRecvd)
 				n += 1
 				waitingForReply = False
 
@@ -1419,7 +1425,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 	def closeEvent(self, event):
 		try:
-			self.global_listener_thread.stop()
+			#self.global_listener_thread.stop()
 			self.serial.close()
 			#self.threadpool.end()
 			

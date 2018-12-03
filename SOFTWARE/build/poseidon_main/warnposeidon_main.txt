@@ -1,0 +1,111 @@
+missing module named 'multiprocessing.forking' - imported by /Users/sinabooeshaghi/software/anaconda/envs/poseidon_controller/lib/python3.6/site-packages/PyInstaller/loader/rthooks/pyi_rth_multiprocessing.py
+missing module named multiprocessing.get_context - imported by multiprocessing, multiprocessing.pool, multiprocessing.managers, multiprocessing.sharedctypes
+missing module named multiprocessing.TimeoutError - imported by multiprocessing, multiprocessing.pool
+missing module named multiprocessing.BufferTooShort - imported by multiprocessing, multiprocessing.connection
+missing module named multiprocessing.AuthenticationError - imported by multiprocessing, multiprocessing.connection
+missing module named multiprocessing.set_start_method - imported by multiprocessing, multiprocessing.spawn
+missing module named multiprocessing.get_start_method - imported by multiprocessing, multiprocessing.spawn
+missing module named multiprocessing.SimpleQueue - imported by multiprocessing, concurrent.futures.process
+missing module named pyimod03_importers - imported by /Users/sinabooeshaghi/software/anaconda/envs/poseidon_controller/lib/python3.6/site-packages/PyInstaller/loader/rthooks/pyi_rth_pkgres.py
+missing module named 'pkg_resources.extern.pyparsing' - imported by pkg_resources._vendor.packaging.markers, pkg_resources._vendor.packaging.requirements
+missing module named netbios - imported by uuid
+missing module named win32wnet - imported by uuid
+missing module named __builtin__ - imported by numpy.core.numerictypes, numpy.core.numeric, numpy.distutils.misc_util, numpy.lib.function_base, numpy.lib._iotools, numpy.ma.core, numpy, pkg_resources._vendor.pyparsing
+missing module named ordereddict - imported by pkg_resources._vendor.pyparsing
+missing module named StringIO - imported by numpy.lib.utils, numpy.testing._private.utils, numpy.lib.format, pkg_resources._vendor.six
+missing module named 'win32com.shell' - imported by pkg_resources._vendor.appdirs
+missing module named 'com.sun' - imported by pkg_resources._vendor.appdirs
+missing module named com - imported by pkg_resources._vendor.appdirs
+missing module named win32api - imported by distutils.msvccompiler, pkg_resources._vendor.appdirs
+missing module named win32com - imported by pkg_resources._vendor.appdirs
+missing module named __main__ - imported by pkg_resources
+missing module named pkg_resources.extern.packaging - imported by pkg_resources.extern, pkg_resources
+missing module named pkg_resources.extern.appdirs - imported by pkg_resources.extern, pkg_resources
+missing module named 'pkg_resources.extern.six.moves' - imported by pkg_resources, pkg_resources._vendor.packaging.requirements
+missing module named pkg_resources.extern.six - imported by pkg_resources.extern, pkg_resources
+missing module named org - imported by pickle, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+excluded module named _frozen_importlib - imported by importlib, importlib.abc, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+missing module named _frozen_importlib_external - imported by importlib._bootstrap, importlib, importlib.abc, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+missing module named _winreg - imported by platform, numpy.distutils.cpuinfo, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py, pkg_resources._vendor.appdirs
+missing module named java - imported by platform, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+missing module named 'java.lang' - imported by platform, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py, xml.sax._exceptions
+missing module named vms_lib - imported by platform, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+missing module named winreg - imported by platform, mimetypes, distutils.msvccompiler, distutils.msvc9compiler, distutils._msvccompiler, numpy.distutils.cpuinfo, urllib.request, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+missing module named nt - imported by os, shutil, ntpath, pathlib, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+missing module named msvcrt - imported by subprocess, multiprocessing.spawn, multiprocessing.popen_spawn_win32, numpy.distutils.mingw32ccompiler, getpass, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+missing module named _winapi - imported by subprocess, multiprocessing.reduction, multiprocessing.connection, multiprocessing.heap, multiprocessing.popen_spawn_win32, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+missing module named _dummy_threading - imported by dummy_threading, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py
+missing module named 'org.python' - imported by copy, setuptools.sandbox, /Users/sinabooeshaghi/Dropbox (Personal)/Caltech/Research/Syringe Pump/poseidon/SOFTWARE/poseidon_main.py, xml.sax
+missing module named scipy - imported by numpy.testing._private.nosetester
+missing module named 'nose.util' - imported by numpy.testing._private.noseclasses
+missing module named 'nose.plugins' - imported by numpy.testing._private.noseclasses, numpy.testing._private.nosetester
+missing module named nose - imported by numpy.testing._private.utils, numpy.testing._private.decorators, numpy.testing._private.noseclasses
+missing module named numpy.core.number - imported by numpy.core, numpy.testing._private.utils
+missing module named dummy_thread - imported by numpy.core.arrayprint
+missing module named thread - imported by numpy.core.arrayprint
+missing module named cPickle - imported by numpy.core.numeric, numpy.lib.format, numpy.lib.npyio, numpy.ma.core
+missing module named cStringIO - imported by cPickle
+missing module named copy_reg - imported by cPickle, cStringIO, numpy.core
+missing module named numpy.lib.imag - imported by numpy.lib, numpy.testing._private.utils
+missing module named numpy.lib.real - imported by numpy.lib, numpy.testing._private.utils
+missing module named numpy.lib.iscomplexobj - imported by numpy.lib, numpy.testing._private.utils
+missing module named numpy.core.signbit - imported by numpy.core, numpy.testing._private.utils
+missing module named win32pdh - imported by numpy.testing._private.utils
+missing module named numpy.core.float64 - imported by numpy.core, numpy.testing._private.utils
+missing module named numpy.core.float32 - imported by numpy.core, numpy.testing._private.utils
+missing module named commands - imported by numpy.distutils.cpuinfo
+missing module named setuptools.extern.packaging - imported by setuptools.extern, setuptools.dist, setuptools.command.egg_info
+missing module named 'setuptools.extern.six' - imported by setuptools, setuptools.extension
+missing module named 'setuptools.extern.packaging.version' - imported by setuptools.config, setuptools.msvc
+missing module named _manylinux - imported by setuptools.pep425tags
+missing module named 'setuptools.extern.packaging.utils' - imported by setuptools.wheel
+missing module named wincertstore - imported by setuptools.ssl_support
+missing module named 'backports.ssl_match_hostname' - imported by setuptools.ssl_support
+missing module named backports - imported by setuptools.ssl_support
+missing module named _distutils_findvs - imported by distutils._msvccompiler
+missing module named 'setuptools.extern.six.moves' - imported by setuptools.dist, setuptools.py33compat, setuptools.command.easy_install, setuptools.sandbox, setuptools.command.setopt, setuptools.package_index, setuptools.ssl_support, setuptools.command.egg_info, setuptools.command.py36compat, setuptools.namespaces, setuptools.msvc
+missing module named setuptools.extern.six - imported by setuptools.extern, setuptools.monkey, setuptools.dist, setuptools.py33compat, setuptools.config, setuptools.command.easy_install, setuptools.sandbox, setuptools.py27compat, setuptools.package_index, setuptools.wheel, setuptools.command.egg_info, setuptools.command.sdist, setuptools.command.bdist_egg, setuptools.unicode_utils, setuptools.glob, setuptools.command.develop
+missing module named 'numpy_distutils.cpuinfo' - imported by numpy.f2py.diagnose
+missing module named 'numpy_distutils.fcompiler' - imported by numpy.f2py.diagnose
+missing module named 'numpy_distutils.command' - imported by numpy.f2py.diagnose
+missing module named numpy_distutils - imported by numpy.f2py.diagnose
+missing module named __svn_version__ - imported by numpy.f2py.__version__
+missing module named numarray - imported by numpy.distutils.system_info
+missing module named Numeric - imported by numpy.distutils.system_info
+missing module named ConfigParser - imported by numpy.distutils.system_info, numpy.distutils.npy_pkg_config
+missing module named win32con - imported by distutils.msvccompiler
+missing module named pytest - imported by numpy.testing._private.pytesttester
+missing module named numpy.lib.i0 - imported by numpy.lib, numpy.dual
+missing module named numpy.core.integer - imported by numpy.core, numpy.fft.helper
+missing module named numpy.core.sqrt - imported by numpy.core, numpy.linalg.linalg, numpy.fft.fftpack
+missing module named numpy.core.conjugate - imported by numpy.core, numpy.fft.fftpack
+missing module named numpy.core.divide - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.object_ - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.intp - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.geterrobj - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.add - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.complexfloating - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.inexact - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.cdouble - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.csingle - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.double - imported by numpy.core, numpy.linalg.linalg
+missing module named numpy.core.single - imported by numpy.core, numpy.linalg.linalg
+missing module named future_builtins - imported by numpy.lib.npyio
+missing module named urllib2 - imported by numpy.lib._datasource
+missing module named urlparse - imported by numpy.lib._datasource
+missing module named numpy.recarray - imported by numpy, numpy.ma.mrecords
+missing module named numpy.dtype - imported by numpy, numpy.ma.mrecords, numpy.ctypeslib
+missing module named numpy.expand_dims - imported by numpy, numpy.ma.core
+missing module named numpy.array - imported by numpy, numpy.ma.core, numpy.ma.extras, numpy.ma.mrecords, numpy.ctypeslib
+missing module named numpy.bool_ - imported by numpy, numpy.ma.core, numpy.ma.mrecords
+missing module named numpy.iscomplexobj - imported by numpy, numpy.ma.core
+missing module named numpy.amin - imported by numpy, numpy.ma.core
+missing module named numpy.amax - imported by numpy, numpy.ma.core
+missing module named numpy.ndarray - imported by numpy, numpy.ma.core, numpy.ma.extras, numpy.ma.mrecords, numpy.ctypeslib
+missing module named numpy.histogramdd - imported by numpy, numpy.lib.twodim_base
+missing module named numpy.eye - imported by numpy, numpy.core.numeric
+missing module named FCNTL - imported by serial.serialposix
+missing module named TERMIOS - imported by serial.serialposix
+missing module named 'System.IO' - imported by serial.serialcli
+missing module named System - imported by serial.serialcli
+missing module named clr - imported by serial.serialcli

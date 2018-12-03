@@ -729,7 +729,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		experiment_notes = self.experiment_notes
 
 		text = []
-		text.append("File name: " + name + "\n") 				# line 0
+		text.append("File name: " + name + ".txt" + "\n") 		# line 0
 		text.append("Date time: " + date_string + "\n") 		# line 1
 
 		text.append(":================================ \n") 	# line 2
@@ -752,81 +752,85 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		text.append("P3 Jog D: " + p3_setup_jog_delta + "\n") 	# line 19
 		text.append("Exp Note: " + experiment_notes)			# line 20
 
-		with open(name, 'w') as f:
-			f.writelines(text)
+		if name:
+			with open(name + ".txt", 'w') as f:
+				f.writelines(text)
+				self.statusBar().showMessage("Settings saved in " + name + ".txt")
 
 	def load_settings(self):
 		# need to make name an tuple otherwise i had an error and app crashed
-		name, _ = QFileDialog.getOpenFileName(self, 'Open File', options=QFileDialog.DontUseNativeDialog)
+		name, _ = QFileDialog.getOpenFileName(self, 'Open File', options=QFileDialog.DontUseNativeDialog, filter = "Text (*.txt)")
 
-		with open(name, 'r') as f:
-			text = f.readlines()
-			# here is where you load all of your variables
-			# reformatting the text
-			text = [line.split(':')[-1].strip('\n')[1:] for line in text]
-			fname = text[0]
-			date_string = text[1]
+		if name:
+			with open(name, 'r') as f:
+				text = f.readlines()
+				# here is where you load all of your variables
+				# reformatting the text
+				text = [line.split(':')[-1].strip('\n')[1:] for line in text]
+				fname = text[0]
+				date_string = text[1]
 
-			p1_syringe 			= text[3]
-			p1_units 			= text[4]
-			p1_speed 			= text[5]
-			p1_accel 			= text[6]
-			p1_setup_jog_delta 	= text[7]
+				p1_syringe 			= text[3]
+				p1_units 			= text[4]
+				p1_speed 			= text[5]
+				p1_accel 			= text[6]
+				p1_setup_jog_delta 	= text[7]
 
-			p2_syringe 			= text[9]
-			p2_units 			= text[10]
-			p2_speed 			= text[11]
-			p2_accel 			= text[12]
-			p2_setup_jog_delta 	= text[13]
+				p2_syringe 			= text[9]
+				p2_units 			= text[10]
+				p2_speed 			= text[11]
+				p2_accel 			= text[12]
+				p2_setup_jog_delta 	= text[13]
 
-			p3_syringe 			= text[15]
-			p3_units 			= text[16]
-			p3_speed 			= text[17]
-			p3_accel 			= text[18]
-			p3_setup_jog_delta 	= text[19]
+				p3_syringe 			= text[15]
+				p3_units 			= text[16]
+				p3_speed 			= text[17]
+				p3_accel 			= text[18]
+				p3_setup_jog_delta 	= text[19]
 
-			experiment_notes 	= text[20]
+				experiment_notes 	= text[20]
 
-			#print(fname, date_string, p1_syringe, p1_units, p1_speed, p1_accel, p1_setup_jog_delta)
+				#print(fname, date_string, p1_syringe, p1_units, p1_speed, p1_accel, p1_setup_jog_delta)
 
-		# Here we are setting all of the values as given by the settings file
-		p1_syringe_index = self.ui.p1_syringe_DROPDOWN.findText(p1_syringe, QtCore.Qt.MatchFixedString)
-		self.ui.p1_syringe_DROPDOWN.setCurrentIndex(p1_syringe_index)
-		p1_units_index = self.ui.p1_units_DROPDOWN.findText(p1_units, QtCore.Qt.MatchFixedString)
-		self.ui.p1_units_DROPDOWN.setCurrentIndex(p1_units_index)
-		self.ui.p1_speed_INPUT.setValue(float(p1_speed))
-		self.ui.p1_accel_INPUT.setValue(float(p1_accel))
+			# Here we are setting all of the values as given by the settings file
+			p1_syringe_index = self.ui.p1_syringe_DROPDOWN.findText(p1_syringe, QtCore.Qt.MatchFixedString)
+			self.ui.p1_syringe_DROPDOWN.setCurrentIndex(p1_syringe_index)
+			p1_units_index = self.ui.p1_units_DROPDOWN.findText(p1_units, QtCore.Qt.MatchFixedString)
+			self.ui.p1_units_DROPDOWN.setCurrentIndex(p1_units_index)
+			self.ui.p1_speed_INPUT.setValue(float(p1_speed))
+			self.ui.p1_accel_INPUT.setValue(float(p1_accel))
 
-		AllItems = [self.ui.p1_setup_jog_delta_INPUT.itemText(i) for i in range(self.ui.p1_setup_jog_delta_INPUT.count())]
+			AllItems = [self.ui.p1_setup_jog_delta_INPUT.itemText(i) for i in range(self.ui.p1_setup_jog_delta_INPUT.count())]
 
-		p1_setup_jog_delta_index = self.ui.p1_setup_jog_delta_INPUT.findText(p1_setup_jog_delta, QtCore.Qt.MatchFixedString)
-		self.ui.p1_setup_jog_delta_INPUT.setCurrentIndex(p1_setup_jog_delta_index)
+			p1_setup_jog_delta_index = self.ui.p1_setup_jog_delta_INPUT.findText(p1_setup_jog_delta, QtCore.Qt.MatchFixedString)
+			self.ui.p1_setup_jog_delta_INPUT.setCurrentIndex(p1_setup_jog_delta_index)
 
 
-		p2_syringe_index = self.ui.p2_syringe_DROPDOWN.findText(p2_syringe, QtCore.Qt.MatchFixedString)
-		self.ui.p2_syringe_DROPDOWN.setCurrentIndex(p2_syringe_index)
-		p2_units_index = self.ui.p2_units_DROPDOWN.findText(p2_units, QtCore.Qt.MatchFixedString)
-		self.ui.p2_units_DROPDOWN.setCurrentIndex(p2_units_index)
-		self.ui.p2_speed_INPUT.setValue(float(p2_speed))
-		self.ui.p2_accel_INPUT.setValue(float(p2_accel))
+			p2_syringe_index = self.ui.p2_syringe_DROPDOWN.findText(p2_syringe, QtCore.Qt.MatchFixedString)
+			self.ui.p2_syringe_DROPDOWN.setCurrentIndex(p2_syringe_index)
+			p2_units_index = self.ui.p2_units_DROPDOWN.findText(p2_units, QtCore.Qt.MatchFixedString)
+			self.ui.p2_units_DROPDOWN.setCurrentIndex(p2_units_index)
+			self.ui.p2_speed_INPUT.setValue(float(p2_speed))
+			self.ui.p2_accel_INPUT.setValue(float(p2_accel))
 
-		p2_setup_jog_delta_index = self.ui.p2_setup_jog_delta_INPUT.findText(p2_setup_jog_delta, QtCore.Qt.MatchFixedString)
-		self.ui.p2_setup_jog_delta_INPUT.setCurrentIndex(p2_setup_jog_delta_index)
+			p2_setup_jog_delta_index = self.ui.p2_setup_jog_delta_INPUT.findText(p2_setup_jog_delta, QtCore.Qt.MatchFixedString)
+			self.ui.p2_setup_jog_delta_INPUT.setCurrentIndex(p2_setup_jog_delta_index)
 
-		p3_syringe_index = self.ui.p3_syringe_DROPDOWN.findText(p3_syringe, QtCore.Qt.MatchFixedString)
-		self.ui.p3_syringe_DROPDOWN.setCurrentIndex(p3_syringe_index)
-		p3_units_index = self.ui.p3_units_DROPDOWN.findText(p3_units, QtCore.Qt.MatchFixedString)
-		self.ui.p3_units_DROPDOWN.setCurrentIndex(p3_units_index)
-		self.ui.p3_speed_INPUT.setValue(float(p3_speed))
-		self.ui.p3_accel_INPUT.setValue(float(p3_accel))
+			p3_syringe_index = self.ui.p3_syringe_DROPDOWN.findText(p3_syringe, QtCore.Qt.MatchFixedString)
+			self.ui.p3_syringe_DROPDOWN.setCurrentIndex(p3_syringe_index)
+			p3_units_index = self.ui.p3_units_DROPDOWN.findText(p3_units, QtCore.Qt.MatchFixedString)
+			self.ui.p3_units_DROPDOWN.setCurrentIndex(p3_units_index)
+			self.ui.p3_speed_INPUT.setValue(float(p3_speed))
+			self.ui.p3_accel_INPUT.setValue(float(p3_accel))
 
-		p3_setup_jog_delta_index = self.ui.p3_setup_jog_delta_INPUT.findText(p3_setup_jog_delta, QtCore.Qt.MatchFixedString)
-		self.ui.p3_setup_jog_delta_INPUT.setCurrentIndex(p3_setup_jog_delta_index)
+			p3_setup_jog_delta_index = self.ui.p3_setup_jog_delta_INPUT.findText(p3_setup_jog_delta, QtCore.Qt.MatchFixedString)
+			self.ui.p3_setup_jog_delta_INPUT.setCurrentIndex(p3_setup_jog_delta_index)
 
-		self.ui.experiment_notes.setText(experiment_notes)
+			self.ui.experiment_notes.setText(experiment_notes)
 
-		self.statusBar().showMessage("Settings loaded from: " + text[1])
-
+			self.statusBar().showMessage("Settings loaded from: " + text[1])
+		else:
+			self.statusBar().showMessage("No file selected.")
 
 	# Populate the list of possible syringes to the dropdown menus
 	def populate_syringe_sizes(self):

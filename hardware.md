@@ -29,8 +29,8 @@ Here is how the board looks with the stepper motors connected:
 ![full_board](https://user-images.githubusercontent.com/12504176/35099661-b8e55262-fc0d-11e7-86df-f2927111ce1a.PNG)
 
 
-### Assembly of the Raspberry Pi microscope 
- *Coming soon*
+### Assembly of the Raspberry Pi and screen 
+<iframe width="560" height="315" src="https://www.youtube.com/watch?v=g3pXNY8snOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
  
 
 #### License

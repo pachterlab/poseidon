@@ -34,5 +34,5 @@ For directions on how to flash an arduino please refer to the official guide: [h
 
 #### License
 
-poseidon is distributed under the [BSD 2-Clause License[(https://github.com/pachterlab/poseidon/blob/release/LICENSE)
+poseidon is distributed under the [BSD 2-Clause License](https://github.com/pachterlab/poseidon/blob/release/LICENSE)
 

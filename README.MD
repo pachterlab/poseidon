@@ -118,7 +118,7 @@ Here is how the board looks with the stepper motors connected:
 
 ## Assembly instructions for the Poseidon syringe pumps
 
-Detailed written instructions are on the way. In the meantime you can [click here for a walkthrough video](https://photos.app.goo.gl/xIplnxrbvsixwfU03).
+Assembly and build videos are available through a playlist on youtube: https://www.youtube.com/playlist?list=PLsbYv-R7OqYybVdILIrP1LfeDA5lv4RnW
 
 
 ## Startup Tips

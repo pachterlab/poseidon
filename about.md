@@ -69,4 +69,4 @@ All necessary files for inDrops assembly are avaialble on [Metafluidics](https:/
 
 #### License
 
-poseidon is distributed under the [BSD 2-Clause License[(https://github.com/pachterlab/poseidon/blob/release/LICENSE)
+poseidon is distributed under the [BSD 2-Clause License](https://github.com/pachterlab/poseidon/blob/release/LICENSE)

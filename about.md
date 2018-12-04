@@ -65,4 +65,8 @@ The microscope was inspired on a design published by the [Satija Lab](http://sat
 William Stephenson, Laura T. Donlin, Andrew Butler, Cristina Rozo, Ali Rashidfarrokhi, Susan M. Goodman, Lionel B. Ivashkiv, Vivian P. Bykerk, Dana E. Orange, Robert B. Darnell, Harold P. Swerdlow, Rahul Satija <br>
 Nature Communicationsvolume 9, Article number: 791 (2018)](https://www.nature.com/articles/s41467-017-02659-x)
 
-All necessary files are avaialble on [Metafluidics](https://metafluidics.org/devices/minidrops/)
+All necessary files for inDrops assembly are avaialble on [Metafluidics](https://metafluidics.org/devices/minidrops/)
+
+#### License
+
+poseidon is distributed under the [BSD 2-Clause License[(https://github.com/pachterlab/poseidon/blob/release/LICENSE)

@@ -17,6 +17,8 @@ Detailed written instructions are on the way, in the meantime you can [click her
 
 ### Instructions for the pumps Arduino hardware
 
+<iframe width="100%" src="https://www.youtube.com/embed/Xl02fsRCJ7U" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)
 to allow for up to three pumps can be controlled from a computer or from the Rapsberry Pi microscope.
 
@@ -30,7 +32,8 @@ Here is how the board looks with the stepper motors connected:
 
 
 ### Assembly of the Raspberry Pi and screen 
-<iframe width="100%" height="56.25%" src="https://www.youtube.com/embed/g3pXNY8snOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="100%" src="https://www.youtube.com/embed/g3pXNY8snOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+ 
  
 
 #### License

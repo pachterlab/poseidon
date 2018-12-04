@@ -30,7 +30,7 @@ Here is how the board looks with the stepper motors connected:
 
 
 ### Assembly of the Raspberry Pi and screen 
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=g3pXNY8snOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/g3pXNY8snOg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
  
 
 #### License

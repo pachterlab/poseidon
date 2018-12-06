@@ -1,4 +1,5 @@
-# Poseidon project - open source bioinstrumentation
+# poseidon project - open source bioinstrumentation
+# poseidon website: https://pachterlab.github.io/poseidon
 
 The poseidon syringe pumps and microscope is a customizable open source alternative to commercial systems that costs less than $400 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, but the pumps can also be connected to a computer and used independently for other experiments.
 
@@ -20,6 +21,18 @@ Syringe Pump: https://www.youtube.com/watch?v=7YSiO6usR1M
 Microscope  : https://www.youtube.com/watch?v=Szg-vjukonA  
 Arduino     : https://www.youtube.com/watch?v=Xl02fsRCJ7U  
 Raspberry Pi: https://www.youtube.com/watch?v=g3pXNY8snOg  
+
+## Arduino hardware setup information
+
+We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)
+to allow for up to three pumps can be controlled from a computer or from the Rapsberry Pi microscope.
+
+The software is configured to run the stepper motors with 200 steps per revolution at 1/8 microstepping, which translates to 800 steps per rotation. To configure this, it is necessary to add a jumper between the MODE1 pins of the Arduino CNC shield, as shown in the picture below. More information about microstepping can be found in the product page for the [DRV8825 Stepper Motor Driver](https://www.pololu.com/product/2133), which is used by the CNC shield. 
+
+
+## Startup Tips
+Before stating the Python controller, make sure the Arduino is connected via USB to the computer or Rapsberry Pi microscope, that the CNC shield is powered, and that the 3 motors are plugged in. Test to see that they are moving in the correct direction when expelling, if not simply rotate the relevant stepper motor connectors 180 degrees and plug them back in.
+
 
 ## Components of the poseidon system
 
@@ -53,7 +66,7 @@ The pumps are driven by an Arduino board that interprets commands sent via USB a
 
 For directions on how to flash an arduino please refer to the official guide: https://www.arduino.cc/en/Guide/HomePage
 
-# Detailed instructions
+# Software detailed instructions
 
 ### Running the `poseidon_main.py` Python script on Raspbian
 
@@ -100,31 +113,6 @@ Described here: https://stackoverflow.com/questions/51324754/python-3-6-x-pyinst
 python -m PyInstaller -F poseidon_main.py --hidden-import PyQt5.sip
 ```
 
-
-## Arduino hardware setup information
-
-We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)
-to allow for up to three pumps can be controlled from a computer or from the Rapsberry Pi microscope.
-
-The software is configured to run the stepper motors with 200 steps per revolution at 1/8 microstepping, which translates to 800 steps per rotation. To configure this, it is necessary to add a jumper between the MODE1 pins of the Arduino CNC shield, as shown in the picture below. More information about microstepping can be found in the product page for the [DRV8825 Stepper Motor Driver](https://www.pololu.com/product/2133), which is used by the CNC shield. 
-
-![microsteppingpng](https://user-images.githubusercontent.com/12504176/34992088-d2e04ca0-fa80-11e7-9dde-99b1894fbe5c.PNG)
-
-Here is how the board looks with the stepper motors connected:
-
-![full_board](https://user-images.githubusercontent.com/12504176/35099661-b8e55262-fc0d-11e7-86df-f2927111ce1a.PNG)
-
-
-
-## Assembly instructions for the Poseidon syringe pumps
-
-Assembly and build videos are available through a playlist on youtube: https://www.youtube.com/playlist?list=PLsbYv-R7OqYybVdILIrP1LfeDA5lv4RnW
-
-
-## Startup Tips
-Before stating the Python controller, make sure the Arduino is connected via USB to the computer or Rapsberry Pi microscope, that the CNC shield is powered, and that the 3 motors are plugged in. Test to see that they are moving in the correct direction when expelling, if not simply rotate the relevant stepper motor connectors 180 degrees and plug them back in.
-
-
 #### Authors
 
 The poseidon system was developed at the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
@@ -134,15 +122,6 @@ The poseidon system was developed at the [Pachter Lab](https://pachterlab.github
 - [Jase Gehring](https://scholar.google.com/citations?user=63ZRebIAAAAJ&hl=en)
 - [Lior Pachter](https://github.com/lakigigar)
 
-
-#### Authors
-
-The poseidon system was developed at the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
-- [Sina Booeshaghi](https://github.com/sbooeshaghi/)
-- [Dylan Bannon](https://github.com/dylanbannon/)
-- [Eduardo Beltrame](https://github.com/munfred/)
-- [Jase Gehring](https://scholar.google.com/citations?user=63ZRebIAAAAJ&hl=en)
-- [Lior Pachter](https://github.com/lakigigar)
 
 #### Prior work and references
 

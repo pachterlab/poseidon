@@ -1,7 +1,7 @@
 # poseidon project - open source bioinstrumentation
 ## poseidon website: https://pachterlab.github.io/poseidon
 
-The poseidon syringe pumps and microscope is a customizable open source alternative to commercial systems that costs less than $400 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, but the pumps can also be connected to a computer and used independently for other experiments.
+The poseidon syringe pumps and microscope is a customizable, open source alternative to commercial systems. The poseidon system can be built for less than $400, and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications.
 
 
 ### Open source syringe pumps and Raspberry Pi microscope
@@ -13,7 +13,7 @@ The poseidon system was designed to be customizable. It uses the [Raspberry Pi](
 
 The pump driver uses an Arduino with a [CNC shield](https://blog.protoneer.co.nz/arduino-cnc-shield/) to run up to three pumps. Each pump has a stepper motor that drives lead screw which in turn moves a sled that is mounted on linear bearings. The displacement of the sled moves the syringe forward or backward allowing the user to dispel or intake liquid.
 
-The controller station uses Raspberry Pi with a touchscreen to connect to the Arduino and microscope via USB. Because the microscope and Arduino use USB connections, the they can alternatively be connected to any computer instead of a Raspberry Pi. 
+The controller station uses a Raspberry Pi with a touchscreen to connect to the Arduino and microscope via USB. Because the microscope and Arduino use USB connections, the they can alternatively be connected to any computer instead of a Raspberry Pi. 
 
 **Build tutorial videos are found here:**
 
@@ -117,17 +117,17 @@ python -m PyInstaller -F poseidon_main.py --hidden-import PyQt5.sip
 
 The poseidon system was developed at the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
 - [Sina Booeshaghi](https://github.com/sbooeshaghi/)
-- [Dylan Bannon](https://github.com/dylanbannon/)
 - [Eduardo Beltrame](https://github.com/munfred/)
+- [Dylan Bannon](https://github.com/dylanbannon/)
 - [Jase Gehring](https://scholar.google.com/citations?user=63ZRebIAAAAJ&hl=en)
 - [Lior Pachter](https://github.com/lakigigar)
 
 
 #### Prior work and references
 
-As with everything in life, the Poseidon project was not developed in a vacuum. 
+The Poseidon project is based on a number of other open source projects and papers.
 
-The pumps design was based of the open source syringe pumps published by the [Pearce Research Group](http://www.mse.mtu.edu/~pearce/Index.html):
+The pump design was based of the open source syringe pumps published by the [Pearce Research Group](http://www.mse.mtu.edu/~pearce/Index.html):
 
 [Open-Source Syringe Pump Library <br>
 Bas Wijnen, Emily J. Hunt, Gerald C. Anzalone, Joshua M. Pearce <br>
@@ -135,7 +135,7 @@ PLOS One, 2014. https://doi.org/10.1371/journal.pone.0107216](http://journals.pl
 
 With subsequent refinements published on [http://www.appropedia.org/Open-source_syringe_pump](http://www.appropedia.org/Open-source_syringe_pump)
 
-The microscope was inspired on a design published by the [Satija Lab](http://satijalab.org/):
+The microscope was inspired by a design published by the [Satija Lab](http://satijalab.org/):
 
 [Single-Cell Single-cell RNA-seq of rheumatoid arthritis synovial tissue using low-cost microfluidic instrumentation <br>
 William Stephenson, Laura T. Donlin, Andrew Butler, Cristina Rozo, Ali Rashidfarrokhi, Susan M. Goodman, Lionel B. Ivashkiv, Vivian P. Bykerk, Dana E. Orange, Robert B. Darnell, Harold P. Swerdlow, Rahul Satija <br>

@@ -1014,9 +1014,9 @@ void resumeRun() {
       break;
     case 123:
       stepper1.move(p1_distance_left);
-      stepper1.move(p1_distance_left);
+      stepper2.move(p2_distance_left);
       stepper3.move(p3_distance_left);
-      while (stepper1.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
+      while (stepper1.distanceToGo() >= 0 && stepper2.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
         stepper1.runSpeedToPosition();
         stepper2.runSpeedToPosition();
         stepper3.runSpeedToPosition();

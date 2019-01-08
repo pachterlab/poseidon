@@ -13,8 +13,8 @@ import os
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog
 
-import cv2 
-# note, had to use version 3.2.0.8 otherwise it had its own 
+import cv2
+# note, had to use version 3.2.0.8 otherwise it had its own
 # pyqt packages that conflicted with mine
 
 import numpy as np
@@ -114,9 +114,10 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		self.populate_pump_units()
 		self.setting_variables()
 		self.populate_ports()
-		
+		self.set_port()
 
-		
+
+
 		self.connect_all_gui_components()
 		self.grey_out_components()
 
@@ -222,14 +223,14 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 		# Action buttons
 		self.ui.run_BTN.clicked.connect(self.run)
-		
+
 
 		self.ui.pause_BTN.clicked.connect(self.pause)
-		
+
 
 		self.ui.zero_BTN.clicked.connect(self.zero)
 		self.ui.stop_BTN.clicked.connect(self.stop)
-		
+
 
 		self.ui.jog_plus_BTN.clicked.connect(lambda:self.jog(self.ui.jog_plus_BTN))
 		self.ui.jog_minus_BTN.clicked.connect(lambda:self.jog(self.ui.jog_minus_BTN))
@@ -461,7 +462,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 			p3_input_displacement = str(self.convert_displacement(self.p3_amount, self.p3_units, self.p3_syringe_area))
 
 			pumps_2_run = ''.join(map(str,active_pumps))
-			
+
 			cmd = "<RUN,DIST,"+pumps_2_run+",0.0,F," + p1_input_displacement + "," + p2_input_displacement + "," + p3_input_displacement + ">"
 
 			testData.append(cmd)
@@ -513,7 +514,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		testData = []
 
 		cmd = "<ZERO,BLAH,BLAH,BLAH,F,0.0,0.0,0.0>"
-		
+
 		print("Sending ZERO command..")
 		thread = Thread(self.runTest, testData)
 		thread.finished.connect(lambda:self.thread_finished(thread))
@@ -542,7 +543,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 			one_jog = str(self.p1_setup_jog_delta_to_send)
 			two_jog = str(self.p2_setup_jog_delta_to_send)
 			three_jog = str(self.p3_setup_jog_delta_to_send)
-				 
+
 			if btn.text() == "Jog +":
 				self.statusBar().showMessage("You clicked JOG +")
 				f_cmd = "<RUN,DIST," + pumps_2_run +",0,F," + one_jog + "," + two_jog + "," + three_jog + ">"
@@ -597,7 +598,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		if len(image.shape) == 3: #
 			if image.shape[2] == 4:
 				qformat = QtGui.QImage.Format_RGBA8888
-				
+
 			else:
 				qformat = QtGui.QImage.Format_RGB888
 				#print(image.shape[0], image.shape[1], image.shape[2])
@@ -665,6 +666,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		self.statusBar().showMessage("You clicked REFRESH PORTS")
 		self.ui.port_DROPDOWN.clear()
 		self.populate_ports()
+		self.set_port()
 
 	# Set the port that is selected from the dropdown menu
 	def set_port(self):
@@ -678,10 +680,10 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 	# Can probably delete
 	def set_log_file_name(self):
 		"""
-		Sets the file name for the current test run, enables us to log data to the file.        
+		Sets the file name for the current test run, enables us to log data to the file.
 
-		Callback setter method from the 'self.ui.logFileNameInput' to set the 
-		name of the log file. The log file name is of the form 
+		Callback setter method from the 'self.ui.logFileNameInput' to set the
+		name of the log file. The log file name is of the form
 		label_Year-Month-Date hour_min_sec.txt
 		"""
 		# Create a date string
@@ -876,7 +878,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		self.set_p3_setup_jog_delta()
 		self.set_p3_amount()
 
-	# Set Px units 
+	# Set Px units
 	def set_p1_units(self):
 		self.p1_units = self.ui.p1_units_DROPDOWN.currentText()
 
@@ -890,7 +892,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 	def set_p2_units(self):
 		self.p2_units = self.ui.p2_units_DROPDOWN.currentText()
-		
+
 		length = self.p2_units.split("/")[0]
 		self.ui.p2_units_LABEL_2.setText(length)
 
@@ -901,7 +903,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 	def set_p3_units(self):
 		self.p3_units = self.ui.p3_units_DROPDOWN.currentText()
-		
+
 		length = self.p3_units.split("/")[0]
 		self.ui.p3_units_LABEL_2.setText(length)
 
@@ -923,7 +925,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		self.ui.p2_setup_jog_delta_INPUT.addItems(self.jog_delta)
 		self.ui.p3_setup_jog_delta_INPUT.addItems(self.jog_delta)
 
-	# Set Px speed 
+	# Set Px speed
 	def set_p1_speed(self):
 		self.p1_speed = self.ui.p1_speed_INPUT.value()
 		self.ui.p1_units_LABEL.setText(str(self.p1_speed) + " " + self.ui.p1_units_DROPDOWN.currentText())
@@ -939,7 +941,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		self.ui.p3_units_LABEL.setText(str(self.p3_speed) + " " + self.ui.p3_units_DROPDOWN.currentText())
 		self.p3_speed_to_send = self.convert_speed(self.p3_speed, self.p3_units, self.p3_syringe_area)
 
-	# Set Px accel 
+	# Set Px accel
 	def set_p1_accel(self):
 		self.p1_accel = self.ui.p1_accel_INPUT.value()
 		self.p1_accel_to_send = self.convert_accel(self.p1_accel, self.p1_units, self.p1_syringe_area)
@@ -952,7 +954,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		self.p3_accel = self.ui.p3_accel_INPUT.value()
 		self.p3_accel_to_send = self.convert_accel(self.p3_accel, self.p3_units, self.p3_syringe_area)
 
-	# Set Px jog delta (setup) 
+	# Set Px jog delta (setup)
 	def set_p1_setup_jog_delta(self):
 		self.p1_setup_jog_delta = self.ui.p1_setup_jog_delta_INPUT.currentText()
 		self.p1_setup_jog_delta = float(self.ui.p1_setup_jog_delta_INPUT.currentText())
@@ -979,7 +981,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		thread.finished.connect(lambda:self.thread_finished(thread))
 		thread.start()
 		print("P1 SETTINGS sent.")
-		
+
 	def send_p2_settings(self):
 		self.statusBar().showMessage("You clicked SEND P2 SETTINGS")
 		self.p2_settings = []
@@ -1048,7 +1050,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		except AttributeError:
 			self.statusBar().showMessage("Please plug in the board and select a proper port, then press connect.")
 
-		
+
 
 	# Disconnect from the Arduino board
 	# TODO: figure out how to handle error..
@@ -1101,8 +1103,8 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 	def steps2mm(self, steps):
 	# 200 steps per rev
 	# one rev is 0.8mm dist
-		mm = steps/200/32*0.8
-		#mm = steps/200/0.8
+		#mm = steps/200/32*0.8
+		mm = steps/200/0.8
 		return mm
 
 	def steps2mL(self, steps, syringe_area):
@@ -1115,8 +1117,8 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 
 	def mm2steps(self, mm):
-		steps = mm/0.8*200*32
-		#steps = mm/0.8*200
+		#steps = mm/0.8*200*32
+		steps = mm/0.8*200
 		return steps
 
 	def mL2steps(self, mL, syringe_area):
@@ -1215,7 +1217,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		elif time == "hr":
 			speed = self.perhour2persec(speed)
 
-		
+
 
 		print("INPUT  SPEED: " + str(inp_speed) + ' ' + units)
 		print("OUTPUT SPEED: " + str(speed) + ' steps/s')
@@ -1279,11 +1281,11 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 		ck = ""
 		x = "z" # any value that is not an end- or startMarker
-	  
+
 		# wait for the start character
-		while  ord(x) != startMarker: 
+		while  ord(x) != startMarker:
 			x = self.serial.read()
-		  
+
 		# save data until the end marker is found
 		while ord(x) != endMarker:
 			if ord(x) == midMarker:
@@ -1361,7 +1363,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 			isDisplay = "asdf"
 			while self.serial.inWaiting() == 0:
 				pass
-			while  not x or ord(x) != startMarker: 
+			while  not x or ord(x) != startMarker:
 				x = self.serial.read()
 				#if ord(x) == posMarker:
 				#	return self.get_position()
@@ -1399,7 +1401,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 	# TODO
 	# def display_position(self, motorID):
 	# 	if motorID == 1:
-			
+
 	# 		seconds = 0
 	# 		p1_speed = self.p1_speed_to_send
 	# 		p1_dist = 0
@@ -1432,7 +1434,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 			#self.global_listener_thread.stop()
 			self.serial.close()
 			#self.threadpool.end()
-			
+
 		except AttributeError:
 			pass
 		sys.exit()

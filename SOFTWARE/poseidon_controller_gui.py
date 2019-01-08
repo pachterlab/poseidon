@@ -209,6 +209,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.p2_amount_INPUT = QtWidgets.QDoubleSpinBox(self.control)
         self.p2_amount_INPUT.setObjectName("p2_amount_INPUT")
+        self.p2_amount_INPUT.setRange(-100, 100)
         self.horizontalLayout_9.addWidget(self.p2_amount_INPUT)
         self.horizontalLayout_8.addLayout(self.horizontalLayout_9)
         self.p2_units_LABEL_2 = QtWidgets.QLabel(self.control)
@@ -222,6 +223,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_16.setObjectName("horizontalLayout_16")
         self.p3_amount_INPUT = QtWidgets.QDoubleSpinBox(self.control)
         self.p3_amount_INPUT.setObjectName("p3_amount_INPUT")
+        self.p3_amount_INPUT.setRange(-100, 100)
         self.horizontalLayout_16.addWidget(self.p3_amount_INPUT)
         self.horizontalLayout_15.addLayout(self.horizontalLayout_16)
         self.p3_units_LABEL_2 = QtWidgets.QLabel(self.control)
@@ -235,6 +237,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.p1_amount_INPUT = QtWidgets.QDoubleSpinBox(self.control)
         self.p1_amount_INPUT.setObjectName("p1_amount_INPUT")
+        self.p1_amount_INPUT.setRange(-100, 100)
         self.horizontalLayout_6.addWidget(self.p1_amount_INPUT)
         self.horizontalLayout.addLayout(self.horizontalLayout_6)
         self.p1_units_LABEL_2 = QtWidgets.QLabel(self.control)
@@ -792,4 +795,3 @@ class Ui_MainWindow(object):
         self.save_settings_INPUT.setText(_translate("MainWindow", "Save settings"))
         self.load_settings_BTN.setText(_translate("MainWindow", "Load settings"))
         self.save_settings_BTN.setText(_translate("MainWindow", "Save settings"))
-

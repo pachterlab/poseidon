@@ -71,18 +71,18 @@
 #define MICROSTEPS 32
 #define TOTAL_STEPS 6400
 
-#define X_SPEED 100 // X steps per second
-#define Y_SPEED 100 // Y
-#define Z_SPEED 100 // Z
+#define X_SPEED 1000 // X steps per second
+#define Y_SPEED 1000 // Y
+#define Z_SPEED 1000 // Z
 
-#define X_ACCEL 1000000.0 // X steps per second per second
-#define Y_ACCEL 1000000.0 // Y
-#define Z_ACCEL 1000000.0 // Z
+#define X_ACCEL 5000.0 // X steps per second per second
+#define Y_ACCEL 5000.0 // Y
+#define Z_ACCEL 5000.0 // Z
 
 #define EN        8       // stepper motor enable, low level effective (note put jumper so automatic)
 
-#define X_DIR     5       // X axis, direction pin 
-#define Y_DIR     6       // Y 
+#define X_DIR     5       // X axis, direction pin
+#define Y_DIR     6       // Y
 #define Z_DIR     7       // Z
 
 #define X_STP     2       // X axis, step pin
@@ -127,6 +127,8 @@ boolean newDataFromPC = false;
 char messageFromPC[buffSize] = {0};
 char mode[buffSize] = {0};
 int motorID = 0;
+int motors[3] = {0,0,0};
+AccelStepper steppers[3] = {stepper1, stepper2, stepper3};
 char setting[buffSize] = {0};
 float value = 0.0;
 char dir[buffSize] = {0};
@@ -148,6 +150,7 @@ float p3_toMove;
 float p1_optional;
 float p2_optional;
 float p3_optional;
+float distances[3];
 signed long p1_distance_to_go;
 signed long p1_target_position;
 signed long p1_distance_left;
@@ -160,13 +163,13 @@ signed long p3_distance_to_go;
 signed long p3_target_position;
 signed long p3_distance_left;
 
+signed long distances_to_go[3];
+signed long targets_position[3];
+signed long distances_left[3];
+
 unsigned long curMillis;
 unsigned long prevReplyToPCmillis = 0;
 unsigned long replyToPCinterval = 1000;
-
-#define X_ACCEL 10000.0 // X steps per second per second
-#define Y_ACCEL 10000.0 // Y
-#define Z_ACCEL 10000.0 // Z
 
 //=============
 // Setup is only called once. When we start up the GUI the Arduino initalizes with a BAUD Rate of _________
@@ -179,8 +182,19 @@ void setup() {
   delay(500); // delay() is OK in setup as it only happens once
   digitalWrite(ledPin, LOW);
   delay(500);
+
+  stepper1.setMaxSpeed(X_SPEED);
+  stepper2.setMaxSpeed(Y_SPEED);
+  stepper3.setMaxSpeed(Z_SPEED);
+  // stepper1.setSpeed(X_SPEED);
+  // stepper2.setSpeed(Y_SPEED);
+  // stepper3.setSpeed(Z_SPEED);
+  stepper1.setAcceleration(X_ACCEL);
+  stepper2.setAcceleration(Y_ACCEL);
+  stepper3.setAcceleration(Z_ACCEL);
   // tell the PC we are ready
   Serial.println("<Arduino is ready>");
+
 
 }
 
@@ -202,6 +216,8 @@ void getDataFromPC() {
 
   // If there is data from the serial port
   if (Serial.available() > 0) {
+    // turn on the LED to indicate we are receiving
+    digitalWrite(ledPin, HIGH);
     // read the a single character
     char x = Serial.read();
 
@@ -228,6 +244,7 @@ void getDataFromPC() {
       bytesRecvd = 0;
       readInProgress = true;
     }
+    digitalWrite(ledPin, LOW);
   }
 }
 
@@ -258,8 +275,31 @@ void parseData() {
   strtokIndx = strtok(NULL, ",");            // get the second part - the setting string
   strcpy(setting, strtokIndx);               // copy it to messageFromPC
 
+
   strtokIndx = strtok(NULL, ",");            // get the third part - the motor ID int
+  String motorstr(strtokIndx);
+
   motorID = atoi(strtokIndx);                // convert to integer and copy it to motorID
+
+  motors[0] = 0;
+  motors[1] = 0;
+  motors[2] = 0;
+
+  if(motorstr.indexOf("1") >= 0) {
+    motors[0] = 1;
+  }
+  if(motorstr.indexOf("2") >= 0) {
+    motors[1] = 1;
+  }
+  if(motorstr.indexOf("3") >= 0) {
+    motors[2] = 1;
+  }
+  Serial.println("string");
+  Serial.println(motorstr);
+  Serial.println("Status");
+  Serial.println(motors[0]);
+  Serial.println(motors[1]);
+  Serial.println(motors[2]);
 
   strtokIndx = strtok(NULL, ",");            // get the fourth part - the value float
   value = atof(strtokIndx);                  // convert to float and copy to value
@@ -276,11 +316,25 @@ void parseData() {
   strtokIndx = strtok(NULL, ",");            // get the fourth part - the value float
   p3_optional = atof(strtokIndx);            // convert to float and copy to value
 
+  distances[0] = p1_optional;
+  distances[1] = p2_optional;
+  distances[2] = p3_optional;
+  if (strcmp(setting, "RUN") == 0) {
+    distances[0] = 999999.0;
+    distances[1] = 999999.0;
+    distances[2] = 999999.0;
+  }
+
+  Serial.println("Status Distances");
+  Serial.println(distances[0]);
+  Serial.println(distances[1]);
+  Serial.println(distances[2]);
+
   newDataFromPC = true;
   replyToPC();
 
   return executeThisFunction();
-}
+  }
 
 void clearVariables() {
   char messageFromPC[buffSize] = {0};
@@ -325,7 +379,7 @@ void executeThisFunction() {
   }
 
   else if (strcmp(mode, "RESUME") == 0) {
-    return resumeRun();
+    return runFew();
   }
 }
 
@@ -412,7 +466,7 @@ void udpateSettings() {
       }
       else if (strcmp(setting, "ACCEL") == 0) {
         //stepper1.setAcceleration(value);
-        stepper1.setAcceleration(X_ACCEL);
+        stepper1.setAcceleration(value);
       }
       else if (strcmp(setting, "DELTA") == 0) {
         jog1Delta = value;
@@ -424,7 +478,7 @@ void udpateSettings() {
       }
       else if (strcmp(setting, "ACCEL") == 0) {
         //stepper2.setAcceleration(value);
-        stepper2.setAcceleration(Y_ACCEL);
+        stepper2.setAcceleration(value);
       }
       else if (strcmp(setting, "DELTA") == 0) {
         jog2Delta = value;
@@ -436,7 +490,7 @@ void udpateSettings() {
       }
       else if (strcmp(setting, "ACCEL") == 0) {
         //stepper3.setAcceleration(value);
-        stepper3.setAcceleration(Z_ACCEL);
+        stepper3.setAcceleration(value);
       }
       else if (strcmp(setting, "DELTA") == 0) {
         jog3Delta = value;
@@ -456,577 +510,102 @@ void udpateSettings() {
 
 //===================================
 // This function will run few ie if (p1, p2) or (p1, p3) or (p2, p3) are enabled
+int array_sum(int * array, int len) {
+  int arraySum;
+
+  arraySum = 0;
+  for(int index = 0; index < len; index++)
+  { arraySum += array[index]; }
+  return arraySum;
+}
 
 void runFew() {
-  switch (motorID) {
-    case 1:
-      if (strcmp(setting, "DIST") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = p1_optional;
-          stepper1.move(toMove);
-          //Serial.print("<START,1>");
-          while (stepper1.distanceToGo() > 0) {
-            stepper1.runSpeedToPosition();
-            getDataFromPC();
-          }
-          stepper1.stop();
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -p1_optional;
-          stepper1.move(toMove);
-          //Serial.print("<START,1>");
-          while (stepper1.distanceToGo() < 0) {
-            stepper1.runSpeedToPosition();
-            getDataFromPC();
-          }
-          stepper1.stop();
-        }
-      }
-      else if (strcmp(setting, "RUN") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = 999999;
-          stepper1.move(toMove);
-          //Serial.print("<START,1>");
-          while (stepper1.distanceToGo() >= 0) {
-            stepper1.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -999999;
-          stepper1.move(toMove);
-          //Serial.print("<START,1>");
-          while (stepper1.distanceToGo() <= 0) {
-            stepper1.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      break;
-    case 2:
-      // run pump 2. literally copy-paste case 1 here. for readability will do this at the end
-      if (strcmp(setting, "DIST") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = p2_optional;
-          stepper2.move(toMove);
-          //Serial.print("<START,2>");
-          while (stepper2.distanceToGo() > 0) {
-            stepper2.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -p2_optional;
-          stepper2.move(toMove);
-          //Serial.print("<START,2>");
-          while (stepper2.distanceToGo() < 0) {
-            stepper2.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      else if (strcmp(setting, "RUN") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = 999999;
-          stepper2.move(toMove);
-          //Serial.print("<START,2>");
-          while (stepper2.distanceToGo() >= 0) {
-            stepper2.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -999999;
-          stepper2.move(toMove);
-          //Serial.print("<START,2>");
-          while (stepper2.distanceToGo() <= 0) {
-            stepper2.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      break;
+  // First we determine the direction of movement. If 1, then it's forward, otherwise it's -1.
+  // We use 1 and -1 so that we can multiply any number and reverse the math, minimizing lines of code
+  AccelStepper steppers[3] = {stepper1, stepper2, stepper3};
 
-    case 3:
-      // run pump 3. literally copy-paste case 1 here. for readability will do this at the end
-      if (strcmp(setting, "DIST") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = p3_optional;
-          stepper3.move(toMove);
-          //Serial.print("<START,3>");
-          while (stepper3.distanceToGo() > 0) {
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -p3_optional;
-          stepper3.move(toMove);
-          //Serial.print("<START,3>");
-          while (stepper3.distanceToGo() < 0) {
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      else if (strcmp(setting, "RUN") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = 999999;
-          stepper3.move(toMove);
-          //Serial.print("<START,3>");
-          while (stepper3.distanceToGo() >= 0) {
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -999999;
-          stepper3.move(toMove);
-          //Serial.print("<START,3>");
-          while (stepper3.distanceToGo() <= 0) {
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      break;
-    case 12:
-      if (strcmp(setting, "DIST") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          p1_toMove = p1_optional;
-          p2_toMove = p2_optional;
+  int direction = 1;
+  if (strcmp(dir, "B") == 0) {
+    direction = -1;
+  }
+  Serial.print("Direction");
+  Serial.println(direction);
+  // Second we set the distance to move for each stepper.
+  // We use direction and multiply the value saved in the distances array;
+  // The distances array is set above to default to 999999 if 'RUN' else, the value set.
+  Serial.println("Status Distances");
+  Serial.println(distances[0]);
+  Serial.println(distances[1]);
+  Serial.println(distances[2]);
 
-          stepper1.move(p1_toMove);
-          stepper2.move(p2_toMove);
-          //Serial.print("<START,12>");
-          while (stepper1.distanceToGo() >= 0 && stepper2.distanceToGo() >= 0) {
-            stepper1.runSpeedToPosition();
-            stepper2.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          p1_toMove = -p1_optional;
-          p2_toMove = -p2_optional;
+  for (int i = 0; i < 3; i += 1) {
+    if (motors[i] == 1) {
+      toMove = direction * distances[i];
+      Serial.print("Sedding tomove command: ");
+      Serial.println(toMove);
+      steppers[i].move(toMove);
+    }
+  }
+  // Finally the main loop where we move and check the steppers status
+  // We declare an array to store the status of each stepper
+  int stepperStatus[3] = {0, 0, 0};
+  // Then we loop until that sum is equal to the number of selected steppers
+  // That number is stored in the motors array, 1 for selected, 0 otherwise
+  // If we have 1 and 3 for example motors = [1, 0, 1] => sum = 2
+  Serial.println("Entering While Loop ");
+  Serial.println(array_sum(stepperStatus, 3));
 
-          stepper1.move(p1_toMove);
-          stepper2.move(p2_toMove);
-          //Serial.print("<START,12>");
-          while (stepper1.distanceToGo() <= 0 && stepper2.distanceToGo() <= 0) {
-            stepper1.runSpeedToPosition();
-            stepper2.runSpeedToPosition();
-            getDataFromPC();
-          }
+  Serial.println(motors[0]);
+  Serial.println(motors[1]);
+  Serial.println(motors[2]);
+
+  Serial.println(array_sum(motors, 3));
+
+// 4000 steps == 1 mm
+
+
+  while (array_sum(stepperStatus, 3) != array_sum(motors, 3)) {
+    // We iterate over the 3 possible steppers
+    for (int i = 0; i < 3; i += 1) {
+      // If this stepper is selected
+      if (motors[i] == 1) {
+        // Ask the stepper to move to position at constant speed.
+        if (stepperStatus[i] == 0 ) {
+          steppers[i].run();
+        }
+        // Check if it reached it's position
+        if (steppers[i].distanceToGo() == 0) {
+          // If yes then store that value in the stepperStatus array.
+          stepperStatus[i] = 1;
         }
       }
-      else if (strcmp(setting, "RUN") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = 999999;
-          stepper1.move(toMove);
-          stepper2.move(toMove);
-          //Serial.print("<START,12>");
-          while (stepper1.distanceToGo() >= 0 && stepper2.distanceToGo() >= 0) {
-            stepper1.runSpeedToPosition();
-            stepper2.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -999999;
-          stepper1.move(toMove);
-          stepper2.move(toMove);
-          //Serial.print("<START,12>");
-          while (stepper1.distanceToGo() <= 0 && stepper2.distanceToGo() <= 0) {
-            stepper1.runSpeedToPosition();
-            stepper2.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      break;
-    case 13:
-      // run pump 13. literally copy-paste case 12 here. for readability will do this at the end
-      if (strcmp(setting, "DIST") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          p1_toMove = p1_optional;
-          p3_toMove = p3_optional;
-
-          stepper1.move(p1_toMove);
-          stepper3.move(p3_toMove);
-          //Serial.print("<START,13>");
-          while (stepper1.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
-            stepper1.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          p1_toMove = -p1_optional;
-          p3_toMove = -p3_optional;
-
-          stepper1.move(p1_toMove);
-          stepper3.move(p3_toMove);
-          //Serial.print("<START,13>");
-          while (stepper1.distanceToGo() <= 0 && stepper3.distanceToGo() <= 0) {
-            stepper1.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      else if (strcmp(setting, "RUN") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = 999999;
-          stepper1.move(toMove);
-          stepper3.move(toMove);
-          //Serial.print("<START,13>");
-          while (stepper1.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
-            stepper1.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -999999;
-          stepper1.move(toMove);
-          stepper3.move(toMove);
-          //Serial.print("<START,13>");
-          while (stepper1.distanceToGo() <= 0 && stepper3.distanceToGo() <= 0) {
-            stepper1.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      break;
-    case 23:
-      // run pump 23. literally copy-paste case 12 here. for readability will do this at the end
-      if (strcmp(setting, "DIST") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          p2_toMove = p2_optional;
-          p3_toMove = p3_optional;
-
-          stepper2.move(p2_toMove);
-          stepper3.move(p3_toMove);
-          //Serial.print("<START,23>");
-          while (stepper2.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
-            stepper2.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          p2_toMove = -p2_optional;
-          p3_toMove = -p3_optional;
-
-          stepper2.move(p2_toMove);
-          stepper3.move(p3_toMove);
-          //Serial.print("<START,23>");
-          while (stepper2.distanceToGo() <= 0 && stepper3.distanceToGo() <= 0) {
-            stepper2.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      else if (strcmp(setting, "RUN") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = 999999;
-          stepper2.move(toMove);
-          stepper3.move(toMove);
-          //Serial.print("<START,23>");
-          while (stepper2.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
-            stepper2.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -999999;
-          stepper2.move(toMove);
-          stepper3.move(toMove);
-          //Serial.print("<START,23>");
-          while (stepper2.distanceToGo() <= 0 && stepper3.distanceToGo() <= 0) {
-            stepper2.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      break;
-    case 123:
-      if (strcmp(setting, "DIST") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          p1_toMove = p1_optional;
-          p2_toMove = p2_optional;
-          p3_toMove = p3_optional;
-
-          stepper1.move(p1_toMove);
-          stepper2.move(p2_toMove);
-          stepper3.move(p3_toMove);
-          //Serial.print("<START,123>");
-          while (stepper1.distanceToGo() >= 0 && stepper2.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
-            stepper1.runSpeedToPosition();
-            stepper2.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          p1_toMove = -p1_optional;
-          p2_toMove = -p2_optional;
-          p3_toMove = -p3_optional;
-
-          stepper1.move(p1_toMove);
-          stepper2.move(p2_toMove);
-          stepper3.move(p3_toMove);
-          //Serial.print("<START,123>");
-          while (stepper1.distanceToGo() <= 0 && stepper2.distanceToGo() <= 0 && stepper3.distanceToGo() <= 0) {
-            stepper1.runSpeedToPosition();
-            stepper2.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      else if (strcmp(setting, "RUN") == 0) {
-        if (strcmp(dir, "F") == 0) {
-          toMove = 999999;
-          stepper1.move(toMove);
-          stepper2.move(toMove);
-          stepper3.move(toMove);
-          //Serial.print("<START,123>");
-          while (stepper1.distanceToGo() >= 0 && stepper2.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
-            stepper1.runSpeedToPosition();
-            stepper2.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-        else if (strcmp(dir, "B") == 0) {
-          toMove = -999999;
-          stepper1.move(toMove);
-          stepper2.move(toMove);
-          stepper3.move(toMove);
-          //Serial.print("<START,123>");
-          while (stepper1.distanceToGo() <= 0 && stepper2.distanceToGo() <= 0 && stepper3.distanceToGo() <= 0) {
-            stepper1.runSpeedToPosition();
-            stepper2.runSpeedToPosition();
-            stepper3.runSpeedToPosition();
-            getDataFromPC();
-          }
-        }
-      }
-      break;
-
+    }
+    getDataFromPC();
   }
   clearVariables();
 }
 
 
 void stopAll() {
-  stepper1.stop();
-  stepper2.stop();
-  stepper3.stop();
-
+  for (int i = 0; i < 3; i += 1) {
+    steppers[i].stop();
+  }
 }
 
 void pauseRun() {
-  switch (motorID) {
-    case 1:
-      p1_distance_to_go = stepper1.distanceToGo();
-      p1_target_position = stepper1.targetPosition();
-      p1_distance_left = p1_distance_to_go - p1_distance_left;
-      stepper1.move(p1_distance_to_go);
-      while (strcmp(mode, "RESUME") != 0) {
-        // do nothing
-        getDataFromPC();
-      }
-      return resumeRun();
-      break;
-
-    case 2:
-      p2_distance_to_go = stepper2.distanceToGo();
-      p2_target_position = stepper2.targetPosition();
-      p2_distance_left = p2_distance_to_go - p2_distance_left;
-      stepper2.move(p2_distance_to_go);
-      while (strcmp(mode, "RESUME") != 0) {
-        // do nothing
-        getDataFromPC();
-      }
-      return resumeRun();
-      break;
-
-    case 3:
-      p3_distance_to_go = stepper3.distanceToGo();
-      p3_target_position = stepper3.targetPosition();
-      p3_distance_left = p3_distance_to_go - p3_distance_left;
-      stepper3.move(p3_distance_to_go);
-      while (strcmp(mode, "RESUME") != 0) {
-        // do nothing
-        getDataFromPC();
-      }
-      return resumeRun();
-      break;
-
-    case 12:
-      p1_distance_to_go = stepper1.distanceToGo();
-      p1_target_position = stepper1.targetPosition();
-      p1_distance_left = p1_distance_to_go - p1_distance_left;
-      stepper1.move(p1_distance_to_go);
-
-      p2_distance_to_go = stepper2.distanceToGo();
-      p2_target_position = stepper2.targetPosition();
-      p2_distance_left = p2_distance_to_go - p2_distance_left;
-      stepper2.move(p2_distance_to_go);
-
-
-      while (strcmp(mode, "RESUME") != 0) {
-        // do nothing
-        getDataFromPC();
-      }
-      return resumeRun();
-      break;
-
-    case 13:
-      p1_distance_to_go = stepper1.distanceToGo();
-      p1_target_position = stepper1.targetPosition();
-      p1_distance_left = p1_distance_to_go - p1_distance_left;
-      stepper1.move(p1_distance_to_go);
-
-      p3_distance_to_go = stepper3.distanceToGo();
-      p3_target_position = stepper3.targetPosition();
-      p3_distance_left = p3_distance_to_go - p3_distance_left;
-      stepper3.move(p3_distance_to_go);
-
-      while (strcmp(mode, "RESUME") != 0) {
-        // do nothing
-        getDataFromPC();
-      }
-      return resumeRun();
-      break;
-
-    case 23:
-      p2_distance_to_go = stepper2.distanceToGo();
-      p2_target_position = stepper2.targetPosition();
-      p2_distance_left = p2_distance_to_go - p2_distance_left;
-      stepper2.move(p2_distance_to_go);
-
-      p3_distance_to_go = stepper3.distanceToGo();
-      p3_target_position = stepper3.targetPosition();
-      p3_distance_left = p3_distance_to_go - p3_distance_left;
-      stepper3.move(p3_distance_to_go);
-
-
-      while (strcmp(mode, "RESUME") != 0) {
-        // do nothing
-        getDataFromPC();
-      }
-      return resumeRun();
-      break;
-
-    case 123:
-      p1_distance_to_go = stepper1.distanceToGo();
-      p1_target_position = stepper1.targetPosition();
-      p1_distance_left = p1_distance_to_go - p1_distance_left;
-      stepper1.move(p1_distance_to_go);
-
-      p2_distance_to_go = stepper2.distanceToGo();
-      p2_target_position = stepper2.targetPosition();
-      p2_distance_left = p2_distance_to_go - p2_distance_left;
-      stepper2.move(p2_distance_to_go);
-
-      p3_distance_to_go = stepper3.distanceToGo();
-      p3_target_position = stepper3.targetPosition();
-      p3_distance_left = p3_distance_to_go - p3_distance_left;
-      stepper3.move(p3_distance_to_go);
-
-
-      while (strcmp(mode, "RESUME") != 0) {
-        // do nothing
-        getDataFromPC();
-      }
-      return resumeRun();
-      break;
+  for (int i = 0; i < 3; i += 1) {
+    distances_to_go[i] = steppers[i].distanceToGo();
+    targets_position[i] = steppers[i].targetPosition();
+    distances_left[i] = distances_to_go[i] - distances_left[i];
+    steppers[i].move(p1_distance_to_go);
+  }
+  while (strcmp(mode, "RESUME") != 0) {
+    // do nothing
+    getDataFromPC();
+  }
+  for (int i = 0; i < 3; i += 1) {
+    distances[i] = distances_left[i];
   }
 
+  return runFew();
 }
-
-
-void resumeRun() {
-  switch (motorID) {
-    case 1:
-      stepper1.move(p1_distance_left);
-      while (stepper1.distanceToGo() >= 0) {
-        stepper1.runSpeedToPosition();
-        getDataFromPC();
-      }
-      stepper1.setCurrentPosition(0);
-      break;
-    case 2:
-      stepper2.move(p2_distance_left);
-      while (stepper2.distanceToGo() >= 0) {
-        stepper2.runSpeedToPosition();
-        getDataFromPC();
-      }
-      stepper2.setCurrentPosition(0);
-      break;
-    case 3:
-      stepper3.move(p3_distance_left);
-      while (stepper3.distanceToGo() >= 0) {
-        stepper3.runSpeedToPosition();
-        getDataFromPC();
-      }
-      stepper3.setCurrentPosition(0);
-      break;
-    case 12:
-      stepper1.move(p1_distance_left);
-      stepper2.move(p2_distance_left);
-      while (stepper1.distanceToGo() >= 0 && stepper2.distanceToGo() >= 0) {
-        stepper1.runSpeedToPosition();
-        stepper2.runSpeedToPosition();
-        getDataFromPC();
-      }
-      stepper1.setCurrentPosition(0);
-      stepper2.setCurrentPosition(0);
-      break;
-    case 13:
-      stepper1.move(p1_distance_left);
-      stepper3.move(p3_distance_left);
-      while (stepper1.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
-        stepper1.runSpeedToPosition();
-        stepper3.runSpeedToPosition();
-        getDataFromPC();
-      }
-      stepper1.setCurrentPosition(0);
-      stepper3.setCurrentPosition(0);
-      break;
-    case 23:
-      stepper2.move(p2_distance_left);
-      stepper3.move(p3_distance_left);
-      while (stepper2.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
-        stepper2.runSpeedToPosition();
-        stepper3.runSpeedToPosition();
-        getDataFromPC();
-      }
-      stepper2.setCurrentPosition(0);
-      stepper3.setCurrentPosition(0);
-      break;
-    case 123:
-      stepper1.move(p1_distance_left);
-      stepper2.move(p2_distance_left);
-      stepper3.move(p3_distance_left);
-      while (stepper1.distanceToGo() >= 0 && stepper2.distanceToGo() >= 0 && stepper3.distanceToGo() >= 0) {
-        stepper1.runSpeedToPosition();
-        stepper2.runSpeedToPosition();
-        stepper3.runSpeedToPosition();
-        getDataFromPC();
-      }
-      stepper1.setCurrentPosition(0);
-      stepper2.setCurrentPosition(0);
-      stepper3.setCurrentPosition(0);
-      break;
-  }
-
-}
-

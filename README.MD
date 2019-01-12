@@ -1,78 +1,93 @@
 ![poseidon_logo](https://user-images.githubusercontent.com/10369156/51078049-4152d900-1664-11e9-9296-1b153aca908b.png)
 
-# poseidon project - open source bioinstrumentation
-## poseidon website: https://pachterlab.github.io/poseidon
+## Poseidon: Open source bioinstrumentation
+### An easy-to-use, highly customizable, and open source syringe pump and microscope system.
+### Documentation: https://pachterlab.github.io/poseidon/
 
-The poseidon syringe pumps and microscope is a customizable, open source alternative to commercial systems. The poseidon system can be built for less than $400, and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications.
+## The tl;dr
 
+The Poseidon syringe pump and microscope system is an open source alternative to commercial systems. It costs \$452.85 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications. The pumps and microscope can be run from a Windows, Mac, Linux, or Raspberry Pi computer with an easy to use GUI.
 
-### Open source syringe pumps and Raspberry Pi microscope
-![mvimg_20180111_222424](https://user-images.githubusercontent.com/12504176/34991157-69e99c68-fa7d-11e7-8a77-660660820391.jpg)
+## Whats included?
+* Computer Aided Design (CAD) files of the 3D printed components
+* Controller software (Python) and a graphical user interface (GUI) to control the pumps
+* Arduino firmware to send commands to the motors and receive commands from the GUI
+* Bill of materials for sourcing and purchasing materials
+* Detailed assembly instructions of hardware compnents
+* Single click executable files for Mac, Windows, Linux, and Raspberry Pi systems
 
-# Overview
+![ortho_edit](https://user-images.githubusercontent.com/10369156/51078589-5a5f8800-166c-11e9-8312-50b374d574d9.jpg)
 
-The poseidon system was designed to be customizable. It uses the [Raspberry Pi](https://www.raspberrypi.org/)  and [Arduino](https://www.arduino.cc/) electronics boards, which are supported by a strong ecosystem of open source hardware and software, facilitating the implementation of new functionalities.
+## Getting Started
+### 3D printing components and purchasing hardware
+The 3D printed components can be fabricated on any desktop fused filament fabrication (FFF) 3D printer. They were designed using [Autodesk Fusion 360](http://autodesk.com/fusion360), a proprietary CAD software that offers free academic licenses.
 
-The pump driver uses an Arduino with a [CNC shield](https://blog.protoneer.co.nz/arduino-cnc-shield/) to run up to three pumps. Each pump has a stepper motor that drives lead screw which in turn moves a sled that is mounted on linear bearings. The displacement of the sled moves the syringe forward or backward allowing the user to dispel or intake liquid.
+- Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk)
+- Fusion360 interactive view of [poseidon pump](https://a360.co/2Ph19kC).
+- STL files, Fusion 360 archive files and bill of materials are available in the `HARDWARE/` folder.
+- Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml)
 
-The controller station uses a Raspberry Pi with a touchscreen to connect to the Arduino and microscope via USB. Because the microscope and Arduino use USB connections, the they can alternatively be connected to any computer instead of a Raspberry Pi. 
-
-**Build tutorial videos are found here:**
-
+### Build Videos
 Syringe Pump: https://www.youtube.com/watch?v=7YSiO6usR1M  
 Microscope  : https://www.youtube.com/watch?v=Szg-vjukonA  
 Arduino     : https://www.youtube.com/watch?v=Xl02fsRCJ7U  
 Raspberry Pi: https://www.youtube.com/watch?v=g3pXNY8snOg  
 
-## Arduino hardware setup information
-
+### Setting up the Arduino 
 We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)
 to allow for up to three pumps can be controlled from a computer or from the Rapsberry Pi microscope.
 
-The software is configured to run the stepper motors with 200 steps per revolution at 1/8 microstepping, which translates to 800 steps per rotation. To configure this, it is necessary to add a jumper between the MODE1 pins of the Arduino CNC shield, as shown in the picture below. More information about microstepping can be found in the product page for the [DRV8825 Stepper Motor Driver](https://www.pololu.com/product/2133), which is used by the CNC shield. 
+The software is configured to run the stepper motors with 200 steps per revolution at 1/32 microstepping, which translates to 6400 steps per rotation. To configure this, it is necessary to add a jumper pins between the MODE1 pins of the Arduino CNC shield, as shown in the picture below. More information about microstepping can be found in the product page for the [DRV8825 Stepper Motor Driver](https://www.pololu.com/product/2133), which is used by the CNC shield. See the build videos if you are confused. 
 
+The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available the `SOFTWARE/` folder.
 
-## Startup Tips
-Before stating the Python controller, make sure the Arduino is connected via USB to the computer or Rapsberry Pi microscope, that the CNC shield is powered, and that the 3 motors are plugged in. Test to see that they are moving in the correct direction when expelling, if not simply rotate the relevant stepper motor connectors 180 degrees and plug them back in.
+The pumps are driven by an Arduino board that interprets commands sent via USB and sends the proper signal to control the stepper motor movement. For directions on how to flash an arduino please refer to the official guide: https://www.arduino.cc/en/Guide/HomePage
 
+### Installing software
+The Python scripts are available in the `SOFTWARE/` folder. The GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigner-manual.html), a drag and drop application for organizing buttons that allows the used to easily make modifications. This GUI is used to interface with a Python script that controls both the microscope and Arduino via USB. 
 
-## Components of the poseidon system
+The software you will need to run on your computer in order to control the Arduino is the `poseidon_main.py` script located in the `SOFTWARE/` folder (also included is `poseidon_controller_gui.py` which is needed). 
 
-### 1. Computer Aided Design (CAD) files of the 3D printed components and assembly
+You have the option of either (1) running from the source code in Python or (2) choosing the appropriate binary file below for your operating system and executing it. Before you run the controller code, MAKE SURE YOU HAVE INSTALLED THE ARDUINO FIRMWARE!!
 
-The 3D printed components can be fabricated on any desktop fused filament fabrication (FFF) 3D printer. They were designed using [Autodesk Fusion 360](http://autodesk.com/fusion360), a proprietary CAD software that offers free academic licenses. To modify the 3D models the user can either use Fusion 360 or any other CAD software. 
+## Startup Checklist
+Before starting the Python controller, make sure
+1. The Arduino has the firmware uplaoded to it
+2. The Arduino is connected via USB to the computer or Rapsberry Pi microscope
+3. You have appropriately placed jumpers on the CNC Sheild to allow for microstepping and hardware enabling (discussed in build video).
+4. The CNC shield is powered, and that all motors are plugged in to the CNC sheild
 
-- STL files, Fusion 360 archive files and bill of materials are available on the hardware folder.
-- Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk)
-- Fusion360 interactive view of [poseidon pump](https://a360.co/2Ph19kC).
-- Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml)
+## Running the software and Testing the pumps
+There are two ways to run the controller. The easiest way is to just double click the executable available below. Simply download the executable, double click it, and begin using it.
 
-### 2. Python pump controller software and Graphical User Interface (GUI) to control the Arduino
-
-The Python scripts are available on the software folder.
-
-The GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigner-manual.html), a drag and drop application for organizing buttons that allows the used to easily make modifications. This GUI is used to interface with a Python script that controls both the microscope and Arduino via USB. 
-
-The software you will need to run on your computer in order to control the Arduino is the `poseidon_main.py` script located in the `software folder` (it also needs the poseidon_controller_gui.py). You have the option of either running from the source code in Python or choosing the appropriate binary file below for your operating system and executing that. You still need to flash the arduino as described in the next section.
-
-#### Download of binary files
 - [Windows](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_windows_executable_2018-08-29.exe) 
 - [Mac OS](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_mac_executable_2018-08-29)
 - [Ubuntu] (coming soon)
 - [Raspbian](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_raspbian_executable_2018-08-29)
 
-### 3. Arduino firmware used to drive the motors, 
-The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available the software folder.
-
-The pumps are driven by an Arduino board that interprets commands sent via USB and sends the proper signal to control the stepper motor movement. The user can take advantage of this by developing custom movement patterns using the Arduino functions.
-
-For directions on how to flash an arduino please refer to the official guide: https://www.arduino.cc/en/Guide/HomePage
-
-# Software detailed instructions
-
-### Running the `poseidon_main.py` Python script on Raspbian
-
-To run `poseidon_main.py` in a Raspberry Pi with a fresh install of Raspbian, Python 3 with pyqt5 need to be installed, together with a few packages.
+If you want to run the system from the source code then follow the instructions below.
+### Windows, Mac, Linux
+First make sure you have Python 3 installed on your machine. Then install PyQt5. To install PyQt5 use `brew install pyqt5` or `conda install pyqt` if you are using anaconda. If you are on Linux you can do `sudo apt-get install python3-pyqt5`. Now we need to add a few packages:
+```
+pip3 install --upgrade -pip
+pip3 install pyserial
+pip3 install opencv-python
+```
+On Linux opencv requires extra binaries
+```
+sudo apt-get install libatlas-base-dev
+sudo apt-get install libjasper-dev
+sudo apt-get install libqtgui4
+sudo apt-get install libqt4-qt3support
+sudo apt-get install libqt4-test
+```
+Now you can run 
+```
+# now the script can be called
+python3.5 poseidon_main.py
+```
+### Raspberry Pi
+To run `poseidon_main.py` on a Raspberry Pi with a fresh install of Raspbian, Python 3 with pyqt5 need to be installed, together with a few packages.
 ```
 sudo apt-get install python3-pyqt5
 
@@ -91,6 +106,32 @@ sudo apt-get install libqt4-test
 # now the script can be called
 python3.5 poseidon_main.py
 ```
+### Now that you have everything installed, go ahead and test it out!
+(1) Select the port that your Arduino is plugged into. If you don't see the right port, press `update port`. 
+(2) Set your microstepping
+(3) Input appropriate settings
+(4) Select `connect to controller`
+(5) Select `Send all settings to controller`
+(6) Go to the controller tab, select all three checkboxes and press `Jog +`
+
+If the sleds are not moving in the right direction simply rotate the relevant stepper motor plug (that connects to the CNC shield) 180 degrees and plug it back in.
+
+# Overview
+
+The poseidon system was designed to be customizable. It uses the [Raspberry Pi](https://www.raspberrypi.org/)  and [Arduino](https://www.arduino.cc/) electronics boards, which are supported by a strong ecosystem of open source hardware and software, facilitating the implementation of new functionalities.
+
+The pump driver uses an Arduino with a [CNC shield](https://blog.protoneer.co.nz/arduino-cnc-shield/) to run up to three pumps. Each pump has a stepper motor that drives lead screw which in turn moves a sled that is mounted on linear bearings. The displacement of the sled moves the syringe forward or backward allowing the user to dispel or intake liquid.
+
+The controller station uses a Raspberry Pi with a touchscreen to connect to the Arduino and microscope via USB. Because the microscope and Arduino use USB connections, the they can alternatively be connected to any computer instead of a Raspberry Pi. 
+
+
+
+## Want to modify things? It's easy!
+To modify the 3D models the user can either use Fusion 360 or any other CAD software. Simply open up the components, located in the `HARDWARE` folder, and get editing! Once you're done, go ahead and print out the parts and assemble them.
+
+Most of the modifications to the code will be done in `poseidon_main.py` and to the GUI. If you want to edit the GUI, first make sure you have installed PyQt Designer (which should have been installed when you downloaded and installed PyQt5, so you can search for it on your computer `Designer.exe` (Windows) or `Designer` in your applications folder (Mac). Open up the `poseidon_controller_gui.ui` in Designer and make whatever modifications you'd like. Then when you are done, you need to convert the modified `.ui` file to a `.py` file. Go to the terminal, navigate to the folder where you have `poseidon_controller_gui.ui` and run the command `pyuic5 poseidon_controller_gui.ui > poseidon_controller_gui.py`.
+
+When you are done editing the `poseidon_main.py` you can recreate the single click executable files by following the instructions below.
 
 ### Installing pyinstaller on Windows 7 and making a single executable for the Python controller
 
@@ -115,10 +156,10 @@ Described here: https://stackoverflow.com/questions/51324754/python-3-6-x-pyinst
 python -m PyInstaller -F poseidon_main.py --hidden-import PyQt5.sip
 ```
 
-#### Authors
+## Authors
 
 The poseidon system was developed at the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
-- [Sina Booeshaghi](https://github.com/sbooeshaghi/)
+- [Sina Booeshaghi](https://sinabooeshaghi.com/)
 - [Eduardo Beltrame](https://github.com/munfred/)
 - [Dylan Bannon](https://github.com/dylanbannon/)
 - [Jase Gehring](https://scholar.google.com/citations?user=63ZRebIAAAAJ&hl=en)

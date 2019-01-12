@@ -1,8 +1,9 @@
 ![poseidon_logo](https://user-images.githubusercontent.com/10369156/51078049-4152d900-1664-11e9-9296-1b153aca908b.png)
 
 ## Poseidon: Open source bioinstrumentation
-### An easy-to-use, highly customizable, and open source syringe pump and microscope system.
-### Documentation: https://pachterlab.github.io/poseidon/
+An easy-to-use, highly customizable, and open source syringe pump and microscope system.
+
+**Documentation**: https://pachterlab.github.io/poseidon/
 
 ## The tl;dr
 
@@ -116,17 +117,13 @@ python3.5 poseidon_main.py
 
 If the sleds are not moving in the right direction simply rotate the relevant stepper motor plug (that connects to the CNC shield) 180 degrees and plug it back in.
 
-# Overview
-
+## How does it work, and how to modify it. (Very easy!)
 The poseidon system was designed to be customizable. It uses the [Raspberry Pi](https://www.raspberrypi.org/)  and [Arduino](https://www.arduino.cc/) electronics boards, which are supported by a strong ecosystem of open source hardware and software, facilitating the implementation of new functionalities.
 
 The pump driver uses an Arduino with a [CNC shield](https://blog.protoneer.co.nz/arduino-cnc-shield/) to run up to three pumps. Each pump has a stepper motor that drives lead screw which in turn moves a sled that is mounted on linear bearings. The displacement of the sled moves the syringe forward or backward allowing the user to dispel or intake liquid.
 
 The controller station uses a Raspberry Pi with a touchscreen to connect to the Arduino and microscope via USB. Because the microscope and Arduino use USB connections, the they can alternatively be connected to any computer instead of a Raspberry Pi. 
 
-
-
-## Want to modify things? It's easy!
 To modify the 3D models the user can either use Fusion 360 or any other CAD software. Simply open up the components, located in the `HARDWARE` folder, and get editing! Once you're done, go ahead and print out the parts and assemble them.
 
 Most of the modifications to the code will be done in `poseidon_main.py` and to the GUI. If you want to edit the GUI, first make sure you have installed PyQt Designer (which should have been installed when you downloaded and installed PyQt5, so you can search for it on your computer `Designer.exe` (Windows) or `Designer` in your applications folder (Mac). Open up the `poseidon_controller_gui.ui` in Designer and make whatever modifications you'd like. Then when you are done, you need to convert the modified `.ui` file to a `.py` file. Go to the terminal, navigate to the folder where you have `poseidon_controller_gui.ui` and run the command `pyuic5 poseidon_controller_gui.ui > poseidon_controller_gui.py`.

@@ -1,3 +1,5 @@
+<center>![poseidon_logo](https://user-images.githubusercontent.com/10369156/51078049-4152d900-1664-11e9-9296-1b153aca908b.png)</center>
+
 # poseidon project - open source bioinstrumentation
 ## poseidon website: https://pachterlab.github.io/poseidon
 

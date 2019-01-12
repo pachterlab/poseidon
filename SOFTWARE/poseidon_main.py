@@ -1103,8 +1103,8 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 	def steps2mm(self, steps):
 	# 200 steps per rev
 	# one rev is 0.8mm dist
-		#mm = steps/200/32*0.8
-		mm = steps/4000
+		mm = steps/200/32*0.8
+		#mm = steps/200*0.8
 		return mm
 
 	def steps2mL(self, steps, syringe_area):
@@ -1117,8 +1117,8 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 
 	def mm2steps(self, mm):
-		#steps = mm/0.8*200*32
-		steps = mm*4000
+		steps = mm/0.8*200*32
+		#steps = mm*200/0.8
 		return steps
 
 	def mL2steps(self, mL, syringe_area):

@@ -13,7 +13,7 @@ The Poseidon syringe pump and microscope system is an open source alternative to
 
 ![ortho_edit](https://user-images.githubusercontent.com/10369156/51078589-5a5f8800-166c-11e9-8312-50b374d574d9.jpg)
 
-## Whats included?
+## What is included?
 * Computer Aided Design (CAD) files of the 3D printed components
 * Controller software (Python) and a graphical user interface (GUI) to control the pumps
 * Arduino firmware to send commands to the motors and receive commands from the GUI

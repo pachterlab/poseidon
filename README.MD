@@ -1,5 +1,7 @@
 ![poseidon_logo](https://user-images.githubusercontent.com/10369156/51078049-4152d900-1664-11e9-9296-1b153aca908b.png)
 
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+
 ## Poseidon: Open source bioinstrumentation
 An easy-to-use, highly customizable, and open source syringe pump and microscope system.
 

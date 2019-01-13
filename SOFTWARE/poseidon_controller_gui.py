@@ -208,6 +208,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.p2_amount_INPUT = QtWidgets.QDoubleSpinBox(self.control)
+        self.p2_amount_INPUT.setDecimals(3)
+        self.p2_amount_INPUT.setMinimum(-99.0)
         self.p2_amount_INPUT.setObjectName("p2_amount_INPUT")
         self.horizontalLayout_9.addWidget(self.p2_amount_INPUT)
         self.horizontalLayout_8.addLayout(self.horizontalLayout_9)
@@ -221,6 +223,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_16 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_16.setObjectName("horizontalLayout_16")
         self.p3_amount_INPUT = QtWidgets.QDoubleSpinBox(self.control)
+        self.p3_amount_INPUT.setDecimals(3)
+        self.p3_amount_INPUT.setMinimum(-99.0)
         self.p3_amount_INPUT.setObjectName("p3_amount_INPUT")
         self.horizontalLayout_16.addWidget(self.p3_amount_INPUT)
         self.horizontalLayout_15.addLayout(self.horizontalLayout_16)
@@ -234,6 +238,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.p1_amount_INPUT = QtWidgets.QDoubleSpinBox(self.control)
+        self.p1_amount_INPUT.setDecimals(3)
+        self.p1_amount_INPUT.setMinimum(-99.0)
         self.p1_amount_INPUT.setObjectName("p1_amount_INPUT")
         self.horizontalLayout_6.addWidget(self.p1_amount_INPUT)
         self.horizontalLayout.addLayout(self.horizontalLayout_6)
@@ -740,7 +746,7 @@ class Ui_MainWindow(object):
         self.menuBar.addAction(self.menuFile.menuAction())
 
         self.retranslateUi(MainWindow)
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(0)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

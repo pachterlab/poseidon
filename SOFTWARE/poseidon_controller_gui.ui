@@ -30,7 +30,7 @@
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <property name="iconSize">
        <size>
@@ -381,7 +381,14 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_9">
                   <item>
-                   <widget class="QDoubleSpinBox" name="p2_amount_INPUT"/>
+                   <widget class="QDoubleSpinBox" name="p2_amount_INPUT">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-99.000000000000000</double>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -402,7 +409,14 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_16">
                   <item>
-                   <widget class="QDoubleSpinBox" name="p3_amount_INPUT"/>
+                   <widget class="QDoubleSpinBox" name="p3_amount_INPUT">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-99.000000000000000</double>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -423,7 +437,14 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_6">
                   <item>
-                   <widget class="QDoubleSpinBox" name="p1_amount_INPUT"/>
+                   <widget class="QDoubleSpinBox" name="p1_amount_INPUT">
+                    <property name="decimals">
+                     <number>3</number>
+                    </property>
+                    <property name="minimum">
+                     <double>-99.000000000000000</double>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>

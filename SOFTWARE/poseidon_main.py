@@ -108,7 +108,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		self.ui.setupUi(self)
 
 		# Put comments here
-
+		self.populate_microstepping()
 		self.populate_syringe_sizes()
 		self.populate_pump_jog_delta()
 		self.populate_pump_units()
@@ -140,6 +140,8 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 		# Random other things I need
 		self.image = None
+		#self.microstepping = 1
+		#print(self.microstepping)
 
 
 	def recurring_timer(self):
@@ -257,6 +259,9 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		self.ui.port_DROPDOWN.currentIndexChanged.connect(self.set_port)
 
 		self.ui.experiment_notes.editingFinished.connect(self.set_experiment_notes)
+
+		# Set the microstepping value, default is 1
+		self.ui.microstepping_DROPDOWN.currentIndexChanged.connect(self.set_microstepping)
 
 		# Set the log file name
 		self.date_string =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -457,9 +462,9 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		active_pumps = self.get_active_pumps()
 		if len(active_pumps) > 0:
 
-			p1_input_displacement = str(self.convert_displacement(self.p1_amount, self.p1_units, self.p1_syringe_area))
-			p2_input_displacement = str(self.convert_displacement(self.p2_amount, self.p2_units, self.p2_syringe_area))
-			p3_input_displacement = str(self.convert_displacement(self.p3_amount, self.p3_units, self.p3_syringe_area))
+			p1_input_displacement = str(self.convert_displacement(self.p1_amount, self.p1_units, self.p1_syringe_area, self.microstepping))
+			p2_input_displacement = str(self.convert_displacement(self.p2_amount, self.p2_units, self.p2_syringe_area, self.microstepping))
+			p3_input_displacement = str(self.convert_displacement(self.p3_amount, self.p3_units, self.p3_syringe_area, self.microstepping))
 
 			pumps_2_run = ''.join(map(str,active_pumps))
 
@@ -672,6 +677,30 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 	def set_port(self):
 		self.port = self.ui.port_DROPDOWN.currentText()
 
+	# Set the microstepping amount from the dropdown menu
+	# TODO: There is definitely a better way of updating different variables
+	# after there is a change of some input from the user. need to figure out.
+	def set_microstepping(self):
+		self.microstepping = int(self.ui.microstepping_DROPDOWN.currentText())
+		self.set_p1_units()
+		self.set_p1_speed()
+		self.set_p1_accel()
+		self.set_p1_setup_jog_delta()
+		self.set_p1_amount()
+
+		self.set_p2_units()
+		self.set_p2_speed()
+		self.set_p2_accel()
+		self.set_p2_setup_jog_delta()
+		self.set_p2_amount()
+
+		self.set_p3_units()
+		self.set_p3_speed()
+		self.set_p3_accel()
+		self.set_p3_setup_jog_delta()
+		self.set_p3_amount()
+
+		print(self.microstepping)
 
 	def set_experiment_notes(self):
 		self.experiment_notes = self.ui.experiment_notes.text()
@@ -834,6 +863,12 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		else:
 			self.statusBar().showMessage("No file selected.")
 
+	# Populate the microstepping amounts for the dropdown menu
+	def populate_microstepping(self):
+		self.microstepping_values = ['1', '2', '4', '8', '16', '32']
+		self.ui.microstepping_DROPDOWN.addItems(self.microstepping_values)
+		self.microstepping = 1
+
 	# Populate the list of possible syringes to the dropdown menus
 	def populate_syringe_sizes(self):
 		self.syringe_options = ["BD 1 mL", "BD 3 mL", "BD 5 mL", "BD 10 mL", "BD 20 mL", "BD 30 mL", "BD 60 mL"]
@@ -929,44 +964,44 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 	def set_p1_speed(self):
 		self.p1_speed = self.ui.p1_speed_INPUT.value()
 		self.ui.p1_units_LABEL.setText(str(self.p1_speed) + " " + self.ui.p1_units_DROPDOWN.currentText())
-		self.p1_speed_to_send = self.convert_speed(self.p1_speed, self.p1_units, self.p1_syringe_area)
+		self.p1_speed_to_send = self.convert_speed(self.p1_speed, self.p1_units, self.p1_syringe_area, self.microstepping)
 
 	def set_p2_speed(self):
 		self.p2_speed = self.ui.p2_speed_INPUT.value()
 		self.ui.p2_units_LABEL.setText(str(self.p2_speed) + " " + self.ui.p2_units_DROPDOWN.currentText())
-		self.p2_speed_to_send = self.convert_speed(self.p2_speed, self.p2_units, self.p2_syringe_area)
+		self.p2_speed_to_send = self.convert_speed(self.p2_speed, self.p2_units, self.p2_syringe_area, self.microstepping)
 
 	def set_p3_speed(self):
 		self.p3_speed = self.ui.p3_speed_INPUT.value()
 		self.ui.p3_units_LABEL.setText(str(self.p3_speed) + " " + self.ui.p3_units_DROPDOWN.currentText())
-		self.p3_speed_to_send = self.convert_speed(self.p3_speed, self.p3_units, self.p3_syringe_area)
+		self.p3_speed_to_send = self.convert_speed(self.p3_speed, self.p3_units, self.p3_syringe_area, self.microstepping)
 
 	# Set Px accel
 	def set_p1_accel(self):
 		self.p1_accel = self.ui.p1_accel_INPUT.value()
-		self.p1_accel_to_send = self.convert_accel(self.p1_accel, self.p1_units, self.p1_syringe_area)
+		self.p1_accel_to_send = self.convert_accel(self.p1_accel, self.p1_units, self.p1_syringe_area, self.microstepping)
 
 	def set_p2_accel(self):
 		self.p2_accel = self.ui.p2_accel_INPUT.value()
-		self.p2_accel_to_send = self.convert_accel(self.p2_accel, self.p2_units, self.p2_syringe_area)
+		self.p2_accel_to_send = self.convert_accel(self.p2_accel, self.p2_units, self.p2_syringe_area, self.microstepping)
 
 	def set_p3_accel(self):
 		self.p3_accel = self.ui.p3_accel_INPUT.value()
-		self.p3_accel_to_send = self.convert_accel(self.p3_accel, self.p3_units, self.p3_syringe_area)
+		self.p3_accel_to_send = self.convert_accel(self.p3_accel, self.p3_units, self.p3_syringe_area, self.microstepping)
 
 	# Set Px jog delta (setup)
 	def set_p1_setup_jog_delta(self):
 		self.p1_setup_jog_delta = self.ui.p1_setup_jog_delta_INPUT.currentText()
 		self.p1_setup_jog_delta = float(self.ui.p1_setup_jog_delta_INPUT.currentText())
-		self.p1_setup_jog_delta_to_send = self.convert_displacement(self.p1_setup_jog_delta, self.p1_units, self.p1_syringe_area)
+		self.p1_setup_jog_delta_to_send = self.convert_displacement(self.p1_setup_jog_delta, self.p1_units, self.p1_syringe_area, self.microstepping)
 
 	def set_p2_setup_jog_delta(self):
 		self.p2_setup_jog_delta = float(self.ui.p2_setup_jog_delta_INPUT.currentText())
-		self.p2_setup_jog_delta_to_send = self.convert_displacement(self.p2_setup_jog_delta, self.p2_units, self.p2_syringe_area)
+		self.p2_setup_jog_delta_to_send = self.convert_displacement(self.p2_setup_jog_delta, self.p2_units, self.p2_syringe_area, self.microstepping)
 
 	def set_p3_setup_jog_delta(self):
 		self.p3_setup_jog_delta = float(self.ui.p3_setup_jog_delta_INPUT.currentText())
-		self.p3_setup_jog_delta_to_send = self.convert_displacement(self.p3_setup_jog_delta, self.p3_units, self.p3_syringe_area)
+		self.p3_setup_jog_delta_to_send = self.convert_displacement(self.p3_setup_jog_delta, self.p3_units, self.p3_syringe_area, self.microstepping)
 
 	# Send Px settings
 	def send_p1_settings(self):
@@ -1100,11 +1135,11 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 	# MISC : Functions I need
 	# =======================
 
-	def steps2mm(self, steps):
+	def steps2mm(self, steps, microsteps):
 	# 200 steps per rev
 	# one rev is 0.8mm dist
-		mm = steps/200/32*0.8
-		#mm = steps/200*0.8
+		#mm = steps/200/32*0.8
+		mm = steps/200/microsteps*0.8
 		return mm
 
 	def steps2mL(self, steps, syringe_area):
@@ -1116,18 +1151,18 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		return uL
 
 
-	def mm2steps(self, mm):
-		steps = mm/0.8*200*32
+	def mm2steps(self, mm, microsteps):
+		steps = mm/0.8*200*microsteps
 		#steps = mm*200/0.8
 		return steps
 
-	def mL2steps(self, mL, syringe_area):
+	def mL2steps(self, mL, syringe_area, microsteps):
 		# note syringe_area is in mm^2
-		steps = self.mm2steps(self.mL2mm3(mL)/syringe_area)
+		steps = self.mm2steps(self.mL2mm3(mL)/syringe_area, microsteps)
 		return steps
 
-	def uL2steps(self, uL, syringe_area):
-		steps = self.mm2steps(self.uL2mm3(uL)/syringe_area)
+	def uL2steps(self, uL, syringe_area, microsteps):
+		steps = self.mm2steps(self.uL2mm3(uL)/syringe_area, microsteps)
 		return steps
 
 
@@ -1177,17 +1212,17 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		value_per_sec = value_per_hour/60.0/60.0
 		return value_per_sec
 
-	def convert_displacement(self, displacement, units, syringe_area):
+	def convert_displacement(self, displacement, units, syringe_area, microsteps):
 		length = units.split("/")[0]
 		time = units.split("/")[1]
 		inp_displacement = displacement
 		# convert length first
 		if length == "mm":
-			displacement = self.mm2steps(displacement)
+			displacement = self.mm2steps(displacement, microsteps)
 		elif length == "mL":
-			displacement = self.mL2steps(displacement, syringe_area)
+			displacement = self.mL2steps(displacement, syringe_area, microsteps)
 		elif length == "µL":
-			displacement = self.uL2steps(displacement, syringe_area)
+			displacement = self.uL2steps(displacement, syringe_area, microsteps)
 
 		print('______________________________')
 		print("INPUT  DISPLACEMENT: " + str(inp_displacement) + ' ' + length)
@@ -1195,18 +1230,18 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		print('\n############################################################\n')
 		return displacement
 
-	def convert_speed(self, inp_speed, units, syringe_area):
+	def convert_speed(self, inp_speed, units, syringe_area, microsteps):
 		length = units.split("/")[0]
 		time = units.split("/")[1]
 
 
 		# convert length first
 		if length == "mm":
-			speed = self.mm2steps(inp_speed)
+			speed = self.mm2steps(inp_speed, microsteps)
 		elif length == "mL":
-			speed = self.mL2steps(inp_speed, syringe_area)
+			speed = self.mL2steps(inp_speed, syringe_area, microsteps)
 		elif length == "µL":
-			speed = self.uL2steps(inp_speed, syringe_area)
+			speed = self.uL2steps(inp_speed, syringe_area, microsteps)
 
 
 		# convert time next
@@ -1223,7 +1258,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 		print("OUTPUT SPEED: " + str(speed) + ' steps/s')
 		return speed
 
-	def convert_accel(self, accel, units, syringe_area):
+	def convert_accel(self, accel, units, syringe_area, microsteps):
 		length = units.split("/")[0]
 		time = units.split("/")[1]
 		inp_accel = accel
@@ -1231,11 +1266,11 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 		# convert length first
 		if length == "mm":
-			accel = self.mm2steps(accel)
+			accel = self.mm2steps(accel, microsteps)
 		elif length == "mL":
-			accel = self.mL2steps(accel, syringe_area)
+			accel = self.mL2steps(accel, syringe_area, microsteps)
 		elif length == "µL":
-			accel = self.uL2steps(accel, syringe_area)
+			accel = self.uL2steps(accel, syringe_area, microsteps)
 
 		# convert time next
 		if time == "s":

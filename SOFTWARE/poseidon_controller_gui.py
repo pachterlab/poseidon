@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'poseidon_controller_gui.ui'
 #
-# Created by: PyQt5 UI code generator 5.10.1
+# Created by: PyQt5 UI code generator 5.11.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(781, 473)
+        MainWindow.resize(748, 473)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.verticalLayout = QtWidgets.QVBoxLayout(self.centralwidget)
@@ -209,7 +209,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_9.setObjectName("horizontalLayout_9")
         self.p2_amount_INPUT = QtWidgets.QDoubleSpinBox(self.control)
         self.p2_amount_INPUT.setObjectName("p2_amount_INPUT")
-        self.p2_amount_INPUT.setRange(-100, 100)
         self.horizontalLayout_9.addWidget(self.p2_amount_INPUT)
         self.horizontalLayout_8.addLayout(self.horizontalLayout_9)
         self.p2_units_LABEL_2 = QtWidgets.QLabel(self.control)
@@ -223,7 +222,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_16.setObjectName("horizontalLayout_16")
         self.p3_amount_INPUT = QtWidgets.QDoubleSpinBox(self.control)
         self.p3_amount_INPUT.setObjectName("p3_amount_INPUT")
-        self.p3_amount_INPUT.setRange(-100, 100)
         self.horizontalLayout_16.addWidget(self.p3_amount_INPUT)
         self.horizontalLayout_15.addLayout(self.horizontalLayout_16)
         self.p3_units_LABEL_2 = QtWidgets.QLabel(self.control)
@@ -237,7 +235,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.p1_amount_INPUT = QtWidgets.QDoubleSpinBox(self.control)
         self.p1_amount_INPUT.setObjectName("p1_amount_INPUT")
-        self.p1_amount_INPUT.setRange(-100, 100)
         self.horizontalLayout_6.addWidget(self.p1_amount_INPUT)
         self.horizontalLayout.addLayout(self.horizontalLayout_6)
         self.p1_units_LABEL_2 = QtWidgets.QLabel(self.control)
@@ -535,9 +532,18 @@ class Ui_MainWindow(object):
         self.refresh_ports_BTN.setObjectName("refresh_ports_BTN")
         self.horizontalLayout_2.addWidget(self.refresh_ports_BTN)
         self.verticalLayout_14.addLayout(self.horizontalLayout_2)
-        self.experiment_notes = QtWidgets.QLineEdit(self.setup)
-        self.experiment_notes.setObjectName("experiment_notes")
-        self.verticalLayout_14.addWidget(self.experiment_notes)
+        self.horizontalLayout_17 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_17.setObjectName("horizontalLayout_17")
+        self.label_5 = QtWidgets.QLabel(self.setup)
+        font = QtGui.QFont()
+        font.setPointSize(15)
+        self.label_5.setFont(font)
+        self.label_5.setObjectName("label_5")
+        self.horizontalLayout_17.addWidget(self.label_5)
+        self.microstepping_DROPDOWN = QtWidgets.QComboBox(self.setup)
+        self.microstepping_DROPDOWN.setObjectName("microstepping_DROPDOWN")
+        self.horizontalLayout_17.addWidget(self.microstepping_DROPDOWN)
+        self.verticalLayout_14.addLayout(self.horizontalLayout_17)
         self.line_6 = QtWidgets.QFrame(self.setup)
         self.line_6.setFrameShadow(QtWidgets.QFrame.Raised)
         self.line_6.setFrameShape(QtWidgets.QFrame.HLine)
@@ -705,6 +711,9 @@ class Ui_MainWindow(object):
         self.horizontalLayout_7.addWidget(self.send_all_BTN)
         self.verticalLayout_13.addLayout(self.horizontalLayout_7)
         self.verticalLayout_14.addLayout(self.verticalLayout_13)
+        self.experiment_notes = QtWidgets.QLineEdit(self.setup)
+        self.experiment_notes.setObjectName("experiment_notes")
+        self.verticalLayout_14.addWidget(self.experiment_notes)
         self.tabWidget.addTab(self.setup, "")
         self.verticalLayout.addWidget(self.tabWidget)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -712,7 +721,7 @@ class Ui_MainWindow(object):
         self.status_bar_DISP.setObjectName("status_bar_DISP")
         MainWindow.setStatusBar(self.status_bar_DISP)
         self.menuBar = QtWidgets.QMenuBar(MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 781, 22))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 748, 22))
         self.menuBar.setNativeMenuBar(False)
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtWidgets.QMenu(self.menuBar)
@@ -774,7 +783,7 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.camera), _translate("MainWindow", "Camera"))
         self.label_7.setText(_translate("MainWindow", "Select port:"))
         self.refresh_ports_BTN.setText(_translate("MainWindow", "Refresh ports"))
-        self.experiment_notes.setPlaceholderText(_translate("MainWindow", "Write notes about your experiment here. These will be appended to the end of your settings file."))
+        self.label_5.setText(_translate("MainWindow", "Set Microstepping:"))
         self.label_19.setText(_translate("MainWindow", "Accel"))
         self.label_16.setText(_translate("MainWindow", "Syringe"))
         self.label_20.setText(_translate("MainWindow", "Jog Delta"))
@@ -789,9 +798,11 @@ class Ui_MainWindow(object):
         self.connect_BTN.setText(_translate("MainWindow", "Connect to Controller"))
         self.disconnect_BTN.setText(_translate("MainWindow", "Disconnect from Controller"))
         self.send_all_BTN.setText(_translate("MainWindow", "Send all settings"))
+        self.experiment_notes.setPlaceholderText(_translate("MainWindow", "Write notes about your experiment here. These will be appended to the end of your settings file."))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.setup), _translate("MainWindow", "Setup"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.load_settings_INPUT.setText(_translate("MainWindow", "Load settings"))
         self.save_settings_INPUT.setText(_translate("MainWindow", "Save settings"))
         self.load_settings_BTN.setText(_translate("MainWindow", "Load settings"))
         self.save_settings_BTN.setText(_translate("MainWindow", "Save settings"))
+

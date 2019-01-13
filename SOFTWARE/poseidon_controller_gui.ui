@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>781</width>
+    <width>748</width>
     <height>473</height>
    </rect>
   </property>
@@ -947,11 +947,23 @@
          </layout>
         </item>
         <item>
-         <widget class="QLineEdit" name="experiment_notes">
-          <property name="placeholderText">
-           <string>Write notes about your experiment here. These will be appended to the end of your settings file.</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_17">
+          <item>
+           <widget class="QLabel" name="label_5">
+            <property name="font">
+             <font>
+              <pointsize>15</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Set Microstepping:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="microstepping_DROPDOWN"/>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="Line" name="line_6">
@@ -1231,6 +1243,13 @@
           </item>
          </layout>
         </item>
+        <item>
+         <widget class="QLineEdit" name="experiment_notes">
+          <property name="placeholderText">
+           <string>Write notes about your experiment here. These will be appended to the end of your settings file.</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </widget>
      </widget>
@@ -1243,7 +1262,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>781</width>
+     <width>748</width>
      <height>22</height>
     </rect>
    </property>

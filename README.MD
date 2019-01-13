@@ -14,22 +14,22 @@ The Poseidon syringe pump and microscope system is an open source alternative to
 ![ortho_edit](https://user-images.githubusercontent.com/10369156/51078589-5a5f8800-166c-11e9-8312-50b374d574d9.jpg)
 
 ## What is included?
-* Computer Aided Design (CAD) files of the 3D printed components
-* Controller software (Python) and a graphical user interface (GUI) to control the pumps
-* Arduino firmware to send commands to the motors and receive commands from the GUI
-* Bill of materials for sourcing and purchasing materials
-* Detailed assembly instructions of hardware compnents
-* Single click executable files for Mac, Windows, Linux, and Raspberry Pi systems
+* Computer Aided Design (CAD) files of the 3D printed components.
+* Controller software (Python) and a graphical user interface (GUI) to control the pumps.
+* Arduino firmware to send commands to the motors and receive commands from the GUI.
+* Bill of materials for sourcing and purchasing materials.
+* Detailed assembly instructions of hardware compnents.
+* Single click executable files for Mac, Windows, Linux, and Raspberry Pi systems.
 
 
 ## Getting Started
 ### 3D printing components and purchasing hardware
 The 3D printed components can be fabricated on any desktop fused filament fabrication (FFF) 3D printer. They were designed using [Autodesk Fusion 360](http://autodesk.com/fusion360), a proprietary CAD software that offers free academic licenses.
 
-- Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk)
+- Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk).
 - Fusion360 interactive view of [poseidon pump](https://a360.co/2Ph19kC).
 - STL files, Fusion 360 archive files and bill of materials are available in the `HARDWARE/` folder.
-- Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml)
+- Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml).
 
 ### Build Videos
 Syringe Pump: https://www.youtube.com/watch?v=7YSiO6usR1M  
@@ -41,11 +41,11 @@ Raspberry Pi: https://www.youtube.com/watch?v=g3pXNY8snOg
 We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)
 to allow for up to three pumps can be controlled from a computer or from the Rapsberry Pi microscope.
 
-The software is configured to run the stepper motors with 200 steps per revolution at 1/32 microstepping, which translates to 6400 steps per rotation. To configure this, it is necessary to add a jumper pins between the MODE1 pins of the Arduino CNC shield, as shown in the picture below. More information about microstepping can be found in the product page for the [DRV8825 Stepper Motor Driver](https://www.pololu.com/product/2133), which is used by the CNC shield. See the build videos if you are confused. 
+The software is configured to run the stepper motors with 200 steps per revolution at 1/32 microstepping, which translates to 6400 steps per rotation. To configure this, it is necessary to add jumper pins between the MODE1 pins of the Arduino CNC shield, as shown in the picture below. More information about microstepping can be found in the product page for the [DRV8825 Stepper Motor Driver](https://www.pololu.com/product/2133), which is used by the CNC shield. See the build videos for more detail. 
 
 The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available the `SOFTWARE/` folder.
 
-The pumps are driven by an Arduino board that interprets commands sent via USB and sends the proper signal to control the stepper motor movement. For directions on how to flash an arduino please refer to the official guide: https://www.arduino.cc/en/Guide/HomePage
+The pumps are driven by an Arduino board that interprets commands sent via USB and sends the signals to control the stepper motor movement. For directions on how to flash an arduino please refer to the official guide: https://www.arduino.cc/en/Guide/HomePage
 
 ### Installing software
 The Python scripts are available in the `SOFTWARE/` folder. The GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigner-manual.html), a drag and drop application for organizing buttons that allows the used to easily make modifications. This GUI is used to interface with a Python script that controls both the microscope and Arduino via USB. 
@@ -170,7 +170,7 @@ The poseidon system was developed at the [Pachter Lab](https://pachterlab.github
 
 The Poseidon project is based on a number of other open source projects and papers.
 
-The pump design was based of the open source syringe pumps published by the [Pearce Research Group](http://www.mse.mtu.edu/~pearce/Index.html):
+The pump design was based on the open source syringe pumps published by the [Pearce Research Group](http://www.mse.mtu.edu/~pearce/Index.html):
 
 [Open-Source Syringe Pump Library <br>
 Bas Wijnen, Emily J. Hunt, Gerald C. Anzalone, Joshua M. Pearce <br>
@@ -178,10 +178,10 @@ PLOS One, 2014. https://doi.org/10.1371/journal.pone.0107216](http://journals.pl
 
 With subsequent refinements published on [http://www.appropedia.org/Open-source_syringe_pump](http://www.appropedia.org/Open-source_syringe_pump)
 
-The microscope was inspired by a design published by the [Satija Lab](http://satijalab.org/):
+The microscope was based on a design published by the [Satija Lab](http://satijalab.org/):
 
 [Single-Cell Single-cell RNA-seq of rheumatoid arthritis synovial tissue using low-cost microfluidic instrumentation <br>
 William Stephenson, Laura T. Donlin, Andrew Butler, Cristina Rozo, Ali Rashidfarrokhi, Susan M. Goodman, Lionel B. Ivashkiv, Vivian P. Bykerk, Dana E. Orange, Robert B. Darnell, Harold P. Swerdlow, Rahul Satija <br>
 Nature Communicationsvolume 9, Article number: 791 (2018)](https://www.nature.com/articles/s41467-017-02659-x)
 
-All necessary files are avaialble on [Metafluidics](https://metafluidics.org/devices/minidrops/)
+All necessary files are available on [Metafluidics](https://metafluidics.org/devices/minidrops/)

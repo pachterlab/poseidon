@@ -1474,6 +1474,31 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 			pass
 		sys.exit()
 
+	def custom_flow(self, flow_rates, dt, units):
+		self.statusBar().showMessage("You clicked custom_flow")
+		testData = []
+
+		active_pumps = self.get_active_pumps()
+		if len(active_pumps) > 0:
+			pass
+			for frate in flow_rates:
+				self.settings = []
+				self.settings.append("<SETTING,SPEED,1,"+self.convert_speed(frate, units, self.p1_syringe_area, self.microstepping)+",F,0.0,0.0,0.0>")
+				# set flow rate to be the speed for pump i
+				# send that speed to the controller
+				print("Sending all settings..")
+				thread = Thread(self.runTest, self.settings)
+				thread.finished.connect(lambda:self.thread_finished(thread))
+				thread.start()
+
+				# run for delta time (dt)
+				while
+				self.stop()
+				# pause when dt is over
+				# iterate 
+		else:
+			self.statusBar().showMessage("No pumps enabled.")
+
 # I feel better having one of these
 def main():
 	# a new app instance

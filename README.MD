@@ -56,7 +56,7 @@ You have the option of either (1) running from the source code in Python or (2) 
 
 ## Startup Checklist
 Before starting the Python controller, make sure
-1. The Arduino has the firmware uplaoded to it
+1. The Arduino has the firmware uploaded to it
 2. The Arduino is connected via USB to the computer or Rapsberry Pi microscope
 3. You have appropriately placed jumpers on the CNC Sheild to allow for microstepping and hardware enabling (discussed in build video).
 4. The CNC shield is powered, and that all motors are plugged in to the CNC sheild
@@ -136,7 +136,7 @@ When you are done editing the `poseidon_main.py` you can recreate the single cli
 ### Installing pyinstaller on Windows 7 and making a single executable for the Python controller
 
 To create a single .exe file we use 
-Using Python 3.7 (installing pyqt5 form pip) or 3.4 (isntalling pyqt5 from executable) on Windows 10 did not work. 
+Using Python 3.7 (installing pyqt5 form pip) or 3.4 (installing pyqt5 from executable) on Windows 10 did not work. 
 Python 3.7 yields terrible dependency errors from pyinstaller and with Python 3.4 after making the executable pyqt complains apparently because of windows 10. The solution was to use a machine with Windows 7. 
 
 After installing Python 3.5.4 (https://www.python.org/downloads/release/python-354/), using the `Windows x86-64 executable installer`, these dependencies should install without problems:

@@ -2,14 +2,14 @@
 
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
 
-## Poseidon: Open source bioinstrumentation
+## poseidon: Open source bioinstrumentation
 An easy-to-use, highly customizable, and open source syringe pump and microscope system.
 
 **Documentation**: https://pachterlab.github.io/poseidon/
 
 ## The tl;dr
 
-The Poseidon syringe pump and microscope system is an open source alternative to commercial systems. It costs \$452.85 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications. The pumps and microscope can be run from a Windows, Mac, Linux, or Raspberry Pi computer with an easy to use GUI.
+The poseidon syringe pump and microscope system is an open source alternative to commercial systems. It costs \$452.85 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications. The pumps and microscope can be run from a Windows, Mac, Linux, or Raspberry Pi computer with an easy to use GUI.
 
 ![ortho_edit](https://user-images.githubusercontent.com/10369156/51078589-5a5f8800-166c-11e9-8312-50b374d574d9.jpg)
 
@@ -168,7 +168,7 @@ The poseidon system was developed at the [Pachter Lab](https://pachterlab.github
 
 #### Prior work and references
 
-The Poseidon project is based on a number of other open source projects and papers.
+The poseidon project is based on a number of other open source projects and papers.
 
 The pump design was based on the open source syringe pumps published by the [Pearce Research Group](http://www.mse.mtu.edu/~pearce/Index.html):
 

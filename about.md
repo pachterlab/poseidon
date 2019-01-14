@@ -6,11 +6,19 @@ group: navigation
 
 {% include JB/setup %}
 
-####  __poseidon__ project: open source bioinstrumentation
+###  __poseidon__ project: open source bioinstrumentation
 
-The poseidon syringe pumps and microscope is a customizable open source alternative to commercial systems that [costs less than $400](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml) and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, but the pumps can also be connected to a computer and used independently for other experiments.
+The Poseidon syringe pump and microscope system is an open source alternative to commercial systems. It costs \$452.85 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications. The pumps and microscope can be run from a Windows, Mac, Linux, or Raspberry Pi computer with an easy to use GUI.
 
-All source code, 3D model files, bill of materials, and instructions are available at the poseidon GitHub repository: [https://github.com/pachterlab/poseidon](https://github.com/pachterlab/poseidon)
+#### What is included?
+* Computer Aided Design (CAD) files of the 3D printed components.
+* Controller software (Python) and a graphical user interface (GUI) to control the pumps.
+* Arduino firmware to send commands to the motors and receive commands from the GUI.
+* Bill of materials for sourcing and purchasing materials.
+* Detailed assembly instructions of hardware compnents.
+* Single click executable files for Mac, Windows, Linux, and Raspberry Pi systems.
+
+All files are available at the poseidon GitHub repository: [https://github.com/pachterlab/poseidon](https://github.com/pachterlab/poseidon)
 
 ![about](https://user-images.githubusercontent.com/12504176/35100297-31df303c-fc10-11e7-871c-133837e9449c.PNG)
 

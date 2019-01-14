@@ -43,7 +43,7 @@ to allow for up to three pumps can be controlled from a computer or from the Rap
 
 The software is configured to run the stepper motors with 200 steps per revolution at 1/32 microstepping, which translates to 6400 steps per rotation. To configure this, it is necessary to add jumper pins between the MODE1 pins of the Arduino CNC shield, as shown in the picture below. More information about microstepping can be found in the product page for the [DRV8825 Stepper Motor Driver](https://www.pololu.com/product/2133), which is used by the CNC shield. See the build videos for more detail. 
 
-The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available the `SOFTWARE/` folder.
+The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available in the `SOFTWARE/` folder.
 
 The pumps are driven by an Arduino board that interprets commands sent via USB and sends the signals to control the stepper motor movement. For directions on how to flash an arduino please refer to the official guide: https://www.arduino.cc/en/Guide/HomePage
 

@@ -10,7 +10,7 @@ The poseidon GUI was created using [Qt designer](http://doc.qt.io/qt-5/qtdesigne
 
 The pumps are driven by an Arduino board that interprets commands sent via USB and sends the proper signal to control the stepper motor movement. The user can take advantage of this by developing custom movement patterns using the Arduino functions.
 
-![poseidon_gui](https://user-images.githubusercontent.com/12504176/44837086-7565ba00-abed-11e8-9f49-90933ecdb3e8.png)
+![poseidon_gui](https://user-images.githubusercontent.com/12504176/51095267-6f214600-1768-11e9-83d6-207cb360bdec.png)
 
 
 ## Getting started 
@@ -31,6 +31,9 @@ Before starting the Python controller, make sure
 3. You have appropriately placed jumpers on the CNC Sheild to allow for microstepping and hardware enabling, as shown in the [arduino CNC shield build video](https://pachterlab.github.io/poseidon/hardware).
 4. The CNC shield is powered, and that all motors are plugged in to the CNC sheild
 
+A schematic of how the system parts connect is shown below.
+
+![poseidon_setup](https://user-images.githubusercontent.com/12504176/51095573-9d078a00-176a-11e9-9fa8-dbe915b4b94e.png)
 
 
 

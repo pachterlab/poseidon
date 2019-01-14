@@ -1,0 +1,10 @@
+build/
+dist/
+poseidon_controller_gui.ui
+poseidon_main.spec
+out00*
+base_library.zip
+warnposeidon_main.txt
+xref-poseidon_main.html
+poseidon_main/
+.txt

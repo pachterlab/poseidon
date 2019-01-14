@@ -1,0 +1,13 @@
+build/
+dist/
+__pycache__/
+poseidon_main/
+
+poseidon_controller_gui.ui
+poseidon_main.spec
+out00*
+base_library.zip
+warnposeidon_main.txt
+xref-poseidon_main.html
+poseidon_controller_gui.cpython-36.pyc
+.txt

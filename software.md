@@ -12,6 +12,9 @@ The pumps are driven by an Arduino board that interprets commands sent via USB a
 
 ![poseidon_gui](https://user-images.githubusercontent.com/12504176/44837086-7565ba00-abed-11e8-9f49-90933ecdb3e8.png)
 
+
+## Getting started 
+
 To run the poseidon GUI controller you have the option of either running from the source code in Python or choosing the appropriate binary file from the [poseidon releases page](https://github.com/pachterlab/poseidon/releases) and executing it. 
 
 The Python scripts are available in the repository [`SOFTWARE` folder](https://github.com/pachterlab/poseidon/tree/release/SOFTWARE). The two Python scripts needed are `poseidon_main.py` and `poseidon_controller_gui.py`.
@@ -21,7 +24,7 @@ Before you can run the GUI controller, the Arduino should be flashed with the [`
 For directions on how to flash an arduino please refer to the official guide: [https://www.arduino.cc/en/Guide/HomePage](https://www.arduino.cc/en/Guide/HomePage)
 
 
-## Startup Checklist
+### Startup Checklist
 Before starting the Python controller, make sure
 1. The Arduino has the firmware uploaded to it
 2. The Arduino is connected via USB to the computer or Rapsberry Pi microscope

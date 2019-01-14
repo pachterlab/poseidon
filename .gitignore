@@ -3,7 +3,6 @@ dist/
 __pycache__/
 poseidon_main/
 
-poseidon_controller_gui.ui
 poseidon_main.spec
 out00*
 base_library.zip

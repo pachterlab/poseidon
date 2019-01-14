@@ -22,6 +22,9 @@ All files are available at the poseidon GitHub repository: [https://github.com/p
 
 ![about](https://user-images.githubusercontent.com/12504176/35100297-31df303c-fc10-11e7-871c-133837e9449c.PNG)
 
+
+#### Overview 
+
 The poseidon system was designed to be customizable. It uses the [Raspberry Pi](https://www.raspberrypi.org/)  and [Arduino](https://www.arduino.cc/) electronics boards, which are supported by a strong ecosystem of open source hardware and software, facilitating the implementation of new functionalities.
 
 The pump driver uses an Arduino with a [CNC shield](https://blog.protoneer.co.nz/arduino-cnc-shield/) to run up to three pumps. Each pump has a stepper motor that drives lead screw which in turn moves a sled that is mounted on linear bearings. The displacement of the sled moves the syringe forward or backward allowing the user to dispel or intake liquid.

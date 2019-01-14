@@ -15,9 +15,8 @@ group: navigation
 &nbsp;
 
 
-## Getting Started
+## Getting Started and assembly videos
 
-### 3D printing components and purchasing hardware
 The 3D printed components can be fabricated on any desktop fused filament fabrication (FFF) 3D printer. They were designed using [Autodesk Fusion 360](http://autodesk.com/fusion360), a proprietary CAD software that offers free academic licenses.
 
 - Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk).
@@ -26,8 +25,6 @@ The 3D printed components can be fabricated on any desktop fused filament fabric
 - Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml).
 
 &nbsp;
-
-## Assembly videos
 
 ### Syringe pumps
 

@@ -41,7 +41,7 @@ The pumps are driven by an Arduino board that interprets commands sent via USB a
 #### Authors
 
 The poseidon system was developed at the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
-- [Sina Booeshaghi](https://github.com/sbooeshaghi/)
+- [Sina Booeshaghi](https://www.sinabooeshaghi.com/)
 - [Dylan Bannon](https://github.com/dylanbannon/)
 - [Eduardo Beltrame](https://github.com/munfred/)
 - [Jase Gehring](https://scholar.google.com/citations?user=63ZRebIAAAAJ&hl=en)

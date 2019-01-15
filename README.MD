@@ -125,17 +125,16 @@ The poseidon system was designed to be customizable. It uses the [Raspberry Pi](
 
 The pump driver uses an Arduino with a [CNC shield](https://blog.protoneer.co.nz/arduino-cnc-shield/) to run up to three pumps. Each pump has a stepper motor that drives lead screw which in turn moves a sled that is mounted on linear bearings. The displacement of the sled moves the syringe forward or backward allowing the user to dispel or intake liquid.
 
-The controller station uses a Raspberry Pi with a touchscreen to connect to the Arduino and microscope via USB. Because the microscope and Arduino use USB connections, the they can alternatively be connected to any computer instead of a Raspberry Pi. 
+The controller station uses a Raspberry Pi with a touchscreen to connect to the Arduino and microscope via USB. Because the microscope and Arduino use USB connections, they can alternatively be connected to a computer instead of a Raspberry Pi. 
 
-To modify the 3D models the user can either use Fusion 360 or any other CAD software. Simply open up the components, located in the `HARDWARE` folder, and get editing! Once you're done, go ahead and print out the parts and assemble them.
+To modify the 3D models, users can either use Fusion 360 or any other CAD software. Simply open up the components, located in the `HARDWARE` folder, and get editing! Once you're done, go ahead and print out the parts and assemble them.
 
 Most of the modifications to the code will be done in `poseidon_main.py` and to the GUI. If you want to edit the GUI, first make sure you have installed PyQt Designer (which should have been installed when you downloaded and installed PyQt5, so you can search for it on your computer `Designer.exe` (Windows) or `Designer` in your applications folder (Mac). Open up the `poseidon_controller_gui.ui` in Designer and make whatever modifications you'd like. Then when you are done, you need to convert the modified `.ui` file to a `.py` file. Go to the terminal, navigate to the folder where you have `poseidon_controller_gui.ui` and run the command `pyuic5 poseidon_controller_gui.ui > poseidon_controller_gui.py`.
 
 When you are done editing the `poseidon_main.py` you can recreate the single click executable files by following the instructions below.
 
 ### Installing pyinstaller on Windows 7 and making a single executable for the Python controller
-
-To create a single .exe file we use 
+ 
 Using Python 3.7 (installing pyqt5 form pip) or 3.4 (installing pyqt5 from executable) on Windows 10 did not work. 
 Python 3.7 yields terrible dependency errors from pyinstaller and with Python 3.4 after making the executable pyqt complains apparently because of windows 10. The solution was to use a machine with Windows 7. 
 
@@ -158,7 +157,7 @@ python -m PyInstaller -F poseidon_main.py --hidden-import PyQt5.sip
 
 ## Authors
 
-The poseidon system was developed at the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
+The poseidon system was developed by the [Pachter Lab](https://pachterlab.github.io) at Caltech by:
 - [Sina Booeshaghi](https://sinabooeshaghi.com/)
 - [Eduardo Beltrame](https://github.com/munfred/)
 - [Dylan Bannon](https://github.com/dylanbannon/)

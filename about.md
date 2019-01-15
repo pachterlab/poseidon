@@ -8,7 +8,7 @@ group: navigation
 
 ###  __poseidon__ project: open source bioinstrumentation
 
-The Poseidon syringe pump and microscope system is an open source alternative to commercial systems. It costs \$452.85 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications. The pumps and microscope can be run from a Windows, Mac, Linux, or Raspberry Pi computer with an easy to use GUI.
+The Poseidon syringe pump and microscope system is an open source alternative to commercial systems. that [costs less than $400](https://docs.google.com/spreadsheets/d/e/2PACX-1vSvQ-_a3mc86q8SK5kn30WIgRPjqy6SA3FfCof95V2DZ1-tXybiHstTbmEUGz1TtDjSifnlR6G8LoQv/pubhtml) and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications. The pumps and microscope can be run from a Windows, Mac, Linux, or Raspberry Pi computer with an easy to use GUI.
 
 #### What is included?
 * Computer Aided Design (CAD) files of the 3D printed components.

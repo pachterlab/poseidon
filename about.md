@@ -62,15 +62,15 @@ The poseidon system was developed at the [Pachter Lab](https://pachterlab.github
 
 As with everything in life, the Poseidon project was not developed in a vacuum. 
 
-The pumps design was based of the open source syringe pumps published by the [Pearce Research Group](http://www.mse.mtu.edu/~pearce/Index.html):
+The pumps design was based on the open source syringe pumps published by the [Pearce Research Group](http://www.mse.mtu.edu/~pearce/Index.html):
 
 [Open-Source Syringe Pump Library <br>
 Bas Wijnen, Emily J. Hunt, Gerald C. Anzalone, Joshua M. Pearce <br>
 PLOS One, 2014. https://doi.org/10.1371/journal.pone.0107216](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0107216)
 
-With subsequent refinementspublished on [http://www.appropedia.org/Open-source_syringe_pump](http://www.appropedia.org/Open-source_syringe_pump)
+With subsequent refinements published on [http://www.appropedia.org/Open-source_syringe_pump](http://www.appropedia.org/Open-source_syringe_pump)
 
-The microscope was inspired on a design published by the [Satija Lab](http://satijalab.org/):
+The microscope was based on a design published by the [Satija Lab](http://satijalab.org/):
 
 [Single-Cell Single-cell RNA-seq of rheumatoid arthritis synovial tissue using low-cost microfluidic instrumentation <br>
 William Stephenson, Laura T. Donlin, Andrew Butler, Cristina Rozo, Ali Rashidfarrokhi, Susan M. Goodman, Lionel B. Ivashkiv, Vivian P. Bykerk, Dana E. Orange, Robert B. Darnell, Harold P. Swerdlow, Rahul Satija <br>

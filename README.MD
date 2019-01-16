@@ -21,6 +21,9 @@ The poseidon syringe pump and microscope system is an open source alternative to
 * Detailed assembly instructions of hardware compnents.
 * Single click executable files for Mac, Windows, Linux, and Raspberry Pi systems.
 
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/10369156/51273076-a5d1a900-1980-11e9-82a2-6b78c2ead10f.gif">
+</p>
 
 ## Getting Started
 ### 3D printing components and purchasing hardware

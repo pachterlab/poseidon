@@ -37,6 +37,8 @@ Microscope  : https://www.youtube.com/watch?v=Szg-vjukonA
 Arduino     : https://www.youtube.com/watch?v=Xl02fsRCJ7U  
 Raspberry Pi: https://www.youtube.com/watch?v=g3pXNY8snOg  
 
+Running poseidon: https://youtu.be/Szg-vjukonA
+
 ### Setting up the Arduino 
 We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)
 to allow for up to three pumps can be controlled from a computer or from the Rapsberry Pi microscope.

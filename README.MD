@@ -74,6 +74,10 @@ There are two ways to run the controller. The easiest way is to just double clic
 - [Ubuntu] (coming soon)
 - [Raspbian](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_raspbian_executable_2018-08-29)
 
+**Note that the speeds and flow rates of the system are limited by the microstepping and the syringe size used.**
+
+<img width="1068" alt="flow_rates" src="https://user-images.githubusercontent.com/10369156/51273546-d49c4f00-1981-11e9-8946-9ec0baf57dbd.png">
+
 If you want to run the system from the source code then follow the instructions below.
 ### Windows, Mac, Linux
 First make sure you have Python 3 installed on your machine. Then install PyQt5. To install PyQt5 use `brew install pyqt5` or `conda install pyqt` if you are using anaconda. If you are on Linux you can do `sudo apt-get install python3-pyqt5`. Now we need to add a few packages:
@@ -124,6 +128,7 @@ python3.5 poseidon_main.py
 (6) Go to the controller tab, select all three checkboxes and press `Jog +`
 
 If the sleds are not moving in the right direction simply rotate the relevant stepper motor plug (that connects to the CNC shield) 180 degrees and plug it back in.
+
 
 ## How does it work, and how to modify it. (Very easy!)
 The poseidon system was designed to be customizable. It uses the [Raspberry Pi](https://www.raspberrypi.org/)  and [Arduino](https://www.arduino.cc/) electronics boards, which are supported by a strong ecosystem of open source hardware and software, facilitating the implementation of new functionalities.

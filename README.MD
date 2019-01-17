@@ -7,7 +7,7 @@ An easy-to-use, highly customizable, and open source syringe pump and microscope
 
 **Documentation**: https://pachterlab.github.io/poseidon/
 
-**Check out our preprint: ** https://www.biorxiv.org/content/early/2019/01/17/521096
+**Check out our preprint**: https://www.biorxiv.org/content/early/2019/01/17/521096
 
 ## The tl;dr
 

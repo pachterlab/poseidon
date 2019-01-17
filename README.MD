@@ -11,6 +11,11 @@ An easy-to-use, highly customizable, and open source syringe pump and microscope
   Our preprint is now available on the bioRxiv!
 </h2>
 
+<h4 align="center">
+  Design principles for open source bioinstrumentation: 
+  the poseidon syringe pump system as an example.
+</h4>
+
 <h3 align="center">
   https://www.biorxiv.org/content/early/2019/01/17/521096
 </h3>

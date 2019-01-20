@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>748</width>
-    <height>473</height>
+    <width>811</width>
+    <height>498</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
        <enum>QTabWidget::Triangular</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <property name="iconSize">
        <size>
@@ -688,6 +688,25 @@
                </widget>
               </item>
               <item>
+               <widget class="QPushButton" name="run_custom_rates_BTN">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Run Custom</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="pause_BTN">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -983,6 +1002,27 @@
           </item>
           <item>
            <widget class="QComboBox" name="microstepping_DROPDOWN"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_18">
+          <item>
+           <widget class="QCheckBox" name="custom_rates_CHECKBOX">
+            <property name="text">
+             <string>Custom Rates?</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="custom_rates_TEXT">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>[units (string), delta time [s] (int), flowrate1 (float), flowrate2 (float), ...]</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -1283,7 +1323,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>748</width>
+     <width>811</width>
      <height>22</height>
     </rect>
    </property>

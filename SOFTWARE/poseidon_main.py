@@ -225,6 +225,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 		# Action buttons
 		self.ui.run_BTN.clicked.connect(self.run)
+		self.ui.run_custom_rates_BTN.clicked.connect(self.run_custom)
 
 
 		self.ui.pause_BTN.clicked.connect(self.pause)
@@ -262,6 +263,10 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 
 		# Set the microstepping value, default is 1
 		self.ui.microstepping_DROPDOWN.currentIndexChanged.connect(self.set_microstepping)
+
+		# Monitor if custom rates are inputted
+		self.ui.custom_rates_TEXT.editingFinished.connect(self.get_custom)
+		self.ui.custom_rates_CHECKBOX.stateChanged.connect(self.toggle_custom_rates_activation)
 
 		# Set the log file name
 		self.date_string =  datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -1474,30 +1479,86 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 			pass
 		sys.exit()
 
-	def custom_flow(self, flow_rates, dt, units):
-		self.statusBar().showMessage("You clicked custom_flow")
-		testData = []
-
-		active_pumps = self.get_active_pumps()
-		if len(active_pumps) > 0:
-			pass
-			for frate in flow_rates:
-				self.settings = []
-				self.settings.append("<SETTING,SPEED,1,"+self.convert_speed(frate, units, self.p1_syringe_area, self.microstepping)+",F,0.0,0.0,0.0>")
-				# set flow rate to be the speed for pump i
-				# send that speed to the controller
-				print("Sending all settings..")
-				thread = Thread(self.runTest, self.settings)
-				thread.finished.connect(lambda:self.thread_finished(thread))
-				thread.start()
-
-				# run for delta time (dt)
-				while
-				self.stop()
-				# pause when dt is over
-				# iterate 
+	def toggle_custom_rates_activation(self):
+		if self.ui.custom_rates_CHECKBOX.isChecked():
+			self.is_custom_rates_active = True
 		else:
-			self.statusBar().showMessage("No pumps enabled.")
+			self.is_custom_rates_active = False
+		print("Custom rates active: ", self.is_custom_rates_active)
+
+
+	def get_custom(self):
+		try:
+			custom_input = self.ui.custom_rates_TEXT.text()
+			custom_input = custom_input.split('[')[1].split(']')[0].split(',')
+			print("Custom input: ", custom_input)
+			self.custom_units = custom_input[0]
+			print("Custom units: ", self.custom_units)
+			self.dt = float(custom_input[1])
+			print("Custom delta time: ", self.dt)
+			custom_rates = custom_input[2::]
+			self.custom_rates = [float(i) for i in custom_rates]
+			print("Custom rates: ", self.custom_rates)
+			for i in self.custom_rates:
+				print(i, type(i))
+		except:
+			self.statusBar().showMessage("INVALID INPUT, TRY AGAIN.")
+
+	def set_custom(self):
+		pass
+# [mm/s, 1, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0]
+
+	def run_custom(self):#, flow_rates, dt, units):
+		# note dt is in seconds.
+		# so if you wanted 30 minute intervals you would get
+		# 30*60 = 1800 seconds
+		self.statusBar().showMessage("You clicked Run Custom")
+		i = 0
+		testData = []
+		if self.is_custom_rates_active:
+			active_pumps = self.get_active_pumps()
+			if len(active_pumps) > 0:
+				for frate in self.custom_rates:
+					i+= 1
+					self.settings = []
+					speed_tst = self.convert_speed(frate, self.custom_units, self.p1_syringe_area, self.microstepping)
+					self.settings.append("<SETTING,SPEED,1,"+str(speed_tst)+",F,0.0,0.0,0.0>")
+					# set flow rate to be the speed for pump i
+					# send that speed to the controller
+					print("Sending all settings..")
+
+
+					#p1_input_displacement = str(self.convert_displacement(self.p1_amount, self.p1_units, self.p1_syringe_area, self.microstepping))
+					#p2_input_displacement = str(self.convert_displacement(self.p2_amount, self.p2_units, self.p2_syringe_area, self.microstepping))
+					#p3_input_displacement = str(self.convert_displacement(self.p3_amount, self.p3_units, self.p3_syringe_area, self.microstepping))
+
+					pumps_2_run = ''.join(map(str,active_pumps))
+
+					cmd = "<RUN,DIST,"+pumps_2_run+",0.0,F," + "100000000" + "," + "100000000" + "," + "100000000" + ">"
+
+					self.settings.append(cmd)
+
+					thread = Thread(self.runTest, self.settings)
+					thread.finished.connect(lambda:self.thread_finished(thread))
+					print(i, "STARTING THREAD ===========================")
+					thread.start()
+					#time.sleep()
+
+					# run for delta time (dt)
+					start_time = time.time()
+					while True:
+						time.sleep(0.05) # sleep for 1 second
+						if time.time() - start_time >= self.dt:
+							break
+
+					self.stop()
+					#time.sleep(1)
+					# pause when dt is over
+					# iterate 
+			else:
+				self.statusBar().showMessage("No pumps enabled.")
+		else:
+			self.statusBar().showMessage("Custom rates not active.")
 
 # I feel better having one of these
 def main():

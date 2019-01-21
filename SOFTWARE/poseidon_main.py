@@ -1479,6 +1479,7 @@ class MainWindow(QtWidgets.QMainWindow, poseidon_controller_gui.Ui_MainWindow):
 			pass
 		sys.exit()
 
+
 	def toggle_custom_rates_activation(self):
 		if self.ui.custom_rates_CHECKBOX.isChecked():
 			self.is_custom_rates_active = True

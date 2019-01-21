@@ -15,6 +15,11 @@ The pumps are driven by an Arduino board that interprets commands sent via USB a
 
 ## Getting started 
 
+<p align="center">
+  **Running your pump for the first time (VIDEO):** https://youtu.be/VmoB_fPc4L4
+</p>
+
+
 To run the poseidon GUI controller you have the option of either running from the source code in Python or choosing the appropriate binary file from the [poseidon releases page](https://github.com/pachterlab/poseidon/releases) and executing it. 
 
 The Python scripts are available in the repository [`SOFTWARE` folder](https://github.com/pachterlab/poseidon/tree/release/SOFTWARE). The two Python scripts needed are `poseidon_main.py` and `poseidon_controller_gui.py`.

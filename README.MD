@@ -59,9 +59,11 @@ Running poseidon: https://youtu.be/Szg-vjukonA
 We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)
 to allow for up to three pumps can be controlled from a computer or from the Rapsberry Pi microscope.
 
-The software is configured to run the stepper motors with 200 steps per revolution at 1/32 microstepping, which translates to 6400 steps per rotation. To configure this, it is necessary to add jumper pins between the MODE1 pins of the Arduino CNC shield, as shown in the picture below. More information about microstepping can be found in the product page for the [DRV8825 Stepper Motor Driver](https://www.pololu.com/product/2133), which is used by the CNC shield. See the build videos for more detail. 
+The software is configured to run the stepper motors with 200 steps per revolution at 1/32 microstepping, which translates to 6400 steps per rotation. To configure this, it is necessary to add 3 jumpers between the M0, M1 and M2 pins of the Arduino CNC shield. More information about microstepping can be found in the product page for the [DRV8825 Stepper Motor Driver](https://www.pololu.com/product/2133), which is used by the CNC shield. See the build videos for more detail. 
 
 The Arduino should be flashed with the `arduino_serialCOM_v0.1.ino` sketch, available in the `SOFTWARE/` folder.
+
+**Make sure to download and install the [AccelStepper library](https://www.airspayce.com/mikem/arduino/AccelStepper/index.html)**. To install, unzip the zip file to the libraries sub-folder of your sketchbook, if you get stuck here is a [how-to](https://www.arduino.cc/en/guide/libraries).
 
 The pumps are driven by an Arduino board that interprets commands sent via USB and sends the signals to control the stepper motor movement. For directions on how to flash an arduino please refer to the official guide: https://www.arduino.cc/en/Guide/HomePage
 

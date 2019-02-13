@@ -45,7 +45,7 @@ The 3D printed components can be fabricated on any desktop fused filament fabric
 - Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk).
 - Fusion360 interactive view of [poseidon pump](https://a360.co/2Ph19kC).
 - STL, STEP, IGES, Fusion 360 archive files, and bill of materials are available in the `HARDWARE/` folder.
-- Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/1AHBLf0PbtGDgqNbbK6QO31s7ES9_1uCw_NeKWHHPTM4/edit?usp=sharing).
+- Bill of materials with prices and vendor links on a [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1AHBLf0PbtGDgqNbbK6QO31s7ES9_1uCw_NeKWHHPTM4/edit?usp=sharing).
 
 ### Build Videos
 Syringe Pump: https://www.youtube.com/watch?v=7YSiO6usR1M  

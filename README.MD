@@ -31,7 +31,7 @@ The poseidon syringe pump and microscope system is an open source alternative to
 * Controller software (Python) and a graphical user interface (GUI) to control the pumps.
 * Arduino firmware to send commands to the motors and receive commands from the GUI.
 * Bill of materials for sourcing and purchasing materials.
-* Detailed assembly instructions of hardware compnents.
+* Detailed assembly instructions of hardware components.
 * Single click executable files for Mac, Windows, Linux, and Raspberry Pi systems.
 
 <p align="center">
@@ -53,7 +53,7 @@ Microscope  : https://www.youtube.com/watch?v=Szg-vjukonA
 Arduino     : https://www.youtube.com/watch?v=Xl02fsRCJ7U  
 Raspberry Pi: https://www.youtube.com/watch?v=g3pXNY8snOg  
 
-Running poseidon: https://youtu.be/Szg-vjukonA
+Running poseidon: https://youtu.be/VmoB_fPc4L4
 
 ### Setting up the Arduino 
 We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)

@@ -31,7 +31,7 @@ The poseidon syringe pump and microscope system is an open source alternative to
 * Controller software (Python) and a graphical user interface (GUI) to control the pumps.
 * Arduino firmware to send commands to the motors and receive commands from the GUI.
 * Bill of materials for sourcing and purchasing materials.
-* Detailed assembly instructions of hardware compnents.
+* Detailed assembly instructions of hardware components.
 * Single click executable files for Mac, Windows, Linux, and Raspberry Pi systems.
 
 <p align="center">
@@ -45,7 +45,7 @@ The 3D printed components can be fabricated on any desktop fused filament fabric
 - Fusion360 interactive view of [poseidon microscope CAD](http://a360.co/2krZoEk).
 - Fusion360 interactive view of [poseidon pump](https://a360.co/2Ph19kC).
 - STL, STEP, IGES, Fusion 360 archive files, and bill of materials are available in the `HARDWARE/` folder.
-- Bill of materials with prices and vendor links on a [Google Spreadheet](https://docs.google.com/spreadsheets/d/1AHBLf0PbtGDgqNbbK6QO31s7ES9_1uCw_NeKWHHPTM4/edit?usp=sharing).
+- Bill of materials with prices and vendor links on a [Google Spreadsheet](https://docs.google.com/spreadsheets/d/1AHBLf0PbtGDgqNbbK6QO31s7ES9_1uCw_NeKWHHPTM4/edit?usp=sharing).
 
 ### Build Videos
 Syringe Pump: https://www.youtube.com/watch?v=7YSiO6usR1M  
@@ -53,7 +53,7 @@ Microscope  : https://www.youtube.com/watch?v=Szg-vjukonA
 Arduino     : https://www.youtube.com/watch?v=Xl02fsRCJ7U  
 Raspberry Pi: https://www.youtube.com/watch?v=g3pXNY8snOg  
 
-Running poseidon: https://youtu.be/Szg-vjukonA
+Running poseidon: https://youtu.be/VmoB_fPc4L4
 
 ### Setting up the Arduino 
 We use the [Arduino CNC shield](http://wiki.keyestudio.com/index.php/Ks0095_Arduino_CNC_Kit_/_CNC_Shield_V3.0_%2Bkeyestudio_Uno_R3%2B4pcs_a4988_Driver_/_GRBL_Compatible)

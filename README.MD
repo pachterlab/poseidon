@@ -89,13 +89,19 @@ There are two ways to run the controller. The easiest way is to just double clic
 - [Ubuntu] (coming soon)
 - [Raspbian](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_raspbian_executable_2018-08-29)
 
-#### Note 1: Basic tests indicate that pressures up to 4 MPa can be acheived with 1 microstep and a 1 mL syringe.
+# Tips/Hints
+Things that we have learned along the way that may help with your build.
+- Basic tests indicate that pressures up to 4 MPa can be acheived with 1 microstep and a 1 mL syringe.
 
-#### Note 2: Set the current limit on your motor controller to vary the stall torque. Increasing the current to the motor increases the stall torque and increases the max pressure that your syringe pump can run at. [How to set the current limit](https://www.youtube.com/watch?feature=player_embedded&v=89BHS9hfSUk).
+- Set the current limit on your motor controller to vary the stall torque. Increasing the current to the motor increases the stall torque and increases the max pressure that your syringe pump can run at. [How to set the current limit](https://www.youtube.com/watch?feature=player_embedded&v=89BHS9hfSUk).
 
-#### Note 3: The speeds and flow rates of the system are limited by the microstepping and the syringe size used.
+- We recommend [changing the password on the Raspberry Pi](https://raspberrypi.stackexchange.com/questions/67181/how-to-change-a-password) for added security.
+
+- The speeds and flow rates of the system are limited by the microstepping and the syringe size used.
 
 <img width="1068" alt="flow_rates" src="https://user-images.githubusercontent.com/10369156/51273546-d49c4f00-1981-11e9-8946-9ec0baf57dbd.png">
+
+---------------------------------------------------
 
 If you want to run the system from the source code then follow the instructions below.
 ### Windows, Mac, Linux

@@ -91,7 +91,9 @@ There are two ways to run the controller. The easiest way is to just double clic
 
 #### Note 1: Basic tests indicate that pressures up to 4 MPa can be acheived with 1 microstep and a 1 mL syringe.
 
-#### Note 2: The speeds and flow rates of the system are limited by the microstepping and the syringe size used.
+#### Note 2: Set the current limit on your motor controller to vary the stall torque. Increasing the current to the motor increases the stall torque and increases the max pressure that your syringe pump can run at. [How to set the current limit](https://www.youtube.com/watch?feature=player_embedded&v=89BHS9hfSUk).
+
+#### Note 3: The speeds and flow rates of the system are limited by the microstepping and the syringe size used.
 
 <img width="1068" alt="flow_rates" src="https://user-images.githubusercontent.com/10369156/51273546-d49c4f00-1981-11e9-8946-9ec0baf57dbd.png">
 

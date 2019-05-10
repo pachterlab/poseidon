@@ -82,12 +82,12 @@ Before starting the Python controller, make sure
 4. The CNC shield is powered, and that all motors are plugged in to the CNC sheild
 
 ## Running the software and Testing the pumps
-There are two ways to run the controller. The easiest way is to just double click the executable available below. Simply download the executable, double click it, and begin using it.
+There are two ways to run the controller. The easiest way is to just double click the executable available below. Simply download the executable, double click it, and begin using it. Navigate to the **Releases** tab at the top to find the following executables.
 
-- [Windows](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_windows_executable_2018-08-29.exe) 
-- [Mac OS](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_mac_executable_2018-08-29)
-- [Ubuntu] (coming soon)
-- [Raspbian](https://github.com/pachterlab/poseidon/releases/download/v1.0.0/poseidon_main_v1.0.0_raspbian_executable_2018-08-29)
+- Windows
+- Mac OS
+- Ubuntu (coming soon)
+- Raspbian
 
 # Tips/Hints
 Things that we have learned along the way that may help with your build.

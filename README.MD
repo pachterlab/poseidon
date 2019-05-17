@@ -190,13 +190,13 @@ Described here: https://stackoverflow.com/questions/51324754/python-3-6-x-pyinst
 python -m PyInstaller -F poseidon_main.py --hidden-import PyQt5.sip
 ```
 ## Safety Considerations
-Please review our license before using/developing/distribution poseidon. 
+Please review the license before using/developing/distribution poseidon. 
 
-The poseidon syringe pump system uses 3D printed PLA plastic and standard off the shelf components which do not pose a health hazard if handled correctly. Improper handling of plastics however can pose major safety concerns. Initial tests of the poseidon syringe pump showed excessive bending of the syringe pump body. This was a safety concern that we mitigated by reinforcing the body with set screws and a thicker base. To mitigate the possibility of catastrophic failure due to clogging we set the reference voltage on the motor controller such that the motor stalls when the pressure in a 1 mL syringe reaches 4 MPa.
+The poseidon syringe pump system uses 3D printed PLA plastic and standard off the shelf components which do not pose a health hazard if handled correctly. Improper handling of plastics however can create hazards when working with organic solvents. Initial tests of the poseidon syringe pump showed excessive bending of the syringe pump body. We mitigated this by reinforcing the body with set screws and a thicker base. To mitigate the possibility of catastrophic failure due to clogging we set the reference voltage on the motor controller such that the motor stalls when the pressure in a 1 mL syringe reaches 4 MPa.
 
-Before using the poseidon system in a wetlab environment, please ensure that you have thoroughly tested its functionality for your use case in a dry lab. Once the poseidon system is in a wetlab environment, please refrain from removing it as you increase the likelihood of contamination.
+Before using the poseidon system in a wetlab environment, please ensure that you have thoroughly tested its functionality for your use case in a dry lab. Once the poseidon system is in a wetlab environment, refrain from removing it to decreate the likelihood of contamination.
 
-If you plan to build on the poseidon system, please ensure that you communicate any safety concerns that you may have with your design to potential users/collaborators.
+If you plan to build on the poseidon system, ensure that you communicate any safety concerns that you may have with your design to potential users and collaborators.
 
 ## Authors
 

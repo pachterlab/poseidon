@@ -7,9 +7,7 @@ An easy-to-use, highly customizable, and open source syringe pump and microscope
 
 **Documentation**: https://pachterlab.github.io/poseidon/
 
-<h4>
-  A. Sina Booeshaghi, Eduardo da Veiga Beltrame, Dylan Bannon, Jase Gehring and Lior Pachter, <a href="https://www.nature.com/articles/s41598-019-48815-9">Principles of open source bioinstrumentation applied to the poseidon syringe pump system</a>, Scientific Reports <b>9</b>, Article number: 12385 (2019)
-</h4>
+**Paper**: A. Sina Booeshaghi, Eduardo da Veiga Beltrame, Dylan Bannon, Jase Gehring and Lior Pachter, <a href="https://www.nature.com/articles/s41598-019-48815-9">Principles of open source bioinstrumentation applied to the poseidon syringe pump system</a>, Scientific Reports <b>9</b>, Article number: 12385 (2019).
 
 ## The tl;dr
 

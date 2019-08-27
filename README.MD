@@ -7,18 +7,9 @@ An easy-to-use, highly customizable, and open source syringe pump and microscope
 
 **Documentation**: https://pachterlab.github.io/poseidon/
 
-<h2 align="center">
-  Our preprint is now available on the bioRxiv!
-</h2>
-
 <h4 align="center">
-  Design principles for open source bioinstrumentation: 
-  the poseidon syringe pump system as an example.
+  A. Sina Booeshaghi, Eduardo da Veiga Beltrame, Dylan Bannon, Jase Gehring and Lior Pachter, <a href="https://www.nature.com/articles/s41598-019-48815-9">Principles of open source bioinstrumentation applied to the poseidon syringe pump system</a>, Scientific Reports <b>9</b>, Article number: 12385 (2019)
 </h4>
-
-<h3 align="center">
-  https://www.biorxiv.org/content/early/2019/01/17/521096
-</h3>
 
 ## The tl;dr
 

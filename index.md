@@ -13,8 +13,8 @@ layout: page
 <br>
 <br>
 
-<h2> The poseidon pre-print is now on the bioRxiv! <br> <br> 
-<a href="https://www.biorxiv.org/content/biorxiv/early/2019/01/17/521096.full.pdf">Design principles for open source bioinstrumentation: the poseidon syringe pump system as an example</a> 
-</h2>
+<h4>
+  A. Sina Booeshaghi, Eduardo da Veiga Beltrame, Dylan Bannon, Jase Gehring and Lior Pachter, <a href="https://www.nature.com/articles/s41598-019-48815-9">Principles of open source bioinstrumentation applied to the poseidon syringe pump system</a>, Scientific Reports <b>9</b>, Article number: 12385 (2019)
+</h4>
 
 </center>

@@ -49,8 +49,8 @@ project-link: https://github.com/pachterlab/poseidon               # At least pr
 #health-safety-notice: |                    # paragraph
 #  [value]
 
-#contact:
-#  name: [value]                            # text
+contact:
+  name: A. Sina Booeshaghi                  # text
 #  affiliation: [value]                     # text
 #  email: [value]                           # email address
 #  social:

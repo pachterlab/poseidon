@@ -122,7 +122,7 @@ documentation-home: https://pachterlab.github.io/poseidon      # At least one of
 #  - path: [value]                         # Absolute or relative path
 #    title: [value]                        # text
 
-#bom: [value]                              # recommended | absolute or relative path | Direct the maker to the Bill of Materials
+bom: https://github.com/OKH-Forks/poseidon/blob/release/HARDWARE/poseidon_bill-of-materials_v1.0_2019-01-28.xlsx                              # recommended | absolute or relative path | Direct the maker to the Bill of Materials
 
 #tool-list: [value]                        # recommended | absolute or relative path | Direct the maker to a list of tools required to make the thing
 

@@ -1,0 +1,170 @@
+# Open know-how manifest
+# according to The Open Know-How Manifest Specification Version 1.0
+# for more info, see http://openknowhow.org/
+
+# The content of this manifest file is licensed under a Creative Commons Attribution 4.0 International License.
+# Licenses for modification and distribution of the hardware, documentation, source-code, etc are stated separately.
+
+# Remove any fields that are not used. Comments (beginning with '#') may also be removed.
+
+# Manifest metadata
+
+date-created: 2020-02-28                   # YYYY-MM-DD
+
+#date-updated: [value]                      # YYYY-MM-DD
+
+manifest-author:
+  name: Andre Maia Chagas                  # required | text
+  affiliation: University of Sussex        # text
+  email: a.maia-chagas@sussex.ac.uk        # email address
+
+manifest-language: EN-UK
+
+#documentation-language: [language-code]-[region]
+
+#manifest-is-translation:
+#  title: [value]                           # text | Title of the original
+#  manifest: [value]                        # URL - Absolute path | OKH manifest location
+#  web: [value]                             # URL - Absolute path | web presence location
+#  lang: [language]-[region]                # language of original
+
+#documentation-is-translation:
+#  title: [value]                           # text | Title of the original
+#  manifest: [value]                        # URL - Absolute path | OKH manifest location
+#  web: [value]                             # URL - Absolute path | web presence location
+#  lang: [language]-[region]                # language of original
+
+# Properties
+
+title: Poseidon: Open source bioinstrumentation                             # required | text | A title to identify the thing
+
+description: |                             # required | paragraph
+  An easy-to-use, highly customizable, and open source syringe pump and microscope system.
+#intended-use: |                            # recommended | Paragraph
+  The poseidon syringe pump and microscope system is an open source alternative to commercial systems. It costs less than $400 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications. The pumps and microscope can be run from a Windows, Mac, Linux, or Raspberry Pi computer with an easy to use GUI.
+
+keywords:                                  # At least one keyword is recommended | text array
+  - Syringe pump
+  - Microscopy
+  - imaging
+
+project-link: https://github.com/pachterlab/poseidon               # At least project-link or documentation-home is required, otherwise recommended | absolute path URL
+
+#health-safety-notice: |                    # paragraph
+#  [value]
+
+#contact:
+#  name: [value]                            # text
+#  affiliation: [value]                     # text
+#  email: [value]                           # email address
+#  social:
+#    - platform: [value]                    # text
+#      user-handle: [value]                 # text
+
+contributors:                              # recommended
+  - name: [contributor 1]                  # text
+#    affiliation: [value]                   # text
+#    email: [value]                         # email address
+
+image: https://user-images.githubusercontent.com/10369156/51078589-5a5f8800-166c-11e9-8312-50b374d574d9.jpg                             # recommended | absolute or relative path
+
+#version: [value]                           # text
+
+#development-stage: [value]                 # text
+
+made: true                        # boolean - true or false
+
+#made-independently: [true/false]           # boolean - true or false
+
+#standards-used:
+#  - standard-title: [value]                # Required where used | Title of the standard used in developing the design or documentation
+#    publisher: [value]                     # Publisher of the standard
+#    reference: [value]                     # Reference indentifier of the standard (e.g. ISO 9001)
+#    certification:                         # If certification has been granted confirming compliance with the standard
+#      - certifier: [value]                 # Individual or organisation granting the certification. Use "Self" for self-certification
+#        date-awarded: [value]              # Date certification was granted
+#        link: [value]                      # Link to evidence of certification (e.g. certificate). Use an an absolute path to an external resource or an absolute or relative path to evidence within the documentation.
+
+#derivative-of:
+#  title: [value]                           # text | Title of the original
+#  manifest: [value]                        # URL - Absolute path | OKH manifest location
+#  web: [value]                             # URL - Absolute path | web presence location
+
+#variant-of:
+#  title: [value]                           # text | Title of the original
+#  manifest: [value]                        # URL - Absolute path | OKH manifest location
+#  web: [value]                             # URL - Absolute path | web presence location
+
+#sub:
+#  title: [sub 1]                           # text | Title of the original
+#  manifest: [value]                        # URL - Absolute path | OKH manifest location
+#  web: [value]                             # URL - Absolute path | web presence location
+
+# License
+
+license:                                   # At least one license is required | The format should be an SPDX identifier. See https://spdx.org/licenses/hardware: [value] # recommended | The license under which the hardware is released
+  #hardware: [value]                        # recommended | The license under which the documentation is released
+  documentation: BSD-2-Clause              # recommended | The license under which the documentation is released
+  #software: [value]                        # recommended where software is used | The license under which the software is released
+
+#licensor:
+#  name: [value]                            # text
+#  affiliation: [value]                     # text
+#  email: [value]                           # email address
+
+# Documentation
+
+documentation-home: https://pachterlab.github.io/poseidon/      # At least one of the project-link or documentation-home fields is required | absolute path
+
+#archive-download: [value]                 # Absolute or relative path
+
+#design-files:                             # recommended
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#schematics:                               # recommended where applicable
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#bom: [value]                              # recommended | absolute or relative path | Direct the maker to the Bill of Materials
+
+#tool-list: [value]                        # recommended | absolute or relative path | Direct the maker to a list of tools required to make the thing
+
+#making-instructions:                      # recommended
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#manufacturing-files:                      # recommended where applicable
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#risk-assessment:                          # recommended
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#tool-settings:                            # recommended where applicable
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#quality-instructions:
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#operating-instructions:                   # recommended
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#maintenance-instructions: [value]         # recommended
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#disposal-instructions: [value]            # recommended
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+#software:                                 # recommended where applicable | Source code or executable software that the thing uses
+#  - path: [value]                         # Absolute or relative path
+#    title: [value]                        # text
+
+# User defined Fields
+# Include any custom / extended fields here

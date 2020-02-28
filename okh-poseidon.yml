@@ -1,7 +1,3 @@
-# Open know-how manifest
-# according to The Open Know-How Manifest Specification Version 1.0
-# for more info, see http://openknowhow.org/
-
 # The content of this manifest file is licensed under a Creative Commons Attribution 4.0 International License.
 # Licenses for modification and distribution of the hardware, documentation, source-code, etc are stated separately.
 
@@ -9,18 +5,18 @@
 
 # Manifest metadata
 
-date-created: 2020-02-28                   # YYYY-MM-DD
+date-created: 2020-02-28                     # YYYY-MM-DD
 
 #date-updated: [value]                      # YYYY-MM-DD
 
 manifest-author:
-  name: Andre Maia Chagas                  # required | text
+  name:  Andre Maia Chagas                 # required | text
   affiliation: University of Sussex        # text
   email: a.maia-chagas@sussex.ac.uk        # email address
 
-manifest-language: EN-UK
+manifest-language: English-UK
 
-#documentation-language: [language-code]-[region]
+documentation-language: English-UK
 
 #manifest-is-translation:
 #  title: [value]                           # text | Title of the original
@@ -36,17 +32,17 @@ manifest-language: EN-UK
 
 # Properties
 
-title: Poseidon: Open source bioinstrumentation                             # required | text | A title to identify the thing
+title: Poseidon - Open source bioinstrumentation                   # required | text | A title to identify the thing
 
 description: |                             # required | paragraph
   An easy-to-use, highly customizable, and open source syringe pump and microscope system.
-#intended-use: |                            # recommended | Paragraph
+
+intended-use: |                            # recommended | Paragraph
   The poseidon syringe pump and microscope system is an open source alternative to commercial systems. It costs less than $400 and can be assembled in an hour. It uses 3D printed parts and common components that can be easily purchased either from Amazon or other retailers. The microscope and pumps can be used together in microfluidics experiments, or independently for other applications. The pumps and microscope can be run from a Windows, Mac, Linux, or Raspberry Pi computer with an easy to use GUI.
 
 keywords:                                  # At least one keyword is recommended | text array
   - Syringe pump
   - Microscopy
-  - imaging
 
 project-link: https://github.com/pachterlab/poseidon               # At least project-link or documentation-home is required, otherwise recommended | absolute path URL
 
@@ -61,8 +57,8 @@ project-link: https://github.com/pachterlab/poseidon               # At least pr
 #    - platform: [value]                    # text
 #      user-handle: [value]                 # text
 
-contributors:                              # recommended
-  - name: [contributor 1]                  # text
+#contributors:                              # recommended
+#  - name: [contributor 1]                  # text
 #    affiliation: [value]                   # text
 #    email: [value]                         # email address
 
@@ -114,7 +110,7 @@ license:                                   # At least one license is required | 
 
 # Documentation
 
-documentation-home: https://pachterlab.github.io/poseidon/      # At least one of the project-link or documentation-home fields is required | absolute path
+documentation-home: https://pachterlab.github.io/poseidon      # At least one of the project-link or documentation-home fields is required | absolute path
 
 #archive-download: [value]                 # Absolute or relative path
 

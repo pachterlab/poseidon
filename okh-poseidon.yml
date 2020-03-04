@@ -50,9 +50,9 @@ project-link: https://github.com/pachterlab/poseidon               # At least pr
 #  [value]
 
 contact:
-  name: A. Sina Booeshaghi                  # text
+  name: Lior Patcher                  # text
 #  affiliation: [value]                     # text
-#  email: [value]                           # email address
+  email:  lpachter@caltech.edu                           # email address
 #  social:
 #    - platform: [value]                    # text
 #      user-handle: [value]                 # text
@@ -103,10 +103,10 @@ license:                                   # At least one license is required | 
   documentation: BSD-2-Clause              # recommended | The license under which the documentation is released
   #software: [value]                        # recommended where software is used | The license under which the software is released
 
-#licensor:
-#  name: [value]                            # text
+licensor:
+  name: Lior Patcher                  # text
 #  affiliation: [value]                     # text
-#  email: [value]                           # email address
+  email:  lpachter@caltech.edu
 
 # Documentation
 

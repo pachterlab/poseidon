@@ -96,17 +96,13 @@ If you want to run the system from the source code then follow the instructions 
 ### Windows, Mac, Linux
 First make sure you have Python 3 installed on your machine. Then install PyQt5. To install PyQt5 use `brew install pyqt5` or `conda install pyqt` if you are using anaconda. If you are on Linux you can do `sudo apt-get install python3-pyqt5`. Now we need to add a few packages:
 ```
-pip3 install --upgrade -pip
-pip3 install pyserial
-pip3 install opencv-python
+python3.5 -m pip install --upgrade pip
+python3.5 -m pip install pyserial opencv-python
 ```
 On Linux opencv requires extra binaries
 ```
-sudo apt-get install libatlas-base-dev
-sudo apt-get install libjasper-dev
-sudo apt-get install libqtgui4
-sudo apt-get install libqt4-qt3support
-sudo apt-get install libqt4-test
+sudo apt-get install \
+  libatlas-base-dev libjasper-dev libqtgui4 libqt4-qt3support libqt4-test
 ```
 Now you can run 
 ```
@@ -119,16 +115,12 @@ To run `poseidon_main.py` on a Raspberry Pi with a fresh install of Raspbian, Py
 sudo apt-get install python3-pyqt5
 
 # now need to use python3.5 gui.py to invoke the python3 that has pyqt5!
-pip3 install --upgrade -pip
-pip3 install pyserial
-pip3 install opencv-python
+python3.5 -m pip install --upgrade pip
+python3.5 -m pip install pyserial opencv-python
 
 # opencv requires a some extra binaries 
-sudo apt-get install libatlas-base-dev
-sudo apt-get install libjasper-dev
-sudo apt-get install libqtgui4
-sudo apt-get install libqt4-qt3support
-sudo apt-get install libqt4-test
+sudo apt-get install \
+  libatlas-base-dev libjasper-dev libqtgui4 libqt4-qt3support libqt4-test
 
 # now the script can be called
 python3.5 poseidon_main.py
